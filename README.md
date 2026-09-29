@@ -1,6 +1,6 @@
 # Paper reproduction: Rethinking the Role of Homogeneous Surface Models in High-Entropy Alloy Catalyst Screening
 
-This collection contains four archives for FeCoNiPdPt and PtPdRhRuIr high-entropy alloy calculations. It provides the data and code for H adsorption model training/testing, cluster expansion (CE) training/evaluation, uncertainty-aware Monte Carlo (UQMC), canonical ensemble Monte Carlo (CEMC), and reproduction of the manuscript figures.
+This collection contains four archives for FeCoNiPdPt and PtPdRhRuIr high-entropy alloy calculations. It provides the data and code for H adsorption model training/testing, cluster expansion (CE) training/evaluation, uncertainty-aware Monte Carlo (UQMC), cluster expansion Monte Carlo (CEMC), and reproduction of the manuscript figures.
 
 ## Download code and data
 
