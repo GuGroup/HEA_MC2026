@@ -1,17 +1,26 @@
-# HEA Adsorption Models, Cluster Expansion, and Figure Reproduction
+# Paper reproduction: Rethinking the Role of Homogeneous Surface Models in High-Entropy Alloy Catalyst Screening
 
-This collection contains four archives for FeCoNiPdPt and PtPdRhRuIr high-entropy alloy calculations. It provides the data and code for H adsorption model training/testing, cluster expansion (CE) training/evaluation, uncertainty-aware Monte Carlo (UQMC), cluster expansion Monte Carlo (CEMC), and reproduction of the manuscript figures.
+This collection contains four archives for FeCoNiPdPt and PtPdRhRuIr high-entropy alloy calculations. It provides the data and code for H adsorption model training/testing, cluster expansion (CE) training/evaluation, uncertainty-aware Monte Carlo (UQMC), canonical ensemble Monte Carlo (CEMC), and reproduction of the manuscript figures.
 
-Download the four ZIP files from the GitHub release associated with this repository. Extract each ZIP once; it creates its own top-level directory. The packages contain English READMEs with more detailed instructions. No connection to the original calculation server is required.
+## Download code and data
+
+Download the four packages directly below. These links point to the published [v1.0.0 release](https://github.com/GuGroup/HEA_MC2026/releases/tag/v1.0.0) of [GuGroup/HEA_MC2026](https://github.com/GuGroup/HEA_MC2026).
+
+- **[H adsorption models, training and test data](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/FeCoNiPdPt_H_adsorption.zip)** — `FeCoNiPdPt_H_adsorption.zip` (9.3 MB)
+- **[FeCoNiPdPt cluster expansion models and data](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/FeCoNiPdPt_CE.zip)** — `FeCoNiPdPt_CE.zip` (6.1 MB)
+- **[PtPdRhRuIr cluster expansion model and data](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/PtPdRhRuIr_CE.zip)** — `PtPdRhRuIr_CE.zip` (1.9 MB)
+- **[UQMC/CEMC workflows and figure reproduction](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/HEA_UQMC_CEMC_figures.zip)** — `HEA_UQMC_CEMC_figures.zip` (207.4 MB)
+
+Extract each ZIP once; it creates its own top-level directory. The packages contain English READMEs with more detailed instructions. No connection to the original calculation server is required. The commands and package paths below refer to the extracted directories on your computer.
 
 ## 1. Choose a package
 
 | Archive | Approximate ZIP size | Contents | Main entry point |
 |---|---:|---|---|
-| `FeCoNiPdPt_H_adsorption.zip` | 9.3 MB | H-adsorbed structures, DFT adsorption energies, regression training code, fitted models, test data and parity plots for five facet/site combinations | `evaluate_all.py` and each site's `train_model.py` |
-| `FeCoNiPdPt_CE.zip` | 6.1 MB | CE training data, original source, saved models, retraining and holdout evaluation for FeCoNiPdPt fcc(111), fcc(100), and fcc(110) | `run_ce.py` |
-| `PtPdRhRuIr_CE.zip` | 1.9 MB | CE training data, original source, saved model, retraining and holdout evaluation for PtPdRhRuIr fcc(111) | `run_ce.py` |
-| `HEA_UQMC_CEMC_figures.zip` | 207.4 MB | Numeric figure data, plotting code, simulation sources and model exports, equiatomic structures, and four facet workflows | `reproduce_all_figures.py` and workflow-specific `run.py` |
+| [FeCoNiPdPt_H_adsorption.zip](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/FeCoNiPdPt_H_adsorption.zip) | 9.3 MB | H-adsorbed structures, DFT adsorption energies, regression training code, fitted models, test data and parity plots for five facet/site combinations | `evaluate_all.py` and each site's `train_model.py` |
+| [FeCoNiPdPt_CE.zip](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/FeCoNiPdPt_CE.zip) | 6.1 MB | CE training data, original source, saved models, retraining and holdout evaluation for FeCoNiPdPt fcc(111), fcc(100), and fcc(110) | `run_ce.py` |
+| [PtPdRhRuIr_CE.zip](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/PtPdRhRuIr_CE.zip) | 1.9 MB | CE training data, original source, saved model, retraining and holdout evaluation for PtPdRhRuIr fcc(111) | `run_ce.py` |
+| [HEA_UQMC_CEMC_figures.zip](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/HEA_UQMC_CEMC_figures.zip) | 207.4 MB | Numeric figure data, plotting code, simulation sources and model exports, equiatomic structures, and four facet workflows | `reproduce_all_figures.py` and workflow-specific `run.py` |
 
 The adsorption regression models predict adsorption energy in eV. The CE models predict the original structure-energy target in eV per metal atom. These are different models with different purposes. The figure package already contains the exported CE and adsorption inputs needed by its simulation backends; retraining the first three packages is not required to reproduce its figures or run its supplied workflows.
 
@@ -44,7 +53,7 @@ Python alone is sufficient for plotting and model evaluation after installing th
 
 ## 3. FeCoNiPdPt H adsorption models
 
-Detailed guide: [FeCoNiPdPt_H_adsorption/README.md](FeCoNiPdPt_H_adsorption/README.md).
+After extraction, see `FeCoNiPdPt_H_adsorption/README.md` for the detailed guide.
 
 ### Contents
 
@@ -108,7 +117,7 @@ energy_eV = record['adsorption_energy_eV']
 
 ## 4. FeCoNiPdPt cluster expansion models
 
-Detailed guide: [FeCoNiPdPt_CE/README.md](FeCoNiPdPt_CE/README.md).
+After extraction, see `FeCoNiPdPt_CE/README.md` for the detailed guide.
 
 ### Contents
 
@@ -160,7 +169,7 @@ The final saved CE model is refitted on all data after hyperparameter selection.
 
 ## 5. PtPdRhRuIr fcc(111) cluster expansion model
 
-Detailed guide: [PtPdRhRuIr_CE/README.md](PtPdRhRuIr_CE/README.md).
+After extraction, see `PtPdRhRuIr_CE/README.md` for the detailed guide.
 
 This package has the same portable CE interface, for PtPdRhRuIr fcc(111). It contains 1,757 structures: 1,100 bulk and 657 slab structures, with 1,581 fit and 176 holdout structures. Original source, model, training settings, splits, predictions and validation records are included.
 
@@ -182,7 +191,7 @@ Outputs are under `results/fcc111/`. The holdout/refit distinction and parity-pl
 
 ## 6. UQMC, CEMC and manuscript figures
 
-Detailed guide: [HEA_UQMC_CEMC_figures/README.md](HEA_UQMC_CEMC_figures/README.md).
+After extraction, see `HEA_UQMC_CEMC_figures/README.md` for the detailed guide.
 
 ### Reproduce the figures from the supplied data
 
