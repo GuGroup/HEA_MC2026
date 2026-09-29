@@ -1,6 +1,6 @@
 # HEA Adsorption Models, Cluster Expansion, and Figure Reproduction
 
-This collection contains four archives for FeCoNiPdPt and PtPdRhRuIr high-entropy alloy calculations. It provides the data and code for H adsorption model training/testing, cluster expansion (CE) training/evaluation, uncertainty-aware Monte Carlo (UQMC), canonical ensemble Monte Carlo (CEMC), and reproduction of the manuscript figures.
+This collection contains four archives for FeCoNiPdPt and PtPdRhRuIr high-entropy alloy calculations. It provides the data and code for H adsorption model training/testing, cluster expansion (CE) training/evaluation, uncertainty-aware Monte Carlo (UQMC), cluster expansion Monte Carlo (CEMC), and reproduction of the manuscript figures.
 
 Download the four ZIP files from the GitHub release associated with this repository. Extract each ZIP once; it creates its own top-level directory. The packages contain English READMEs with more detailed instructions. No connection to the original calculation server is required.
 
