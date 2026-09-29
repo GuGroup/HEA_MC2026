@@ -312,11 +312,3 @@ python analysis/equiatomic/recompute.py
 ```
 
 This evaluates stored structures and reconstructs the deterministic layer-shuffled controls; it does not rerun CEMC. Fig. 4/5/S14 use zero BE shifts, whereas Fig. 6/S15 preserve the nonzero shifts used by their original source plots. Fig. 3 uses the topmost layer; Fig. S13 pools symmetric layer pairs. Exact definitions and shifts are documented inside the package.
-
-## 7. Reproducibility and outputs
-
-The adsorption and CE packages contain `validation.json`; the figure package contains `validation/` records and `manifest_sha256.json`. Original reference data and provenance are retained. The packaging checks include model retraining/evaluation, prediction comparisons, historical test selection checks, numeric figure comparisons, CEMC sample regeneration, and execution after relocation.
-
-All six historical equiatomic facet/site cases were checked using one full 19-temperature MC trajectory each; their atomic identities matched the originals exactly. Equiatomic figure quantities matched the source tables within floating-point precision (largest recorded difference below 5e-14). These checks do not imply a rerun of every 10,000-trial production calculation.
-
-Follow the README inside each extracted package for complete input/output definitions, reference metrics and known source inconsistencies. In particular, the Fe fcc(100) layer-shuffled activity in Fig. 4 is approximately 0.1621 (displayed 0.16); the manuscript prose value 0.038 differs from the supplied figure and source calculation.
