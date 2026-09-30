@@ -1,59 +1,55 @@
 # Paper reproduction: Rethinking the Role of Homogeneous Surface Models in High-Entropy Alloy Catalyst Screening
 
-This collection contains four archives for FeCoNiPdPt and PtPdRhRuIr high-entropy alloy calculations. It provides the data and code for H adsorption model training/testing, cluster expansion (CE) training/evaluation, uncertainty-aware Monte Carlo (UQMC), cluster expansion Monte Carlo (CEMC), and reproduction of the manuscript figures.
+This repository contains code and data for reproducing **Table 1, Figures 1-6, and Figures S6-S15** of the manuscript. It includes H adsorption model training/testing, cluster expansion (CE) training/evaluation, uncertainty quantification Monte Carlo (UQMC), cluster expansion Monte Carlo (CEMC), and equiatomic slab analyses for FeCoNiPdPt and PtPdRhRuIr.
 
-## Download code and data
+## Get the code and data
 
-Download the four packages directly below. These links point to the published [v1.0.0 release](https://github.com/GuGroup/HEA_MC2026/releases/tag/v1.0.0) of [GuGroup/HEA_MC2026](https://github.com/GuGroup/HEA_MC2026).
-
-- **[H adsorption models, training and test data](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/FeCoNiPdPt_H_adsorption.zip)** — `FeCoNiPdPt_H_adsorption.zip` (9.3 MB)
-- **[FeCoNiPdPt cluster expansion models and data](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/FeCoNiPdPt_CE.zip)** — `FeCoNiPdPt_CE.zip` (6.1 MB)
-- **[PtPdRhRuIr cluster expansion model and data](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/PtPdRhRuIr_CE.zip)** — `PtPdRhRuIr_CE.zip` (1.9 MB)
-- **[UQMC/CEMC workflows and figure reproduction](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/HEA_UQMC_CEMC_figures.zip)** — `HEA_UQMC_CEMC_figures.zip` (207.4 MB)
-
-Extract each ZIP once; it creates its own top-level directory. The packages contain English READMEs with more detailed instructions. No connection to the original calculation server is required. The commands and package paths below refer to the extracted directories on your computer.
-
-## 1. Choose a package
-
-| Archive | Approximate ZIP size | Contents | Main entry point |
-|---|---:|---|---|
-| [FeCoNiPdPt_H_adsorption.zip](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/FeCoNiPdPt_H_adsorption.zip) | 9.3 MB | H-adsorbed structures, DFT adsorption energies, regression training code, fitted models, test data and parity plots for five facet/site combinations | `evaluate_all.py` and each site's `train_model.py` |
-| [FeCoNiPdPt_CE.zip](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/FeCoNiPdPt_CE.zip) | 6.1 MB | CE training data, original source, saved models, retraining and holdout evaluation for FeCoNiPdPt fcc(111), fcc(100), and fcc(110) | `run_ce.py` |
-| [PtPdRhRuIr_CE.zip](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/PtPdRhRuIr_CE.zip) | 1.9 MB | CE training data, original source, saved model, retraining and holdout evaluation for PtPdRhRuIr fcc(111) | `run_ce.py` |
-| [HEA_UQMC_CEMC_figures.zip](https://github.com/GuGroup/HEA_MC2026/releases/download/v1.0.0/HEA_UQMC_CEMC_figures.zip) | 207.4 MB | Numeric figure data, plotting code, simulation sources and model exports, equiatomic structures, and four facet workflows | `reproduce_all_figures.py` and workflow-specific `run.py` |
-
-The adsorption regression models predict adsorption energy in eV. The CE models predict the original structure-energy target in eV per metal atom. These are different models with different purposes. The figure package already contains the exported CE and adsorption inputs needed by its simulation backends; retraining the first three packages is not required to reproduce its figures or run its supplied workflows.
-
-Earlier archives named `fcc_H_training_bundle.zip` and `FeCoNiPdPt_fcc111_H.zip` are narrower versions superseded by `FeCoNiPdPt_H_adsorption.zip` and are not required for this collection.
-
-## 2. Extract the archives and prepare environments
-
-The examples below use Linux/Conda. Run extraction in the directory where the ZIP files were downloaded:
+Clone the repository to download all four folders and this README together:
 
 ```bash
-unzip FeCoNiPdPt_H_adsorption.zip
-unzip FeCoNiPdPt_CE.zip
-unzip PtPdRhRuIr_CE.zip
-unzip HEA_UQMC_CEMC_figures.zip
+git clone https://github.com/GuGroup/HEA_MC2026.git
+cd HEA_MC2026
 ```
 
-The resulting layout is:
+Alternatively, select **Code > Download ZIP** on the repository page and extract that single repository download. Open the extracted repository folder before following the instructions below. All required package files are stored directly in this repository; separate Release downloads are not required.
+
+The four folders contain English READMEs with detailed instructions. No connection to the original calculation server is required to use the supplied data and code.
+
+## 1. Choose a folder
+
+| Folder | Contents | Main entry point |
+|---|---|---|
+| [FeCoNiPdPt_H_adsorption](FeCoNiPdPt_H_adsorption/) | H-adsorbed structures, DFT adsorption energies, regression training code, fitted models, test data and parity plots for five facet/site combinations | `evaluate_all.py` and each site's `train_model.py` |
+| [FeCoNiPdPt_CE](FeCoNiPdPt_CE/) | CE training data, original source, saved models, retraining and holdout evaluation for FeCoNiPdPt fcc(111), fcc(100), and fcc(110) | `run_ce.py` |
+| [PtPdRhRuIr_CE](PtPdRhRuIr_CE/) | CE training data, original source, saved model, retraining and holdout evaluation for PtPdRhRuIr fcc(111) | `run_ce.py` |
+| [HEA_UQMC_CEMC_figures](HEA_UQMC_CEMC_figures/) | Table 1 trial scores and reproduction code, numeric figure data, plotting code, simulation sources and model exports, equiatomic structures, and four facet workflows | `Table_1/reproduce.py`, `reproduce_all_figures.py`, and workflow-specific `run.py` |
+
+The adsorption regression models predict adsorption energy in eV. The CE models predict the original structure-energy target in eV per metal atom. These are different models with different purposes. The figure folder already contains the exported CE and adsorption inputs needed by its simulation backends; retraining the other three packages is not required to reproduce the figures and table or run the supplied workflows.
+
+## 2. Repository layout and environments
 
 ```text
-README.md
-FeCoNiPdPt_H_adsorption/
-FeCoNiPdPt_CE/
-PtPdRhRuIr_CE/
-HEA_UQMC_CEMC_figures/
+HEA_MC2026/
+  README.md
+  FeCoNiPdPt_H_adsorption/
+  FeCoNiPdPt_CE/
+  PtPdRhRuIr_CE/
+  HEA_UQMC_CEMC_figures/
+    Table_1/
+    Fig_1/ ... Fig_6/
+    Fig_S6/ ... Fig_S15/
+    workflows/
 ```
+
+The examples below use Linux/Conda. On Windows, use a suitable Linux environment such as WSL for the C++/MPI simulation commands. Replace `/path/to/HEA_MC2026` with the actual location of your cloned or downloaded repository (the downloaded folder may be named `HEA_MC2026-main`). Each command block identifies the package or workflow directory from which it should be run.
 
 Use the environment setup in each section below. Separate environments avoid conflicts between pinned dependency versions. Adsorption regression was validated with Python 3.12.7; CE and figure packages were validated with Python 3.14. Installing dependencies requires internet access or a local package mirror. Small numerical or rendering differences may occur with other library/compiler versions.
 
-Python alone is sufficient for plotting and model evaluation after installing the requirements. CEMC generation additionally requires a C++17 compiler and MPI (`g++`, `mpicxx`, and `mpirun` on `PATH`). Compiled simulation executables are built locally from the included sources.
+Python alone is sufficient for plotting, Table 1 reproduction and model evaluation after installing the requirements. CEMC generation additionally requires a C++17 compiler and MPI (`g++`, `mpicxx`, and `mpirun` on `PATH`). Compiled simulation executables are built locally from the included sources.
 
 ## 3. FeCoNiPdPt H adsorption models
 
-After extraction, see `FeCoNiPdPt_H_adsorption/README.md` for the detailed guide.
+See [FeCoNiPdPt_H_adsorption/README.md](FeCoNiPdPt_H_adsorption/README.md) for the detailed guide.
 
 ### Contents
 
@@ -77,7 +73,7 @@ Each data record contains its original index, H-adsorbed structure encoded as AS
 ```bash
 conda create -n hea-h-adsorption python=3.12.7 -y
 conda activate hea-h-adsorption
-cd /path/to/FeCoNiPdPt_H_adsorption
+cd /path/to/HEA_MC2026/FeCoNiPdPt_H_adsorption
 python -m pip install -r requirements.txt
 python evaluate_all.py
 ```
@@ -117,7 +113,7 @@ energy_eV = record['adsorption_energy_eV']
 
 ## 4. FeCoNiPdPt cluster expansion models
 
-After extraction, see `FeCoNiPdPt_CE/README.md` for the detailed guide.
+See [FeCoNiPdPt_CE/README.md](FeCoNiPdPt_CE/README.md) for the detailed guide.
 
 ### Contents
 
@@ -136,7 +132,7 @@ Facet datasets are separate because target values can differ even for the same i
 ```bash
 conda create -n feconipdpt-ce python=3.14 -y
 conda activate feconipdpt-ce
-cd /path/to/FeCoNiPdPt_CE
+cd /path/to/HEA_MC2026/FeCoNiPdPt_CE
 python -m pip install -r requirements.txt
 export OPENBLAS_NUM_THREADS=1
 export OMP_NUM_THREADS=1
@@ -169,14 +165,14 @@ The final saved CE model is refitted on all data after hyperparameter selection.
 
 ## 5. PtPdRhRuIr fcc(111) cluster expansion model
 
-After extraction, see `PtPdRhRuIr_CE/README.md` for the detailed guide.
+See [PtPdRhRuIr_CE/README.md](PtPdRhRuIr_CE/README.md) for the detailed guide.
 
 This package has the same portable CE interface, for PtPdRhRuIr fcc(111). It contains 1,757 structures: 1,100 bulk and 657 slab structures, with 1,581 fit and 176 holdout structures. Original source, model, training settings, splits, predictions and validation records are included.
 
 ```bash
 conda create -n ptpdrhruir-ce python=3.14 -y
 conda activate ptpdrhruir-ce
-cd /path/to/PtPdRhRuIr_CE
+cd /path/to/HEA_MC2026/PtPdRhRuIr_CE
 python -m pip install -r requirements.txt
 export OPENBLAS_NUM_THREADS=1
 export OMP_NUM_THREADS=1
@@ -189,16 +185,16 @@ python run_ce.py predict --facet 111 --inputs /path/to/structures --output predi
 
 Outputs are under `results/fcc111/`. The holdout/refit distinction and parity-plot conventions described for FeCoNiPdPt also apply here. The original holdout MAE and RMSE are approximately 1.763 and 2.353 meV/atom.
 
-## 6. UQMC, CEMC and manuscript figures
+## 6. UQMC, CEMC, manuscript figures and Table 1
 
-After extraction, see `HEA_UQMC_CEMC_figures/README.md` for the detailed guide.
+See [HEA_UQMC_CEMC_figures/README.md](HEA_UQMC_CEMC_figures/README.md) for the detailed guide.
 
 ### Reproduce the figures from the supplied data
 
 ```bash
 conda create -n hea-figures python=3.14 -y
 conda activate hea-figures
-cd /path/to/HEA_UQMC_CEMC_figures
+cd /path/to/HEA_MC2026/HEA_UQMC_CEMC_figures
 python -m pip install -r requirements.txt
 python reproduce_all_figures.py
 
@@ -223,6 +219,20 @@ This plotting step does not run CEMC or the 10,000-trial UQMC calculation. Each 
 
 The equiatomic figures have PNG and vector PDF outputs. See each figure's README for output names and statistical conventions. Composite layouts are regenerated from numeric data; typography and spacing can differ from the embedded Word figures.
 
+### Reproduce Table 1 from the supplied trial scores
+
+Run the following from the figure package directory. Table reproduction only requires NumPy; it does not require new CEMC or UQMC calculations.
+
+```bash
+cd /path/to/HEA_MC2026/HEA_UQMC_CEMC_figures
+python -m pip install -r Table_1/requirements.txt
+python Table_1/reproduce.py
+```
+
+[Table_1](HEA_UQMC_CEMC_figures/Table_1/) contains paired CEMC/homogeneous scores for 10,000 trials in each of 12 datasets, the calculation script, the manuscript reference, and generated tables. Outputs are saved under `Table_1/outputs/` as CSV, Markdown and HTML, together with `validation.json`. The figure-only launcher does not run the table script.
+
+All 52 displayed improvement probabilities match the supplied manuscript, including the Average row. Two percentile endpoints differ: the Study 1 delta tau upper endpoint is 0.38 (manuscript 0.39), and the Study 2 ML4 delta CRPS lower endpoint is -0.03 (manuscript -0.04). The calculated values are preserved and the comparison is documented in [Table_1/README.md](HEA_UQMC_CEMC_figures/Table_1/README.md).
+
 ### Run the production UQMC/CEMC workflow
 
 Four physical facet workflows are included:
@@ -237,7 +247,7 @@ Four physical facet workflows are included:
 For Study 2 ML4:
 
 ```bash
-cd /path/to/HEA_UQMC_CEMC_figures/workflows/PtPdRhRuIr_fcc111
+cd /path/to/HEA_MC2026/HEA_UQMC_CEMC_figures/workflows/PtPdRhRuIr_fcc111
 python run.py build
 python run.py slabs --case ML4 --ranks 48
 python run.py activity --case ML4 --ranks 48
@@ -265,7 +275,7 @@ python run.py activity --case ML1 --sample --output outputs/sample_ML1_activity
 For FeCoNiPdPt fcc(100), generate a single facet trajectory set and evaluate both site models:
 
 ```bash
-cd /path/to/HEA_UQMC_CEMC_figures/workflows/FeCoNiPdPt_fcc100
+cd /path/to/HEA_MC2026/HEA_UQMC_CEMC_figures/workflows/FeCoNiPdPt_fcc100
 python run.py build
 python run.py slabs --case hollow --ranks 48
 python run.py activity --case hollow --ranks 48
@@ -276,7 +286,7 @@ python run.py random --case bridge --ranks 48
 
 The activity commands reuse `outputs/slabs_shared_facet/`. Different composition datasets, facets, schedules, CE models or composition uncertainty settings require their own trajectories. Study 1 has a separate implementation and packed format under `workflows/PtPdRhRuIr_fcc111/Study1/`; follow its README rather than the ML1-ML6 commands.
 
-Full production slab/activity collections are not included because they occupy hundreds of GB per trajectory set. The archive includes all figure data, simulation inputs and real small slab samples. Full UQMC regeneration requires substantial storage and computing time. Read the package README for shard boundaries, restart behavior, model overrides and postprocessing.
+Full production slab/activity collections are not included because they occupy hundreds of GB per trajectory set. This folder includes the figure and Table 1 data, simulation inputs and real small slab samples. Full UQMC regeneration requires substantial storage and computing time. Read the package README for shard boundaries, restart behavior, model overrides and postprocessing.
 
 ### Run or reuse equiatomic CEMC calculations
 
@@ -285,7 +295,7 @@ Each of the four facet folders also contains an independent `equi-atomic/` workf
 Example for FeCoNiPdPt fcc(100), starting from its `equi-atomic/` directory:
 
 ```bash
-cd /path/to/HEA_UQMC_CEMC_figures/workflows/FeCoNiPdPt_fcc100/equi-atomic
+cd /path/to/HEA_MC2026/HEA_UQMC_CEMC_figures/workflows/FeCoNiPdPt_fcc100/equi-atomic
 
 # Reuse the supplied structures; no MC rerun is needed.
 python run.py export --site hollow --temperature 298 --output exported_final
