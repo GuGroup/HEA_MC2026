@@ -1,0 +1,9 @@
+ml,quantity,metric,n_trials,mean,sd,sem,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion
+1,cemc_selected,tau,0,nan,nan,nan,nan,nan,nan,nan,nan,"higher tau is better"
+1,random,tau,0,nan,nan,nan,nan,nan,nan,nan,nan,"higher tau is better; random has no temperature"
+1,cemc_selected,mse,1,0,0,0,0,0,0,0,0,"lower MSE is better"
+1,random,mse,1,0,0,0,0,0,0,0,0,"lower MSE is better; random has no temperature"
+1,cemc_minus_random,tau,0,nan,nan,nan,nan,nan,nan,nan,nan,"positive means CEMC tau is higher"
+1,random_minus_cemc,mse,1,0,0,0,0,0,0,0,0,"positive means CEMC MSE is lower"
+1,cemc_minus_random,score_tau_minus_mse,0,nan,nan,nan,nan,nan,nan,nan,nan,"positive means selected CEMC tau-MSE score is higher"
+1,cemc_selected,temperature,1,2000,0,0,2000,2000,2000,2000,2000,"selected MC slab temperature distribution"

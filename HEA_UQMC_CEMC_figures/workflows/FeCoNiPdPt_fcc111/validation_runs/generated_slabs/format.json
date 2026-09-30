@@ -1,0 +1,17 @@
+{
+  "format": "CEMC_SLAB_3BIT_V1",
+  "layout": ["trial", "composition", "run", "temperature", "packed_sites"],
+  "header_bytes": 4096,
+  "bits_per_site": 3,
+  "bytes_per_slab": 375,
+  "n_metal_sites": 1000,
+  "n_trials": 1,
+  "trials_per_shard": 40,
+  "n_compositions": 1,
+  "n_runs": 1,
+  "write_activity": false,
+  "activity_value": "not_written",
+  "elements": ["Fe", "Co", "Ni", "Pd", "Pt"],
+  "atomic_numbers": [26, 27, 28, 46, 78],
+  "temperatures_K": [2000, 1900, 1800, 1700, 1600, 1500, 1400, 1300, 1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300]
+}

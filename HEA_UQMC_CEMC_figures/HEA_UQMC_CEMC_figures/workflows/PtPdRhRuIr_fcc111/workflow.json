@@ -1,0 +1,13 @@
+{
+  "cases": [
+    "ML1",
+    "ML2",
+    "ML3",
+    "ML4",
+    "ML5",
+    "ML6"
+  ],
+  "orr": true,
+  "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit",
+  "sample_case": "ML1"
+}

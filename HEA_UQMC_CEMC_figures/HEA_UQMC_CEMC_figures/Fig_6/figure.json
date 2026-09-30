@@ -1,0 +1,16 @@
+{
+  "figure": "6",
+  "entrypoint": "plot.py",
+  "numeric_data": [
+    "data/Pt/probability_mass_and_paired_bootstrap_requested_shift_metadata.json",
+    "data/Pt/probability_mass_weighted_histograms_1x5_bin_data_requested_shift.csv",
+    "data/fcc100_hollow/BE_shifts.csv",
+    "data/fcc100_hollow/metadata.json",
+    "data/fcc100_hollow/weighted_histogram_bin_data.csv"
+  ],
+  "outputs": [
+    "outputs/Fig_6.png",
+    "outputs/Fig_6.pdf"
+  ],
+  "recompute_from_structures": "../analysis/equiatomic/recompute.py"
+}

@@ -1,0 +1,2 @@
+trial,composition_index,row_idx,col_idx,orig_Ir,orig_Pd,orig_Pt,orig_Rh,orig_Ru,delta_Ir,delta_Pd,delta_Pt,delta_Rh,delta_Ru,sampled_Ir,sampled_Pd,sampled_Pt,sampled_Rh,sampled_Ru,count_Ir,count_Pd,count_Pt,count_Rh,count_Ru,be_shift_Ir,be_shift_Pd,be_shift_Pt,be_shift_Rh,be_shift_Ru
+0,0,0,0,0.2,0.2,0.2,0.2,0.2,0,0,0,0,0,0.2,0.2,0.2,0.2,0.2,200,200,200,200,200,0,0,0,0,0

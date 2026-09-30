@@ -1,0 +1,593 @@
+{
+  "created_utc": "2026-06-22T13:10:13.616676+00:00",
+  "energy_unit": "eV",
+  "feature_spec": {
+    "cluster_spec": {
+      "include_triplets": true,
+      "pair_max_shell": 4,
+      "shell_tolerance": 0.08,
+      "triplet_max_shell": 2
+    },
+    "feature_names": [
+      "zero:n_metal",
+      "point:Ir",
+      "point:Pd",
+      "point:Pt",
+      "point:Rh",
+      "point:Ru",
+      "pair:shell=1:Ir-Ir",
+      "pair:shell=1:Ir-Pd",
+      "pair:shell=1:Ir-Pt",
+      "pair:shell=1:Ir-Rh",
+      "pair:shell=1:Ir-Ru",
+      "pair:shell=1:Ir-X",
+      "pair:shell=1:Pd-Pd",
+      "pair:shell=1:Pd-Pt",
+      "pair:shell=1:Pd-Rh",
+      "pair:shell=1:Pd-Ru",
+      "pair:shell=1:Pd-X",
+      "pair:shell=1:Pt-Pt",
+      "pair:shell=1:Pt-Rh",
+      "pair:shell=1:Pt-Ru",
+      "pair:shell=1:Pt-X",
+      "pair:shell=1:Rh-Rh",
+      "pair:shell=1:Rh-Ru",
+      "pair:shell=1:Rh-X",
+      "pair:shell=1:Ru-Ru",
+      "pair:shell=1:Ru-X",
+      "pair:shell=2:Ir-Ir",
+      "pair:shell=2:Ir-Pd",
+      "pair:shell=2:Ir-Pt",
+      "pair:shell=2:Ir-Rh",
+      "pair:shell=2:Ir-Ru",
+      "pair:shell=2:Ir-X",
+      "pair:shell=2:Pd-Pd",
+      "pair:shell=2:Pd-Pt",
+      "pair:shell=2:Pd-Rh",
+      "pair:shell=2:Pd-Ru",
+      "pair:shell=2:Pd-X",
+      "pair:shell=2:Pt-Pt",
+      "pair:shell=2:Pt-Rh",
+      "pair:shell=2:Pt-Ru",
+      "pair:shell=2:Pt-X",
+      "pair:shell=2:Rh-Rh",
+      "pair:shell=2:Rh-Ru",
+      "pair:shell=2:Rh-X",
+      "pair:shell=2:Ru-Ru",
+      "pair:shell=2:Ru-X",
+      "pair:shell=3:Ir-Ir",
+      "pair:shell=3:Ir-Pd",
+      "pair:shell=3:Ir-Pt",
+      "pair:shell=3:Ir-Rh",
+      "pair:shell=3:Ir-Ru",
+      "pair:shell=3:Ir-X",
+      "pair:shell=3:Pd-Pd",
+      "pair:shell=3:Pd-Pt",
+      "pair:shell=3:Pd-Rh",
+      "pair:shell=3:Pd-Ru",
+      "pair:shell=3:Pd-X",
+      "pair:shell=3:Pt-Pt",
+      "pair:shell=3:Pt-Rh",
+      "pair:shell=3:Pt-Ru",
+      "pair:shell=3:Pt-X",
+      "pair:shell=3:Rh-Rh",
+      "pair:shell=3:Rh-Ru",
+      "pair:shell=3:Rh-X",
+      "pair:shell=3:Ru-Ru",
+      "pair:shell=3:Ru-X",
+      "pair:shell=4:Ir-Ir",
+      "pair:shell=4:Ir-Pd",
+      "pair:shell=4:Ir-Pt",
+      "pair:shell=4:Ir-Rh",
+      "pair:shell=4:Ir-Ru",
+      "pair:shell=4:Ir-X",
+      "pair:shell=4:Pd-Pd",
+      "pair:shell=4:Pd-Pt",
+      "pair:shell=4:Pd-Rh",
+      "pair:shell=4:Pd-Ru",
+      "pair:shell=4:Pd-X",
+      "pair:shell=4:Pt-Pt",
+      "pair:shell=4:Pt-Rh",
+      "pair:shell=4:Pt-Ru",
+      "pair:shell=4:Pt-X",
+      "pair:shell=4:Rh-Rh",
+      "pair:shell=4:Rh-Ru",
+      "pair:shell=4:Rh-X",
+      "pair:shell=4:Ru-Ru",
+      "pair:shell=4:Ru-X",
+      "triplet:geometry=1-1-1:Ir-Ir-Ir",
+      "triplet:geometry=1-1-1:Ir-Ir-Pd",
+      "triplet:geometry=1-1-1:Ir-Ir-Pt",
+      "triplet:geometry=1-1-1:Ir-Ir-Rh",
+      "triplet:geometry=1-1-1:Ir-Ir-Ru",
+      "triplet:geometry=1-1-1:Ir-Ir-X",
+      "triplet:geometry=1-1-1:Ir-Pd-Pd",
+      "triplet:geometry=1-1-1:Ir-Pd-Pt",
+      "triplet:geometry=1-1-1:Ir-Pd-Rh",
+      "triplet:geometry=1-1-1:Ir-Pd-Ru",
+      "triplet:geometry=1-1-1:Ir-Pd-X",
+      "triplet:geometry=1-1-1:Ir-Pt-Pt",
+      "triplet:geometry=1-1-1:Ir-Pt-Rh",
+      "triplet:geometry=1-1-1:Ir-Pt-Ru",
+      "triplet:geometry=1-1-1:Ir-Pt-X",
+      "triplet:geometry=1-1-1:Ir-Rh-Rh",
+      "triplet:geometry=1-1-1:Ir-Rh-Ru",
+      "triplet:geometry=1-1-1:Ir-Rh-X",
+      "triplet:geometry=1-1-1:Ir-Ru-Ru",
+      "triplet:geometry=1-1-1:Ir-Ru-X",
+      "triplet:geometry=1-1-1:Ir-X-X",
+      "triplet:geometry=1-1-1:Pd-Pd-Pd",
+      "triplet:geometry=1-1-1:Pd-Pd-Pt",
+      "triplet:geometry=1-1-1:Pd-Pd-Rh",
+      "triplet:geometry=1-1-1:Pd-Pd-Ru",
+      "triplet:geometry=1-1-1:Pd-Pd-X",
+      "triplet:geometry=1-1-1:Pd-Pt-Pt",
+      "triplet:geometry=1-1-1:Pd-Pt-Rh",
+      "triplet:geometry=1-1-1:Pd-Pt-Ru",
+      "triplet:geometry=1-1-1:Pd-Pt-X",
+      "triplet:geometry=1-1-1:Pd-Rh-Rh",
+      "triplet:geometry=1-1-1:Pd-Rh-Ru",
+      "triplet:geometry=1-1-1:Pd-Rh-X",
+      "triplet:geometry=1-1-1:Pd-Ru-Ru",
+      "triplet:geometry=1-1-1:Pd-Ru-X",
+      "triplet:geometry=1-1-1:Pd-X-X",
+      "triplet:geometry=1-1-1:Pt-Pt-Pt",
+      "triplet:geometry=1-1-1:Pt-Pt-Rh",
+      "triplet:geometry=1-1-1:Pt-Pt-Ru",
+      "triplet:geometry=1-1-1:Pt-Pt-X",
+      "triplet:geometry=1-1-1:Pt-Rh-Rh",
+      "triplet:geometry=1-1-1:Pt-Rh-Ru",
+      "triplet:geometry=1-1-1:Pt-Rh-X",
+      "triplet:geometry=1-1-1:Pt-Ru-Ru",
+      "triplet:geometry=1-1-1:Pt-Ru-X",
+      "triplet:geometry=1-1-1:Pt-X-X",
+      "triplet:geometry=1-1-1:Rh-Rh-Rh",
+      "triplet:geometry=1-1-1:Rh-Rh-Ru",
+      "triplet:geometry=1-1-1:Rh-Rh-X",
+      "triplet:geometry=1-1-1:Rh-Ru-Ru",
+      "triplet:geometry=1-1-1:Rh-Ru-X",
+      "triplet:geometry=1-1-1:Rh-X-X",
+      "triplet:geometry=1-1-1:Ru-Ru-Ru",
+      "triplet:geometry=1-1-1:Ru-Ru-X",
+      "triplet:geometry=1-1-1:Ru-X-X",
+      "triplet:geometry=1-1-2:Ir-Ir-Ir",
+      "triplet:geometry=1-1-2:Ir-Ir-Pd",
+      "triplet:geometry=1-1-2:Ir-Ir-Pt",
+      "triplet:geometry=1-1-2:Ir-Ir-Rh",
+      "triplet:geometry=1-1-2:Ir-Ir-Ru",
+      "triplet:geometry=1-1-2:Ir-Ir-X",
+      "triplet:geometry=1-1-2:Ir-Pd-Pd",
+      "triplet:geometry=1-1-2:Ir-Pd-Pt",
+      "triplet:geometry=1-1-2:Ir-Pd-Rh",
+      "triplet:geometry=1-1-2:Ir-Pd-Ru",
+      "triplet:geometry=1-1-2:Ir-Pd-X",
+      "triplet:geometry=1-1-2:Ir-Pt-Pt",
+      "triplet:geometry=1-1-2:Ir-Pt-Rh",
+      "triplet:geometry=1-1-2:Ir-Pt-Ru",
+      "triplet:geometry=1-1-2:Ir-Pt-X",
+      "triplet:geometry=1-1-2:Ir-Rh-Rh",
+      "triplet:geometry=1-1-2:Ir-Rh-Ru",
+      "triplet:geometry=1-1-2:Ir-Rh-X",
+      "triplet:geometry=1-1-2:Ir-Ru-Ru",
+      "triplet:geometry=1-1-2:Ir-Ru-X",
+      "triplet:geometry=1-1-2:Ir-X-X",
+      "triplet:geometry=1-1-2:Pd-Ir-Ir",
+      "triplet:geometry=1-1-2:Pd-Ir-Pd",
+      "triplet:geometry=1-1-2:Pd-Ir-Pt",
+      "triplet:geometry=1-1-2:Pd-Ir-Rh",
+      "triplet:geometry=1-1-2:Pd-Ir-Ru",
+      "triplet:geometry=1-1-2:Pd-Ir-X",
+      "triplet:geometry=1-1-2:Pd-Pd-Pd",
+      "triplet:geometry=1-1-2:Pd-Pd-Pt",
+      "triplet:geometry=1-1-2:Pd-Pd-Rh",
+      "triplet:geometry=1-1-2:Pd-Pd-Ru",
+      "triplet:geometry=1-1-2:Pd-Pd-X",
+      "triplet:geometry=1-1-2:Pd-Pt-Pt",
+      "triplet:geometry=1-1-2:Pd-Pt-Rh",
+      "triplet:geometry=1-1-2:Pd-Pt-Ru",
+      "triplet:geometry=1-1-2:Pd-Pt-X",
+      "triplet:geometry=1-1-2:Pd-Rh-Rh",
+      "triplet:geometry=1-1-2:Pd-Rh-Ru",
+      "triplet:geometry=1-1-2:Pd-Rh-X",
+      "triplet:geometry=1-1-2:Pd-Ru-Ru",
+      "triplet:geometry=1-1-2:Pd-Ru-X",
+      "triplet:geometry=1-1-2:Pd-X-X",
+      "triplet:geometry=1-1-2:Pt-Ir-Ir",
+      "triplet:geometry=1-1-2:Pt-Ir-Pd",
+      "triplet:geometry=1-1-2:Pt-Ir-Pt",
+      "triplet:geometry=1-1-2:Pt-Ir-Rh",
+      "triplet:geometry=1-1-2:Pt-Ir-Ru",
+      "triplet:geometry=1-1-2:Pt-Ir-X",
+      "triplet:geometry=1-1-2:Pt-Pd-Pd",
+      "triplet:geometry=1-1-2:Pt-Pd-Pt",
+      "triplet:geometry=1-1-2:Pt-Pd-Rh",
+      "triplet:geometry=1-1-2:Pt-Pd-Ru",
+      "triplet:geometry=1-1-2:Pt-Pd-X",
+      "triplet:geometry=1-1-2:Pt-Pt-Pt",
+      "triplet:geometry=1-1-2:Pt-Pt-Rh",
+      "triplet:geometry=1-1-2:Pt-Pt-Ru",
+      "triplet:geometry=1-1-2:Pt-Pt-X",
+      "triplet:geometry=1-1-2:Pt-Rh-Rh",
+      "triplet:geometry=1-1-2:Pt-Rh-Ru",
+      "triplet:geometry=1-1-2:Pt-Rh-X",
+      "triplet:geometry=1-1-2:Pt-Ru-Ru",
+      "triplet:geometry=1-1-2:Pt-Ru-X",
+      "triplet:geometry=1-1-2:Pt-X-X",
+      "triplet:geometry=1-1-2:Rh-Ir-Ir",
+      "triplet:geometry=1-1-2:Rh-Ir-Pd",
+      "triplet:geometry=1-1-2:Rh-Ir-Pt",
+      "triplet:geometry=1-1-2:Rh-Ir-Rh",
+      "triplet:geometry=1-1-2:Rh-Ir-Ru",
+      "triplet:geometry=1-1-2:Rh-Ir-X",
+      "triplet:geometry=1-1-2:Rh-Pd-Pd",
+      "triplet:geometry=1-1-2:Rh-Pd-Pt",
+      "triplet:geometry=1-1-2:Rh-Pd-Rh",
+      "triplet:geometry=1-1-2:Rh-Pd-Ru",
+      "triplet:geometry=1-1-2:Rh-Pd-X",
+      "triplet:geometry=1-1-2:Rh-Pt-Pt",
+      "triplet:geometry=1-1-2:Rh-Pt-Rh",
+      "triplet:geometry=1-1-2:Rh-Pt-Ru",
+      "triplet:geometry=1-1-2:Rh-Pt-X",
+      "triplet:geometry=1-1-2:Rh-Rh-Rh",
+      "triplet:geometry=1-1-2:Rh-Rh-Ru",
+      "triplet:geometry=1-1-2:Rh-Rh-X",
+      "triplet:geometry=1-1-2:Rh-Ru-Ru",
+      "triplet:geometry=1-1-2:Rh-Ru-X",
+      "triplet:geometry=1-1-2:Rh-X-X",
+      "triplet:geometry=1-1-2:Ru-Ir-Ir",
+      "triplet:geometry=1-1-2:Ru-Ir-Pd",
+      "triplet:geometry=1-1-2:Ru-Ir-Pt",
+      "triplet:geometry=1-1-2:Ru-Ir-Rh",
+      "triplet:geometry=1-1-2:Ru-Ir-Ru",
+      "triplet:geometry=1-1-2:Ru-Ir-X",
+      "triplet:geometry=1-1-2:Ru-Pd-Pd",
+      "triplet:geometry=1-1-2:Ru-Pd-Pt",
+      "triplet:geometry=1-1-2:Ru-Pd-Rh",
+      "triplet:geometry=1-1-2:Ru-Pd-Ru",
+      "triplet:geometry=1-1-2:Ru-Pd-X",
+      "triplet:geometry=1-1-2:Ru-Pt-Pt",
+      "triplet:geometry=1-1-2:Ru-Pt-Rh",
+      "triplet:geometry=1-1-2:Ru-Pt-Ru",
+      "triplet:geometry=1-1-2:Ru-Pt-X",
+      "triplet:geometry=1-1-2:Ru-Rh-Rh",
+      "triplet:geometry=1-1-2:Ru-Rh-Ru",
+      "triplet:geometry=1-1-2:Ru-Rh-X",
+      "triplet:geometry=1-1-2:Ru-Ru-Ru",
+      "triplet:geometry=1-1-2:Ru-Ru-X",
+      "triplet:geometry=1-1-2:Ru-X-X",
+      "triplet:geometry=1-1-2:X-Ir-Ir",
+      "triplet:geometry=1-1-2:X-Ir-Pd",
+      "triplet:geometry=1-1-2:X-Ir-Pt",
+      "triplet:geometry=1-1-2:X-Ir-Rh",
+      "triplet:geometry=1-1-2:X-Ir-Ru",
+      "triplet:geometry=1-1-2:X-Ir-X",
+      "triplet:geometry=1-1-2:X-Pd-Pd",
+      "triplet:geometry=1-1-2:X-Pd-Pt",
+      "triplet:geometry=1-1-2:X-Pd-Rh",
+      "triplet:geometry=1-1-2:X-Pd-Ru",
+      "triplet:geometry=1-1-2:X-Pd-X",
+      "triplet:geometry=1-1-2:X-Pt-Pt",
+      "triplet:geometry=1-1-2:X-Pt-Rh",
+      "triplet:geometry=1-1-2:X-Pt-Ru",
+      "triplet:geometry=1-1-2:X-Pt-X",
+      "triplet:geometry=1-1-2:X-Rh-Rh",
+      "triplet:geometry=1-1-2:X-Rh-Ru",
+      "triplet:geometry=1-1-2:X-Rh-X",
+      "triplet:geometry=1-1-2:X-Ru-Ru",
+      "triplet:geometry=1-1-2:X-Ru-X"
+    ],
+    "geometries": [
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        2
+      ]
+    ],
+    "species": [
+      "Ir",
+      "Pd",
+      "Pt",
+      "Rh",
+      "Ru",
+      "X"
+    ],
+    "vacancy_symbol": "X"
+  },
+  "format_version": 1,
+  "mapper_config": {
+    "force_kind": "auto",
+    "layer_tolerance_angstrom": 0.25,
+    "orientation_ratio_tolerance": 0.1,
+    "slab_gap_factor": 1.8,
+    "slab_vacuum_layers": 6,
+    "vacancy_symbol": "X",
+    "xy_match_tolerance_angstrom": 0.2
+  },
+  "metadata": {
+    "feature_scale_summary": {
+      "max": 1.0068740778787566,
+      "min": 0.03406405057607215
+    },
+    "metrics": {
+      "cross_validation": [
+        {
+          "alpha": 1e-08,
+          "mae_mean": 0.0018852983185781605,
+          "mae_std": 6.673261987944367e-05
+        },
+        {
+          "alpha": 2.1544346900318822e-08,
+          "mae_mean": 0.0018852983185877771,
+          "mae_std": 6.673261986413657e-05
+        },
+        {
+          "alpha": 4.641588833612782e-08,
+          "mae_mean": 0.001885298318608497,
+          "mae_std": 6.673261983115486e-05
+        },
+        {
+          "alpha": 1e-07,
+          "mae_mean": 0.001885298318653135,
+          "mae_std": 6.673261976010086e-05
+        },
+        {
+          "alpha": 2.1544346900318822e-07,
+          "mae_mean": 0.0018852983187493053,
+          "mae_std": 6.67326196070252e-05
+        },
+        {
+          "alpha": 4.6415888336127725e-07,
+          "mae_mean": 0.0018852983189564993,
+          "mae_std": 6.673261927722313e-05
+        },
+        {
+          "alpha": 1e-06,
+          "mae_mean": 0.0018852983194028873,
+          "mae_std": 6.673261856669224e-05
+        },
+        {
+          "alpha": 2.1544346900318822e-06,
+          "mae_mean": 0.0018852983203645958,
+          "mae_std": 6.673261703590501e-05
+        },
+        {
+          "alpha": 4.641588833612773e-06,
+          "mae_mean": 0.001885298322436536,
+          "mae_std": 6.673261373792014e-05
+        },
+        {
+          "alpha": 9.999999999999999e-06,
+          "mae_mean": 0.001885298326900394,
+          "mae_std": 6.673260663263064e-05
+        },
+        {
+          "alpha": 2.1544346900318823e-05,
+          "mae_mean": 0.0018852983365174817,
+          "mae_std": 6.673259132476901e-05
+        },
+        {
+          "alpha": 4.641588833612772e-05,
+          "mae_mean": 0.0018852983572368483,
+          "mae_std": 6.673255834506635e-05
+        },
+        {
+          "alpha": 0.0001,
+          "mae_mean": 0.001885298401875287,
+          "mae_std": 6.673248729285644e-05
+        },
+        {
+          "alpha": 0.00021544346900318823,
+          "mae_mean": 0.001885298498045486,
+          "mae_std": 6.673233421738498e-05
+        },
+        {
+          "alpha": 0.00046415888336127724,
+          "mae_mean": 0.0018852987052360277,
+          "mae_std": 6.673200443499305e-05
+        },
+        {
+          "alpha": 0.001,
+          "mae_mean": 0.0018852991516058522,
+          "mae_std": 6.673129398081516e-05
+        },
+        {
+          "alpha": 0.002154434690031882,
+          "mae_mean": 0.0018853001132402678,
+          "mae_std": 6.672976354139296e-05
+        },
+        {
+          "alpha": 0.004641588833612773,
+          "mae_mean": 0.0018853021848321196,
+          "mae_std": 6.672646718083801e-05
+        },
+        {
+          "alpha": 0.01,
+          "mae_mean": 0.0018853066470750572,
+          "mae_std": 6.671936943066002e-05
+        },
+        {
+          "alpha": 0.021544346900318822,
+          "mae_mean": 0.0018853165909978736,
+          "mae_std": 6.670415263844196e-05
+        },
+        {
+          "alpha": 0.046415888336127725,
+          "mae_mean": 0.001885338755763876,
+          "mae_std": 6.667158329914436e-05
+        },
+        {
+          "alpha": 0.1,
+          "mae_mean": 0.0018853864163914773,
+          "mae_std": 6.66018157537074e-05
+        },
+        {
+          "alpha": 0.21544346900318823,
+          "mae_mean": 0.001885492091446375,
+          "mae_std": 6.645756970976017e-05
+        },
+        {
+          "alpha": 0.46415888336127725,
+          "mae_mean": 0.0018858073334458182,
+          "mae_std": 6.622622817842773e-05
+        },
+        {
+          "alpha": 1.0,
+          "mae_mean": 0.0018867182302153862,
+          "mae_std": 6.580958076960708e-05
+        },
+        {
+          "alpha": 2.1544346900318776,
+          "mae_mean": 0.0018895305663642098,
+          "mae_std": 6.497195947432752e-05
+        },
+        {
+          "alpha": 4.641588833612772,
+          "mae_mean": 0.0018998218403866677,
+          "mae_std": 6.460949798625875e-05
+        },
+        {
+          "alpha": 10.0,
+          "mae_mean": 0.0019385815404902359,
+          "mae_std": 6.844889737122532e-05
+        },
+        {
+          "alpha": 21.54434690031878,
+          "mae_mean": 0.0020827305863378135,
+          "mae_std": 8.616745326896148e-05
+        },
+        {
+          "alpha": 46.41588833612773,
+          "mae_mean": 0.002479652993480085,
+          "mae_std": 0.00012544131615077183
+        },
+        {
+          "alpha": 100.0,
+          "mae_mean": 0.0032302085413019634,
+          "mae_std": 0.00016624001775809776
+        }
+      ],
+      "full_refit": {
+        "by_family": {
+          "bulk": {
+            "mae": 0.0012741846032714532,
+            "n": 1100,
+            "r2": 0.9926568417148918,
+            "rmse": 0.0016401004538791654
+          },
+          "slab111": {
+            "mae": 0.002404906736397486,
+            "n": 657,
+            "r2": 0.980997046063365,
+            "rmse": 0.003072568944943604
+          }
+        },
+        "mae": 0.001696998741839355,
+        "n": 1757,
+        "r2": 0.9995990168459515,
+        "rmse": 0.0022834747156332083
+      },
+      "holdout": {
+        "by_family": {
+          "bulk": {
+            "mae": 0.0013650214966065418,
+            "n": 110,
+            "r2": 0.9916978331638433,
+            "rmse": 0.0018011658026674555
+          },
+          "slab111": {
+            "mae": 0.0024264164975438523,
+            "n": 66,
+            "r2": 0.9809869962617151,
+            "rmse": 0.003059703850634593
+          }
+        },
+        "mae": 0.0017630446219580333,
+        "n": 176,
+        "r2": 0.9995883318063777,
+        "rmse": 0.0023533580848507196
+      },
+      "missing_target_structures": [],
+      "n_features": 266,
+      "n_nonzero_coefficients_1e-12": 246,
+      "n_samples": 1757,
+      "n_topology_classes": 2,
+      "selected_alpha": 1e-08,
+      "training_split": {
+        "by_family": {
+          "bulk": {
+            "mae": 0.001277659472216289,
+            "n": 990,
+            "r2": 0.9926762828966651,
+            "rmse": 0.0016317912362725354
+          },
+          "slab111": {
+            "mae": 0.0024182235264704937,
+            "n": 591,
+            "r2": 0.9807553150463761,
+            "rmse": 0.0030864995777227316
+          }
+        },
+        "mae": 0.00170401833120695,
+        "n": 1581,
+        "r2": 0.9995963502103025,
+        "rmse": 0.0022865922045503108
+      }
+    },
+    "package_versions": {
+      "ase": "3.29.0",
+      "numba": "0.65.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.3",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0"
+    },
+    "training_config": {
+      "clusters": {
+        "include_triplets": true,
+        "pair_max_shell": 4,
+        "shell_tolerance": 0.08,
+        "triplet_max_shell": 2
+      },
+      "data": {
+        "energy_unit": "eV",
+        "extensions": [
+          ".cif",
+          ".vasp",
+          ".poscar",
+          ".xyz",
+          ".extxyz"
+        ],
+        "strict": true,
+        "structures": "/home/jinsookim/HEA_MC/PtPdRhRuIr/cgcnn/root_dir/",
+        "target_normalization": "per_atom",
+        "targets": "/home/jinsookim/HEA_MC/PtPdRhRuIr/cgcnn/root_dir/id_prop.csv"
+      },
+      "lattice": {
+        "force_kind": "auto",
+        "layer_tolerance_angstrom": 0.25,
+        "orientation_ratio_tolerance": 0.1,
+        "slab_gap_factor": 1.8,
+        "slab_vacuum_layers": 6,
+        "vacancy_symbol": "X",
+        "xy_match_tolerance_angstrom": 0.2
+      },
+      "output": {
+        "directory": "./ce_training_output"
+      },
+      "regression": {
+        "alpha_log10_max": 2,
+        "alpha_log10_min": -8,
+        "cv_folds": 5,
+        "n_alphas": 31,
+        "random_seed": 42,
+        "test_fraction": 0.1
+      }
+    }
+  },
+  "target_normalization": "per_atom"
+}

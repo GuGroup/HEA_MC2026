@@ -1,0 +1,49 @@
+{
+  "ml": 4,
+  "source_points": {
+    "cemc": "cemc_10000_trial_points_with_kde_probability.csv",
+    "homogeneous": "random_10000_trial_points_with_kde_probability.csv"
+  },
+  "axis_histogram_bins": 20,
+  "axis_histogram_scaling": "each marginal normalized independently to its maximum; visual height occupies 17% of adjacent axis span",
+  "axis_histogram_placement": "Kendall tau outward; MSE and CRPS inward",
+  "axis_tick_label_placement": "Kendall tau numbers at pad=-22; default tick lines hidden and custom ticks drawn inward along +MSE; MSE default outside; CRPS unchanged at pad=8",
+  "mse_lower_axis_padding_fraction": 0.12,
+  "tau_upper_axis_limit": 0.9,
+  "typography": {
+    "panel_title": 36,
+    "axis_title": 30,
+    "axis_tick_label": 20,
+    "colorbar_title": 32,
+    "colorbar_tick_label": 24,
+    "colorbar_text": "Probability"
+  },
+  "ml4_layout_adjustments": {
+    "cemc_crps_label_pad": 38,
+    "homogeneous_crps_label_pad": 38,
+    "homogeneous_panel_x_shift": 0.018,
+    "colorbar_x_shift": 0.045,
+    "kendall_tick_label_pad": -22
+  },
+  "grid": "disabled",
+  "figure_title": "removed",
+  "legend": "removed",
+  "box_aspect": "1:1:1",
+  "box_edges": "12 black lines",
+  "panel_geometry": "Homogeneous synchronized to CEMC limits, ticks, camera, box aspect, width, height, and vertical position",
+  "panel_title_y": 0.955,
+  "panel_title_placement": "2-D text outside and immediately above each 3-D cube",
+  "autoscale": "disabled after CEMC limits and ticks are copied to Homogeneous",
+  "marginal_histogram_attachment": "three shared CEMC-coordinate black baselines; CRPS attached to the x-max/y-max tick-number edge",
+  "selected_point_axis_guides": "black dashed lines from each selected star to its tau, MSE, and CRPS number axes",
+  "axis_label_padding": {
+    "kendall_tau_b": 22,
+    "mse": 22,
+    "crps": 38
+  },
+  "axis_limits": "CEMC-derived and shared by both panels",
+  "selected_trials": {
+    "cemc": 7283,
+    "homogeneous": 5694
+  }
+}

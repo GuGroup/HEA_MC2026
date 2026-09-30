@@ -1,0 +1,22 @@
+{
+  "source": "/home/ktg0829/project/HEA/CEMC/UQMC_new_composition_shift",
+  "most_probable": {
+    "cemc_trial": 1869,
+    "temperature_K": 1300,
+    "homogeneous_trial": 1483
+  },
+  "best": {
+    "cemc_trial": 9002,
+    "temperature_K": 1200,
+    "homogeneous_trial": 5677
+  },
+  "original_activity_grids_match_atol": 1e-12,
+  "map_composition_count": 1400,
+  "recall_composition_count": 1317,
+  "center_cross_index": 25,
+  "clip_percentiles": [
+    1,
+    99
+  ],
+  "continuous_recall_recomputed_with_original_function": true
+}

@@ -1,0 +1,15 @@
+{
+  "case": "fcc110_bridge",
+  "facet": "110",
+  "site": "bridge",
+  "n_bins": 90,
+  "figure": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/equi-atomic/new_BE_shift_completed_sites_log_KDE_peak/by_facet_site/fcc110_bridge/probability_mass_weighted_histogram_1x5/all_temperatures_probability_mass_weighted_histograms.png",
+  "smoothing_applied": false,
+  "cemc_probability_formula": "sum(w_i,e in bin b) / sum(w_i,e over all bins)",
+  "random_support_formula": "1 if any Random ensemble with w_i,e > 0 is in bin b, else 0",
+  "containment_formula": "sum(CEMC probability mass in Random-occupied bins)",
+  "existing_graphs_preserved": true,
+  "pdf_created": false,
+  "BE_shift_selection": "observed CEMC trial in maximum KDE-smoothed 3D-histogram bin for log activity",
+  "composition_shift_applied": false
+}

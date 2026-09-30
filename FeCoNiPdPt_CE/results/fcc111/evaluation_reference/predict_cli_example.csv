@@ -1,0 +1,3 @@
+identifier,path,prediction,total_energy,normalization_denominator,n_metal,n_lattice,kind
+0,/tmp/FeCoNiPdPt_CE_fc2lj8yk/FeCoNiPdPt_CE/fcc111/data/structures/0.cif,-0.021081454978220174,-0.6746065593030456,32.0,32,32,bulk
+1100,/tmp/FeCoNiPdPt_CE_fc2lj8yk/FeCoNiPdPt_CE/fcc111/data/structures/1100.cif,0.11886078314391779,6.4184822897715605,54.0,54,108,slab111

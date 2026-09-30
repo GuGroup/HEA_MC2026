@@ -1,0 +1,15 @@
+{
+  "format": "raw_float32_shard_v1",
+  "dtype": "<f4",
+  "order": "C",
+  "layout": ["trial", "composition", "run", "temperature"],
+  "first_trial": 0,
+  "n_trials": 1,
+  "shape": [1, 1, 1, 18],
+  "temperatures_K": [2000, 1900, 1800, 1700, 1600, 1500, 1400, 1300, 1200, 1100, 1000, 900, 800, 700, 600, 500, 400, 300],
+  "experimental_activity": [-0.0037879099999999998],
+  "predicted_better_is_higher": true,
+  "experimental_better_is_lower": true,
+  "activity_definition": "per-CEMC-slab activity before run averaging",
+  "expected_bytes": 72
+}

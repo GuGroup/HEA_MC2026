@@ -1,0 +1,2 @@
+trial,method,tau,mse,score_tau_minus_mse,n_compositions,n_run_records
+0,random,nan,0,nan,1,1

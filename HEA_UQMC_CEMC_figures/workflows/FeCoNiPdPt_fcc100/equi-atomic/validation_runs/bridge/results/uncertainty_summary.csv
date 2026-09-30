@@ -1,0 +1,11 @@
+quantity,metric,n_trials,mean,sd,sem,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion
+cemc_selected,tau,0,nan,nan,nan,nan,nan,nan,nan,nan,"higher tau is better"
+random,tau,0,nan,nan,nan,nan,nan,nan,nan,nan,"higher tau is better; random has no temperature"
+cemc_minus_random,tau,0,nan,nan,nan,nan,nan,nan,nan,nan,"positive means CEMC tau is higher"
+cemc_selected,mse,1,0,0,0,0,0,0,0,0,"lower MSE is better"
+random,mse,1,0,0,0,0,0,0,0,0,"lower MSE is better; random has no temperature"
+random_minus_cemc,mse,1,0,0,0,0,0,0,0,0,"positive means CEMC MSE is lower"
+cemc_selected,score_tau_minus_mse,0,nan,nan,nan,nan,nan,nan,nan,nan,"temperature is selected by maximizing tau - MSE"
+random,score_tau_minus_mse,0,nan,nan,nan,nan,nan,nan,nan,nan,"random tau - MSE; no temperature selection"
+cemc_minus_random,score_tau_minus_mse,0,nan,nan,nan,nan,nan,nan,nan,nan,"positive means selected CEMC score is higher"
+cemc_selected,temperature,1,2000,0,0,2000,2000,2000,2000,2000,"distribution of selected MC slab temperatures across UQ trials"

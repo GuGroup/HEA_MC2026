@@ -1,0 +1,209 @@
+{
+  "figure": "Fig_S10",
+  "type": "best_activity",
+  "panels": [
+    {
+      "dataset": "Pt_Study1",
+      "case": {
+        "system": "Study1",
+        "label": "Study 1: 1400 compositions",
+        "n": 1400,
+        "source": "/home/ktg0829/project/HEA/CEMC/UQMC_new_composition_shift",
+        "recall_n": 1317
+      },
+      "label": "(a) Study 1: 1400 compositions"
+    },
+    {
+      "dataset": "Pt_ML1",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1",
+        "system": "Pt",
+        "ml": 1,
+        "label": "Study 2: ML1",
+        "n": 342,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_log_activity_kde_representative_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_log_activity_best_tau_mse_crps_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(b) Study 2: ML1"
+    },
+    {
+      "dataset": "Pt_ML2",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2",
+        "system": "Pt",
+        "ml": 2,
+        "label": "Study 2: ML2",
+        "n": 342,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_log_activity_kde_representative_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_log_activity_best_tau_mse_crps_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(c) Study 2: ML2"
+    },
+    {
+      "dataset": "Pt_ML3",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3",
+        "system": "Pt",
+        "ml": 3,
+        "label": "Study 2: ML3",
+        "n": 342,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_log_activity_kde_representative_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_log_activity_best_tau_mse_crps_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(d) Study 2: ML3"
+    },
+    {
+      "dataset": "Pt_ML4",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4",
+        "system": "Pt",
+        "ml": 4,
+        "label": "Study 2: ML4",
+        "n": 342,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_kde_representative_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_best_tau_mse_crps_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(e) Study 2: ML4"
+    },
+    {
+      "dataset": "Pt_ML5",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5",
+        "system": "Pt",
+        "ml": 5,
+        "label": "Study 2: ML5",
+        "n": 342,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_log_activity_kde_representative_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_log_activity_best_tau_mse_crps_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(f) Study 2: ML5"
+    },
+    {
+      "dataset": "Pt_ML6",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6",
+        "system": "Pt",
+        "ml": 6,
+        "label": "Study 2: ML6",
+        "n": 342,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_log_activity_kde_representative_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_log_activity_best_tau_mse_crps_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(g) Study 2: ML6"
+    },
+    {
+      "dataset": "Fe_fcc100_hollow",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity",
+        "system": "Fe",
+        "facet": "100",
+        "site": "hollow",
+        "label": "Study 3: fcc(100) hollow",
+        "n": 238,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_kde_representative_tsne_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/fcc100_hollow_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(h) Study 3: fcc(100) hollow"
+    },
+    {
+      "dataset": "Fe_fcc100_bridge",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity",
+        "system": "Fe",
+        "facet": "100",
+        "site": "bridge",
+        "label": "Study 3: fcc(100) bridge",
+        "n": 238,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_kde_representative_tsne_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(i) Study 3: fcc(100) bridge"
+    },
+    {
+      "dataset": "Fe_fcc110_bridge",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity",
+        "system": "Fe",
+        "facet": "110",
+        "site": "bridge",
+        "label": "Study 3: fcc(110) bridge",
+        "n": 238,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_kde_representative_tsne_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/fcc110_bridge_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(j) Study 3: fcc(110) bridge"
+    },
+    {
+      "dataset": "Fe_fcc111_fcc",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity",
+        "system": "Fe",
+        "facet": "111",
+        "site": "fcc",
+        "label": "Study 3: fcc(111) fcc",
+        "n": 238,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc_log_activity_kde_representative_tsne_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc111_fcc_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(k) Study 3: fcc(111) fcc"
+    },
+    {
+      "dataset": "Fe_fcc111_top",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity",
+        "system": "Fe",
+        "facet": "111",
+        "site": "top",
+        "label": "Study 3: fcc(111) top",
+        "n": 238,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/top_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/top_log_activity_kde_representative_tsne_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/fcc111_top_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/top_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(l) Study 3: fcc(111) top"
+    }
+  ]
+}

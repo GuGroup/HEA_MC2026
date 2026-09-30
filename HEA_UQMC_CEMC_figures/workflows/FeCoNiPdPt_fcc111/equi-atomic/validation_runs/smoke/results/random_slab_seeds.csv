@@ -1,0 +1,2 @@
+trial,composition_index,row_idx,col_idx,run,composition_sample_seed,random_slab_seed,cemc_seed,base_random_seed,seed_role,shuffle_algorithm,n_metal_sites,count_Fe,count_Co,count_Ni,count_Pd,count_Pt,sampled_Fe,sampled_Co,sampled_Ni,sampled_Pd,sampled_Pt,be_shift_Fe,be_shift_Co,be_shift_Ni,be_shift_Pd,be_shift_Pt
+0,0,0,0,0,10102619137980499337,15797363871824861564,13614106630689799526,2026080504,initial_random_slab,mt19937_64_deterministic_fisher_yates_v1,1000,200,200,200,200,200,0.2,0.2,0.2,0.2,0.2,0,0,0,0,0

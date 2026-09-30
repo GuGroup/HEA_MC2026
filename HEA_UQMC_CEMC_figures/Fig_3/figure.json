@@ -1,0 +1,19 @@
+{
+  "figure": "3",
+  "entrypoint": "plot.py",
+  "numeric_data": [
+    "data/Fe_composition.csv",
+    "data/Fe_composition_metadata.json",
+    "data/Fe_wc.csv",
+    "data/Fe_wc_metadata.json",
+    "data/Pt_composition.csv",
+    "data/Pt_composition_metadata.json",
+    "data/Pt_wc.csv",
+    "data/Pt_wc_metadata.json"
+  ],
+  "outputs": [
+    "outputs/Fig_3.png",
+    "outputs/Fig_3.pdf"
+  ],
+  "recompute_from_structures": "../analysis/equiatomic/recompute.py"
+}

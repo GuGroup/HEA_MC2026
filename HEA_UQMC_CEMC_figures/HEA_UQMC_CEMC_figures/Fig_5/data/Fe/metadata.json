@@ -1,0 +1,61 @@
+{
+  "system": "FeCoNiPdPt",
+  "facet": "fcc(100)",
+  "site": "hollow",
+  "slab_method": "Random (Homogeneous)",
+  "n_independent_random_slabs": 20,
+  "n_adsorption_sites_per_slab": 100,
+  "n_total_adsorption_sites": 2000,
+  "BE_shift_applied": false,
+  "composition_shift_applied": false,
+  "reference_optimal_deltaE_H_eV": -0.07,
+  "deltaG_H_formula": "deltaE_H - (-0.070 eV)",
+  "optimal_deltaG_H_eV": 0.0,
+  "activity_temperature_K": 298.0,
+  "activity_formula": "mean(exp(-abs(deltaG_H)/(k_B*T_activity)))",
+  "activity_no_log": 0.08798907013783347,
+  "activity_volcano_plotted": true,
+  "optimum_line_shown_in_legend": false,
+  "y_axis_label": "Probability",
+  "x_axis_label_fontsize_pt": 32,
+  "y_axis_label_fontsize_pt": 28,
+  "axis_tick_label_fontsize_pt": 24,
+  "legend_fontsize_pt": 28,
+  "grid": false,
+  "element_curve_weighting": "zone1 fractional contribution; top is one-hot, bridge/hollow sites are fractionally assigned to their zone1 atoms",
+  "distribution_normalization": "weighted count / (all adsorption sites * bin width); each curve area equals the element's zone1 fractional contribution",
+  "probability_smoothing": "Gaussian kernel, sigma=1.5 bins, 13-bin support",
+  "n_histogram_bins": 90,
+  "element_statistics": {
+    "Fe": {
+      "integrated_fractional_contribution": 0.191,
+      "weighted_mean_deltaG_H_eV": -0.19512826139763198,
+      "weighted_sd_deltaG_H_eV": 0.1027661939322428
+    },
+    "Co": {
+      "integrated_fractional_contribution": 0.1955,
+      "weighted_mean_deltaG_H_eV": -0.12251564081656005,
+      "weighted_sd_deltaG_H_eV": 0.10159527052672242
+    },
+    "Ni": {
+      "integrated_fractional_contribution": 0.2095,
+      "weighted_mean_deltaG_H_eV": -0.12472591919783116,
+      "weighted_sd_deltaG_H_eV": 0.10020183449625973
+    },
+    "Pd": {
+      "integrated_fractional_contribution": 0.207,
+      "weighted_mean_deltaG_H_eV": -0.12600638101415015,
+      "weighted_sd_deltaG_H_eV": 0.0990866076274409
+    },
+    "Pt": {
+      "integrated_fractional_contribution": 0.197,
+      "weighted_mean_deltaG_H_eV": -0.06976477909490403,
+      "weighted_sd_deltaG_H_eV": 0.11178907126965737
+    }
+  },
+  "figure": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/equi-atomic/random_no_be_shift_deltaG_H_probability_activity_volcano/by_facet_site/fcc100_hollow/random_element_deltaG_H_distribution.png",
+  "bin_data": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/equi-atomic/random_no_be_shift_deltaG_H_probability_activity_volcano/by_facet_site/fcc100_hollow/element_deltaG_H_probability_density_bins.csv",
+  "site_data": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/equi-atomic/random_no_be_shift_deltaG_H_probability_activity_volcano/by_facet_site/fcc100_hollow/random_deltaG_H_site_values.csv",
+  "source_analysis_code": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/equi-atomic/scripts/analyze_hbe_distributions.py",
+  "reference_plot_code": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/equi-atomic/new_BE_shift_completed_sites_log_KDE_peak/scripts/plot_most_probable_trial_shift_1x3_all_temperatures.py"
+}

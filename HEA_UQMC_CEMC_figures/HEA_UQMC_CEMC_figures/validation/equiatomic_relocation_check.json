@@ -1,0 +1,11 @@
+{
+  "seven_new_figures_run_from_relocated_package": true,
+  "standalone_export_and_model_override_evaluation": true,
+  "max_numeric_error": 4.1369685455094896e-14,
+  "original_pre_extension_scientific_files_preserved": true,
+  "historical_CEMC_site_cases_checked": 6,
+  "MC_snapshots_per_case_checked": 19,
+  "all_readmes_English": true,
+  "figure_reference_comparison": "numeric values verified; composite typography/spacing rebuilt; not pixel-identical to Word",
+  "temporary_validation_directory": "/tmp/hea_equi_relocation_etgs4d9u"
+}

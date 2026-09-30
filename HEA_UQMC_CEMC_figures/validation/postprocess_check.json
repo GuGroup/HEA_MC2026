@@ -1,0 +1,5 @@
+{
+  "n_trials": 40,
+  "n_temperature_rows": 720,
+  "max_metric_abs_difference": 0.0
+}

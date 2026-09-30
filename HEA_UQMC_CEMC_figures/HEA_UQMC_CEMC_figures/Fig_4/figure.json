@@ -1,0 +1,16 @@
+{
+  "figure": "4",
+  "entrypoint": "plot.py",
+  "numeric_data": [
+    "data/Pt_bin_reference.json",
+    "data/Pt_density.csv",
+    "data/Pt_metadata.json",
+    "data/fcc100_hollow_density.csv",
+    "data/fcc100_hollow_metadata.json"
+  ],
+  "outputs": [
+    "outputs/Fig_4.png",
+    "outputs/Fig_4.pdf"
+  ],
+  "recompute_from_structures": "../analysis/equiatomic/recompute.py"
+}

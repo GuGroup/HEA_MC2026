@@ -1,0 +1,17 @@
+{
+  "figure": "5",
+  "entrypoint": "plot.py",
+  "numeric_data": [
+    "data/Fe/element_deltaG_H_probability_density_bins.csv",
+    "data/Fe/metadata.json",
+    "data/Fe/random_deltaG_H_site_values.csv",
+    "data/Pt/metadata.json",
+    "data/Pt/random_no_be_shift_OH_site_values.csv",
+    "data/Pt/random_no_be_shift_element_OH_BE_probability_bins.csv"
+  ],
+  "outputs": [
+    "outputs/Fig_5.png",
+    "outputs/Fig_5.pdf"
+  ],
+  "recompute_from_structures": "../analysis/equiatomic/recompute.py"
+}

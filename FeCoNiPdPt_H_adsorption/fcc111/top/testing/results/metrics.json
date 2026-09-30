@@ -1,0 +1,24 @@
+{
+  "site": "fcc111/top",
+  "training": {
+    "n": 1056,
+    "mae_eV": 0.03912060597386844,
+    "rmse_eV": 0.04943042482993594,
+    "r2": 0.9511291629312152
+  },
+  "test_all": {
+    "n": 95,
+    "mae_eV": 0.03788432211157539,
+    "rmse_eV": 0.048270722299640294,
+    "r2": 0.9612452479072553
+  },
+  "test_original_plot": {
+    "n": 95,
+    "mae_eV": 0.03788432211157539,
+    "rmse_eV": 0.048270722299640294,
+    "r2": 0.9612452479072553
+  },
+  "original_plot_selection": "all",
+  "excluded_from_original_plot_indices": [],
+  "note": "Error-filtered subsets reproduce historical plots; use test_all for complete test-set performance."
+}

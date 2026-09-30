@@ -1,0 +1,48 @@
+{
+  "system": "PtPdRhRuIr",
+  "facet": "fcc(111)",
+  "slab_method": "Random",
+  "n_independent_random_slabs": 20,
+  "n_OH_top_sites_per_slab": 100,
+  "n_total_OH_sites": 2000,
+  "BE_shift_applied": false,
+  "BE_shifts_eV": {
+    "Pt": 0.0,
+    "Pd": 0.0,
+    "Ir": 0.0,
+    "Rh": 0.0,
+    "Ru": 0.0
+  },
+  "OH_BE_model": "zone1 top atom + 6 surface 1NN + 3 subsurface atoms",
+  "optimal_OH_BE_eV": 1.1,
+  "activity_temperature_K": 298.0,
+  "activity_formula": "exp(-abs(OH_BE - 1.1 eV)/(k_B*298 K))",
+  "x_axis_label": "Delta E_OH (eV)",
+  "y_axis_label": "Probability",
+  "x_axis_label_fontsize_pt": 32,
+  "y_axis_label_fontsize_pt": 28,
+  "axis_tick_label_fontsize_pt": 24,
+  "legend_fontsize_pt": 28,
+  "grid": false,
+  "optimum_line_shown_in_legend": false,
+  "probability_normalization": "within each top element: histogram bin counts divided by the total number of Random OH sites having that top element",
+  "probability_smoothing": "Gaussian kernel, sigma=1.5 bins, 13-bin support",
+  "n_histogram_bins": 100,
+  "element_site_counts": {
+    "Pt": 386,
+    "Pd": 389,
+    "Ir": 437,
+    "Rh": 395,
+    "Ru": 393
+  },
+  "figure": "/home/jinsookim/HEA_MC/PtPdRhRuIr/equi-atomic/random_no_be_shift_oh_be_probability_activity_volcano/random_no_be_shift_element_OH_BE_probability_activity_volcano.png",
+  "bin_data": "/home/jinsookim/HEA_MC/PtPdRhRuIr/equi-atomic/random_no_be_shift_oh_be_probability_activity_volcano/random_no_be_shift_element_OH_BE_probability_bins.csv",
+  "site_data": "/home/jinsookim/HEA_MC/PtPdRhRuIr/equi-atomic/random_no_be_shift_oh_be_probability_activity_volcano/random_no_be_shift_OH_site_values.csv",
+  "element_colors": {
+    "Pt": "#1F77B4",
+    "Pd": "#FFD700",
+    "Rh": "#FF7F0E",
+    "Ru": "#D62728",
+    "Ir": "#2CA02C"
+  }
+}

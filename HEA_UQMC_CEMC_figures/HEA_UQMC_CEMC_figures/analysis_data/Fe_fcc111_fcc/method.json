@@ -1,0 +1,29 @@
+{
+  "site": "fcc",
+  "input": "raw float32 individual-slab activity shards",
+  "no_log_activity": "mean 20 raw slab activities, then scale over 238 compositions to [-1,0]",
+  "log_activity": "ln every slab activity, mean 20 log values, then scale over 238 compositions to [-1,0]",
+  "metrics": [
+    "Kendall tau",
+    "MSE",
+    "empirical-distribution CRPS"
+  ],
+  "cemc_temperature_selection": "one of 18 temperatures per trial minimizing equal-weight normalized ideal distance",
+  "points_per_histogram_panel": 10000,
+  "histogram_bins_per_axis": 20,
+  "kde_sigma_bins": 1.0,
+  "tsne_features": [
+    "Fe_ratio",
+    "Co_ratio",
+    "Ni_ratio",
+    "Pd_ratio",
+    "Pt_ratio"
+  ],
+  "tsne_perplexity": 30.0,
+  "tsne_random_state": 42,
+  "pdf": "No PDF files created",
+  "representative_trial_constraint": "none; representative trial is selected from the globally highest-probability KDE bin",
+  "continuous_recall": "At each top-k fraction through 60%, intersection of the experimental and representative-trial top-k activity sets divided by k; ascending scaled activity rank",
+  "continuous_recall_baseline": "expected random overlap, y = x in fraction units",
+  "tsne_layout_refresh": "reused existing tsne_composition_layout.csv without recomputation"
+}

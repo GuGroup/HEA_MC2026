@@ -1,0 +1,11 @@
+{
+  "facet": "110",
+  "same_sample_order": true,
+  "same_holdout_split": true,
+  "selected_alpha": 21.54434690031878,
+  "reference_alpha": 21.54434690031878,
+  "coefficient_max_abs_difference": 1.9094152509113727e-09,
+  "target_max_abs_difference": 9.8879238130678e-17,
+  "prediction_max_abs_difference": 7.103599375390957e-10,
+  "validation_prediction_max_abs_difference": 1.1102230246251565e-16
+}

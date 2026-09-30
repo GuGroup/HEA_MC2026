@@ -1,0 +1,5 @@
+condition,successes,n_paired_trials,probability
+p(delta_tau > 0),4601,10000,0.4601
+p(delta_mse > 0),5039,10000,0.5039
+p(delta_crps > 0),5143,10000,0.5143
+"p(delta_tau > 0, delta_mse > 0, delta_crps > 0)",3220,10000,0.322

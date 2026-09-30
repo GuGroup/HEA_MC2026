@@ -1,0 +1,2 @@
+trial,compute_seconds,merge_seconds,summary_seconds,total_seconds,n_tasks,mpi_ranks,structures_written,summary_written
+280,4.273373,0.000468,0.000000,4.273842,20,1,false,false

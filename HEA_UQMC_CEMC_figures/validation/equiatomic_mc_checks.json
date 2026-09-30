@@ -1,0 +1,22 @@
+[
+  {
+    "case": "PtPdRhRuIr_fcc111/top",
+    "all_19_CEMC_snapshots_equal": true,
+    "initial_random_equal": true
+  },
+  {
+    "case": "FeCoNiPdPt_fcc100/hollow",
+    "all_19_CEMC_snapshots_equal": true,
+    "initial_random_equal": true
+  },
+  {
+    "case": "FeCoNiPdPt_fcc110/bridge",
+    "all_19_CEMC_snapshots_equal": true,
+    "initial_random_equal": true
+  },
+  {
+    "case": "FeCoNiPdPt_fcc111/hollow",
+    "all_19_CEMC_snapshots_equal": true,
+    "initial_random_equal": true
+  }
+]

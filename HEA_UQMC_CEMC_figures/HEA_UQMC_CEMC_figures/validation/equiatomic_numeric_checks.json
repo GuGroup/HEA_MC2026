@@ -1,0 +1,22 @@
+{
+  "Pt_surface_composition_WC_max_error": 2.220446049250313e-16,
+  "Fe_surface_composition_WC_max_error": 1.7763568394002505e-15,
+  "Pt_layer_pair_max_percentage_error": 7.105427357601002e-15,
+  "Fe100_layer_pair_max_percentage_error": 7.105427357601002e-15,
+  "Fe110_layer_pair_max_percentage_error": 7.105427357601002e-15,
+  "Fe111_layer_pair_max_percentage_error": 3.552713678800501e-15,
+  "Pt_Fig5_site_energy_max_error": 2.220446049250313e-16,
+  "Pt_Fig6_S15_probability_mass_max_error": 9.8879238130678e-17,
+  "fcc100_hollow_activity_max_error": 6.938893903907228e-17,
+  "fcc100_hollow_Fig5_site_energy_max_error": 9.8879238130678e-17,
+  "fcc100_hollow_Fig6_S15_probability_mass_max_error": 9.73613550891983e-17,
+  "fcc100_bridge_activity_max_error": 5.551115123125783e-17,
+  "fcc100_bridge_Fig6_S15_probability_mass_max_error": 9.8879238130678e-17,
+  "fcc110_bridge_activity_max_error": 2.7755575615628914e-17,
+  "fcc110_bridge_Fig6_S15_probability_mass_max_error": 9.80118763926896e-17,
+  "fcc111_hollow_activity_max_error": 6.938893903907228e-17,
+  "fcc111_hollow_Fig6_S15_probability_mass_max_error": 4.1369685455094896e-14,
+  "fcc111_top_activity_max_error": 6.245004513516506e-17,
+  "fcc111_top_Fig6_S15_probability_mass_max_error": 9.963817965141786e-17,
+  "Pt_activity_max_error": 5.551115123125783e-17
+}

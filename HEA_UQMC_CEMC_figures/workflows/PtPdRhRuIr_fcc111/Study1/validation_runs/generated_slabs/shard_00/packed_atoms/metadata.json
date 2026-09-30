@@ -1,0 +1,16 @@
+{
+  "format": "CEMC packed atoms v1",
+  "bits_per_atom": 3,
+  "bit_order": "little-endian within each byte",
+  "code_to_atomic_number": [44, 45, 46, 77, 78],
+  "code_to_symbol": ["Ru", "Rh", "Pd", "Ir", "Pt"],
+  "atom_order": "ce.metal_sites order; identical to template ASE atom order",
+  "record_order": ["composition", "run", "state", "atom"],
+  "state_order": ["random", "cemc_temperature_index_0_to_17"],
+  "n_compositions": 1,
+  "n_runs": 20,
+  "n_temperatures": 18,
+  "n_atoms": 1000,
+  "bytes_per_slab": 375,
+  "bytes_per_composition_run": 7125
+}

@@ -1,0 +1,2 @@
+mode,activity_scale,clip_lower_percentile,clip_upper_percentile,mc_trial,mc_temperature,random_trial,mc_tau,mc_mse,mc_crps,random_tau,random_mse,random_crps,mc_source_shard,random_source_shard,mc_kde_density,random_kde_density
+log,scaled,1.0,99.0,1869,1300,1483,0.3178404906772005,0.1883149390390539,0.3532888998955199,0.0314306839289482,0.335206345127673,0.4973737928254867,shard_04,shard_03,225.71877117485553,513.9171865517488

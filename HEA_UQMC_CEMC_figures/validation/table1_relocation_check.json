@@ -1,0 +1,24 @@
+{
+  "standalone_relocation_outputs_identical": true,
+  "paired_trials_per_dataset": 10000,
+  "datasets": 12,
+  "displayed_probabilities_match_manuscript": 52,
+  "matching_numeric_cells": 122,
+  "compared_numeric_cells": 124,
+  "known_interval_endpoint_discrepancies": [
+    {
+      "dataset": "Study 1",
+      "field": "tau_q975",
+      "manuscript": "0.39",
+      "recomputed": "0.38",
+      "unrounded": 0.3837824367439394
+    },
+    {
+      "dataset": "Study 2, ML4",
+      "field": "crps_q025",
+      "manuscript": "-0.04",
+      "recomputed": "-0.03",
+      "unrounded": -0.03494168848045415
+    }
+  ]
+}

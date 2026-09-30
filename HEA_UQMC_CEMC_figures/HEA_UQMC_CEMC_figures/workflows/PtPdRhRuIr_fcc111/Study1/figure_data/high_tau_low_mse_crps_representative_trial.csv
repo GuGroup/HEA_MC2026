@@ -1,0 +1,2 @@
+mode,clip_lower_percentile,clip_upper_percentile,trial,temperature,tau,mse,crps,d_tau,d_mse,d_crps,best_score,candidate_scope,source_shard
+log,1.0,99.0,9002,1200,0.4255199407454239,0.0425741305932103,0.1282404588340253,0.011934331273846147,0.028521317093446647,0.05225057782748612,0.03505242110042718,all_trial_temperature_pairs,shard_02

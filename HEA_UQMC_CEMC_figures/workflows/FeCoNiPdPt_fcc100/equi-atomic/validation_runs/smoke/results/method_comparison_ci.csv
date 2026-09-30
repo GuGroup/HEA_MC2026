@@ -1,0 +1,4 @@
+comparison,metric,n_trials,mean_delta,sd_delta,sem_delta,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion,mean_ci_supports_cemc_better,empirical95_supports_cemc_better
+cemc_tau_minus_random_tau,tau,0,nan,nan,nan,nan,nan,nan,nan,nan,"positive means CEMC tau is higher",false,false
+random_mse_minus_cemc_mse,mse,1,0,0,0,0,0,0,0,0,"positive means CEMC MSE is lower",false,false
+cemc_score_minus_random_score,score_tau_minus_mse,0,nan,nan,nan,nan,nan,nan,nan,nan,"positive means selected CEMC tau-MSE score is higher",false,false

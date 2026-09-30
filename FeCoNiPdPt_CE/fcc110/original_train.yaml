@@ -1,0 +1,42 @@
+# Dataset layout can be one directory, a list of directories/files, or glob patterns.
+data:
+  structures: /home/jinsookim/HEA_MC/FeCoNiPtPd_HER/cgcnn/110/root_dir/
+  targets: /home/jinsookim/HEA_MC/FeCoNiPtPd_HER/cgcnn/110/root_dir/id_prop.csv
+  strict: true
+  # Use per_atom when id_prop.csv contains eV per metal atom, as in the examples.
+  # Alternatives: per_lattice_site, total
+  target_normalization: per_atom
+  energy_unit: eV
+  extensions: [.cif, .vasp, .poscar, .xyz, .extxyz]
+
+lattice:
+  vacancy_symbol: X
+  # Extra empty fcc layers inserted into atom-only slabs. The mapper rounds the
+  # final total to an ABC multiple of 3 for (111), or AB multiple of 2 for (100).
+  slab_vacuum_layers: 6
+  layer_tolerance_angstrom: 0.25
+  xy_match_tolerance_angstrom: 0.20
+  slab_gap_factor: 1.8
+  orientation_ratio_tolerance: 0.10
+  force_kind: auto
+
+clusters:
+  # fcc shell index is (distance / nearest-neighbor distance)^2.
+  # Thus 1, 2, 3, 4 are the first four fcc pair shells.
+  pair_max_shell: 4
+  include_triplets: true
+  # Default triplets have all three edges in shell 1 or 2.
+  triplet_max_shell: 2
+  shell_tolerance: 0.08
+
+regression:
+  random_seed: 42
+  test_fraction: 0.10
+  cv_folds: 5
+  # Ridge strength is selected by family-stratified CV.
+  alpha_log10_min: -8
+  alpha_log10_max: 2
+  n_alphas: 31
+
+output:
+  directory: ./ce_training_output

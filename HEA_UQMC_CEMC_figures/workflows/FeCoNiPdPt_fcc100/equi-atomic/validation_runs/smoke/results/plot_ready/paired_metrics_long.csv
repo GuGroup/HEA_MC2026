@@ -1,0 +1,3 @@
+ml,trial,method,selected_temperature,tau,mse,score_tau_minus_mse
+1,0,cemc_selected,2000,nan,0,nan
+1,0,random,,nan,0,nan

@@ -1,0 +1,51 @@
+{
+  "case": "PtPdIrRhRu fcc(111)",
+  "source_csv": "/home/jinsookim/HEA_MC/PtPdRhRuIr/equi-atomic/surface_atomic_fraction/surface_atomic_fraction_vs_temperature_10K.csv",
+  "original_10K_figure_preserved": true,
+  "temperature_count": 172,
+  "temperature_spacing": "10 K from 2000 K through 300 K, plus 298 K",
+  "temperature_axis_direction": "2000 K left to 298 K right",
+  "n_slabs_per_temperature": 20,
+  "surface_atoms_per_slab": 100,
+  "elements": [
+    "Pt",
+    "Pd",
+    "Ir",
+    "Rh",
+    "Ru"
+  ],
+  "quantity": "mean N_element_surface/N_surface over slabs",
+  "smoothing": {
+    "method": "Gaussian temperature-kernel weighted mean",
+    "sigma_K": 50.0,
+    "truncate_sigma": 3.0,
+    "uses_actual_temperature_coordinates": true,
+    "raw_values_retained_in_csv": true,
+    "note": "Smoothing is for visualization and does not add independent MC samples."
+  },
+  "composition_sum_check": {
+    "max_abs_raw_sum_minus_one": 3.3306690738754696e-16,
+    "max_abs_smoothed_sum_minus_one": 4.440892098500626e-16
+  },
+  "series_colors": {
+    "Pd": "#FFD700",
+    "Pt": "#1F77B4",
+    "Ir": "#2CA02C",
+    "Rh": "#FF7F0E",
+    "Ru": "#D62728"
+  },
+  "y_limits": [
+    0.0,
+    0.8
+  ],
+  "style": {
+    "title": false,
+    "markers": false,
+    "grid": false,
+    "legend_frame": false,
+    "axis_label_size": 32,
+    "tick_label_size": 28,
+    "legend_size": 28,
+    "line_width": 4.4
+  }
+}

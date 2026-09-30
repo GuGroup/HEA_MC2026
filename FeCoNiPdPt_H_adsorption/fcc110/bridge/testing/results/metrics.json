@@ -1,0 +1,28 @@
+{
+  "site": "fcc110/bridge",
+  "training": {
+    "n": 722,
+    "mae_eV": 0.07681901098855241,
+    "rmse_eV": 0.09686766992474376,
+    "r2": 0.6517860843247023
+  },
+  "test_all": {
+    "n": 130,
+    "mae_eV": 0.097925049414451,
+    "rmse_eV": 0.12703082024446163,
+    "r2": 0.524723636495545
+  },
+  "test_original_plot": {
+    "n": 127,
+    "mae_eV": 0.09126326848254492,
+    "rmse_eV": 0.11376844084486444,
+    "r2": 0.5354320227704661
+  },
+  "original_plot_selection": "exclude_largest_3_absolute_errors",
+  "excluded_from_original_plot_indices": [
+    133,
+    36,
+    95
+  ],
+  "note": "Error-filtered subsets reproduce historical plots; use test_all for complete test-set performance."
+}

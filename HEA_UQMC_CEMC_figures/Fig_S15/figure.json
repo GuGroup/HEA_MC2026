@@ -1,0 +1,23 @@
+{
+  "figure": "S15",
+  "entrypoint": "plot.py",
+  "numeric_data": [
+    "data/fcc100_bridge/BE_shifts.csv",
+    "data/fcc100_bridge/metadata.json",
+    "data/fcc100_bridge/weighted_histogram_bin_data.csv",
+    "data/fcc110_bridge/BE_shifts.csv",
+    "data/fcc110_bridge/metadata.json",
+    "data/fcc110_bridge/weighted_histogram_bin_data.csv",
+    "data/fcc111_hollow/BE_shifts.csv",
+    "data/fcc111_hollow/metadata.json",
+    "data/fcc111_hollow/weighted_histogram_bin_data.csv",
+    "data/fcc111_top/BE_shifts.csv",
+    "data/fcc111_top/metadata.json",
+    "data/fcc111_top/weighted_histogram_bin_data.csv"
+  ],
+  "outputs": [
+    "outputs/Fig_S15.png",
+    "outputs/Fig_S15.pdf"
+  ],
+  "recompute_from_structures": "../analysis/equiatomic/recompute.py"
+}

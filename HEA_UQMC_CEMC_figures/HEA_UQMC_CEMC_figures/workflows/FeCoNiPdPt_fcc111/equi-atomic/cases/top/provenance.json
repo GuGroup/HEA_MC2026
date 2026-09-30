@@ -1,0 +1,11 @@
+{
+  "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/equi-atomic/111/top",
+  "site": "top",
+  "facet": "FeCoNiPdPt_fcc111",
+  "n_runs": 20,
+  "structure_layout": "Z[temperature,run,atom]; random_Z[run,atom]",
+  "shuffle_seed_prefix": [
+    "FeCoNiPdPt-equi-layer-shuffle-v1",
+    "111/top"
+  ]
+}

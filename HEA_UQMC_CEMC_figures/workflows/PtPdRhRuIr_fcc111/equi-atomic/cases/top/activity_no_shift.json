@@ -1,0 +1,47 @@
+{
+  "case": "PtPdRhRuIr_fcc111/top",
+  "elements": [
+    "Pt",
+    "Pd",
+    "Ir",
+    "Rh",
+    "Ru"
+  ],
+  "shifts_eV": {
+    "Pt": 0.0,
+    "Pd": 0.0,
+    "Ir": 0.0,
+    "Rh": 0.0,
+    "Ru": 0.0
+  },
+  "optimum_eV": 1.1,
+  "activity_temperature_K": 298.0,
+  "temperatures_K": [
+    2000,
+    1900,
+    1800,
+    1700,
+    1600,
+    1500,
+    1400,
+    1300,
+    1200,
+    1100,
+    1000,
+    900,
+    800,
+    700,
+    600,
+    500,
+    400,
+    300,
+    298
+  ],
+  "n_runs": 20,
+  "energy_coordinate": "DeltaE_OH_eV",
+  "activities": {
+    "Homogeneous": 0.047340102203362745,
+    "CEMC": 0.13849147346203736,
+    "CEMC + layer shuffled": 0.13253379399872098
+  }
+}

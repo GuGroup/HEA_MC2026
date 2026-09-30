@@ -1,0 +1,593 @@
+{
+  "created_utc": "2026-06-23T07:15:59.351019+00:00",
+  "energy_unit": "eV",
+  "feature_spec": {
+    "cluster_spec": {
+      "include_triplets": true,
+      "pair_max_shell": 4,
+      "shell_tolerance": 0.08,
+      "triplet_max_shell": 2
+    },
+    "feature_names": [
+      "zero:n_metal",
+      "point:Co",
+      "point:Fe",
+      "point:Ni",
+      "point:Pd",
+      "point:Pt",
+      "pair:shell=1:Co-Co",
+      "pair:shell=1:Co-Fe",
+      "pair:shell=1:Co-Ni",
+      "pair:shell=1:Co-Pd",
+      "pair:shell=1:Co-Pt",
+      "pair:shell=1:Co-X",
+      "pair:shell=1:Fe-Fe",
+      "pair:shell=1:Fe-Ni",
+      "pair:shell=1:Fe-Pd",
+      "pair:shell=1:Fe-Pt",
+      "pair:shell=1:Fe-X",
+      "pair:shell=1:Ni-Ni",
+      "pair:shell=1:Ni-Pd",
+      "pair:shell=1:Ni-Pt",
+      "pair:shell=1:Ni-X",
+      "pair:shell=1:Pd-Pd",
+      "pair:shell=1:Pd-Pt",
+      "pair:shell=1:Pd-X",
+      "pair:shell=1:Pt-Pt",
+      "pair:shell=1:Pt-X",
+      "pair:shell=2:Co-Co",
+      "pair:shell=2:Co-Fe",
+      "pair:shell=2:Co-Ni",
+      "pair:shell=2:Co-Pd",
+      "pair:shell=2:Co-Pt",
+      "pair:shell=2:Co-X",
+      "pair:shell=2:Fe-Fe",
+      "pair:shell=2:Fe-Ni",
+      "pair:shell=2:Fe-Pd",
+      "pair:shell=2:Fe-Pt",
+      "pair:shell=2:Fe-X",
+      "pair:shell=2:Ni-Ni",
+      "pair:shell=2:Ni-Pd",
+      "pair:shell=2:Ni-Pt",
+      "pair:shell=2:Ni-X",
+      "pair:shell=2:Pd-Pd",
+      "pair:shell=2:Pd-Pt",
+      "pair:shell=2:Pd-X",
+      "pair:shell=2:Pt-Pt",
+      "pair:shell=2:Pt-X",
+      "pair:shell=3:Co-Co",
+      "pair:shell=3:Co-Fe",
+      "pair:shell=3:Co-Ni",
+      "pair:shell=3:Co-Pd",
+      "pair:shell=3:Co-Pt",
+      "pair:shell=3:Co-X",
+      "pair:shell=3:Fe-Fe",
+      "pair:shell=3:Fe-Ni",
+      "pair:shell=3:Fe-Pd",
+      "pair:shell=3:Fe-Pt",
+      "pair:shell=3:Fe-X",
+      "pair:shell=3:Ni-Ni",
+      "pair:shell=3:Ni-Pd",
+      "pair:shell=3:Ni-Pt",
+      "pair:shell=3:Ni-X",
+      "pair:shell=3:Pd-Pd",
+      "pair:shell=3:Pd-Pt",
+      "pair:shell=3:Pd-X",
+      "pair:shell=3:Pt-Pt",
+      "pair:shell=3:Pt-X",
+      "pair:shell=4:Co-Co",
+      "pair:shell=4:Co-Fe",
+      "pair:shell=4:Co-Ni",
+      "pair:shell=4:Co-Pd",
+      "pair:shell=4:Co-Pt",
+      "pair:shell=4:Co-X",
+      "pair:shell=4:Fe-Fe",
+      "pair:shell=4:Fe-Ni",
+      "pair:shell=4:Fe-Pd",
+      "pair:shell=4:Fe-Pt",
+      "pair:shell=4:Fe-X",
+      "pair:shell=4:Ni-Ni",
+      "pair:shell=4:Ni-Pd",
+      "pair:shell=4:Ni-Pt",
+      "pair:shell=4:Ni-X",
+      "pair:shell=4:Pd-Pd",
+      "pair:shell=4:Pd-Pt",
+      "pair:shell=4:Pd-X",
+      "pair:shell=4:Pt-Pt",
+      "pair:shell=4:Pt-X",
+      "triplet:geometry=1-1-1:Co-Co-Co",
+      "triplet:geometry=1-1-1:Co-Co-Fe",
+      "triplet:geometry=1-1-1:Co-Co-Ni",
+      "triplet:geometry=1-1-1:Co-Co-Pd",
+      "triplet:geometry=1-1-1:Co-Co-Pt",
+      "triplet:geometry=1-1-1:Co-Co-X",
+      "triplet:geometry=1-1-1:Co-Fe-Fe",
+      "triplet:geometry=1-1-1:Co-Fe-Ni",
+      "triplet:geometry=1-1-1:Co-Fe-Pd",
+      "triplet:geometry=1-1-1:Co-Fe-Pt",
+      "triplet:geometry=1-1-1:Co-Fe-X",
+      "triplet:geometry=1-1-1:Co-Ni-Ni",
+      "triplet:geometry=1-1-1:Co-Ni-Pd",
+      "triplet:geometry=1-1-1:Co-Ni-Pt",
+      "triplet:geometry=1-1-1:Co-Ni-X",
+      "triplet:geometry=1-1-1:Co-Pd-Pd",
+      "triplet:geometry=1-1-1:Co-Pd-Pt",
+      "triplet:geometry=1-1-1:Co-Pd-X",
+      "triplet:geometry=1-1-1:Co-Pt-Pt",
+      "triplet:geometry=1-1-1:Co-Pt-X",
+      "triplet:geometry=1-1-1:Co-X-X",
+      "triplet:geometry=1-1-1:Fe-Fe-Fe",
+      "triplet:geometry=1-1-1:Fe-Fe-Ni",
+      "triplet:geometry=1-1-1:Fe-Fe-Pd",
+      "triplet:geometry=1-1-1:Fe-Fe-Pt",
+      "triplet:geometry=1-1-1:Fe-Fe-X",
+      "triplet:geometry=1-1-1:Fe-Ni-Ni",
+      "triplet:geometry=1-1-1:Fe-Ni-Pd",
+      "triplet:geometry=1-1-1:Fe-Ni-Pt",
+      "triplet:geometry=1-1-1:Fe-Ni-X",
+      "triplet:geometry=1-1-1:Fe-Pd-Pd",
+      "triplet:geometry=1-1-1:Fe-Pd-Pt",
+      "triplet:geometry=1-1-1:Fe-Pd-X",
+      "triplet:geometry=1-1-1:Fe-Pt-Pt",
+      "triplet:geometry=1-1-1:Fe-Pt-X",
+      "triplet:geometry=1-1-1:Fe-X-X",
+      "triplet:geometry=1-1-1:Ni-Ni-Ni",
+      "triplet:geometry=1-1-1:Ni-Ni-Pd",
+      "triplet:geometry=1-1-1:Ni-Ni-Pt",
+      "triplet:geometry=1-1-1:Ni-Ni-X",
+      "triplet:geometry=1-1-1:Ni-Pd-Pd",
+      "triplet:geometry=1-1-1:Ni-Pd-Pt",
+      "triplet:geometry=1-1-1:Ni-Pd-X",
+      "triplet:geometry=1-1-1:Ni-Pt-Pt",
+      "triplet:geometry=1-1-1:Ni-Pt-X",
+      "triplet:geometry=1-1-1:Ni-X-X",
+      "triplet:geometry=1-1-1:Pd-Pd-Pd",
+      "triplet:geometry=1-1-1:Pd-Pd-Pt",
+      "triplet:geometry=1-1-1:Pd-Pd-X",
+      "triplet:geometry=1-1-1:Pd-Pt-Pt",
+      "triplet:geometry=1-1-1:Pd-Pt-X",
+      "triplet:geometry=1-1-1:Pd-X-X",
+      "triplet:geometry=1-1-1:Pt-Pt-Pt",
+      "triplet:geometry=1-1-1:Pt-Pt-X",
+      "triplet:geometry=1-1-1:Pt-X-X",
+      "triplet:geometry=1-1-2:Co-Co-Co",
+      "triplet:geometry=1-1-2:Co-Co-Fe",
+      "triplet:geometry=1-1-2:Co-Co-Ni",
+      "triplet:geometry=1-1-2:Co-Co-Pd",
+      "triplet:geometry=1-1-2:Co-Co-Pt",
+      "triplet:geometry=1-1-2:Co-Co-X",
+      "triplet:geometry=1-1-2:Co-Fe-Fe",
+      "triplet:geometry=1-1-2:Co-Fe-Ni",
+      "triplet:geometry=1-1-2:Co-Fe-Pd",
+      "triplet:geometry=1-1-2:Co-Fe-Pt",
+      "triplet:geometry=1-1-2:Co-Fe-X",
+      "triplet:geometry=1-1-2:Co-Ni-Ni",
+      "triplet:geometry=1-1-2:Co-Ni-Pd",
+      "triplet:geometry=1-1-2:Co-Ni-Pt",
+      "triplet:geometry=1-1-2:Co-Ni-X",
+      "triplet:geometry=1-1-2:Co-Pd-Pd",
+      "triplet:geometry=1-1-2:Co-Pd-Pt",
+      "triplet:geometry=1-1-2:Co-Pd-X",
+      "triplet:geometry=1-1-2:Co-Pt-Pt",
+      "triplet:geometry=1-1-2:Co-Pt-X",
+      "triplet:geometry=1-1-2:Co-X-X",
+      "triplet:geometry=1-1-2:Fe-Co-Co",
+      "triplet:geometry=1-1-2:Fe-Co-Fe",
+      "triplet:geometry=1-1-2:Fe-Co-Ni",
+      "triplet:geometry=1-1-2:Fe-Co-Pd",
+      "triplet:geometry=1-1-2:Fe-Co-Pt",
+      "triplet:geometry=1-1-2:Fe-Co-X",
+      "triplet:geometry=1-1-2:Fe-Fe-Fe",
+      "triplet:geometry=1-1-2:Fe-Fe-Ni",
+      "triplet:geometry=1-1-2:Fe-Fe-Pd",
+      "triplet:geometry=1-1-2:Fe-Fe-Pt",
+      "triplet:geometry=1-1-2:Fe-Fe-X",
+      "triplet:geometry=1-1-2:Fe-Ni-Ni",
+      "triplet:geometry=1-1-2:Fe-Ni-Pd",
+      "triplet:geometry=1-1-2:Fe-Ni-Pt",
+      "triplet:geometry=1-1-2:Fe-Ni-X",
+      "triplet:geometry=1-1-2:Fe-Pd-Pd",
+      "triplet:geometry=1-1-2:Fe-Pd-Pt",
+      "triplet:geometry=1-1-2:Fe-Pd-X",
+      "triplet:geometry=1-1-2:Fe-Pt-Pt",
+      "triplet:geometry=1-1-2:Fe-Pt-X",
+      "triplet:geometry=1-1-2:Fe-X-X",
+      "triplet:geometry=1-1-2:Ni-Co-Co",
+      "triplet:geometry=1-1-2:Ni-Co-Fe",
+      "triplet:geometry=1-1-2:Ni-Co-Ni",
+      "triplet:geometry=1-1-2:Ni-Co-Pd",
+      "triplet:geometry=1-1-2:Ni-Co-Pt",
+      "triplet:geometry=1-1-2:Ni-Co-X",
+      "triplet:geometry=1-1-2:Ni-Fe-Fe",
+      "triplet:geometry=1-1-2:Ni-Fe-Ni",
+      "triplet:geometry=1-1-2:Ni-Fe-Pd",
+      "triplet:geometry=1-1-2:Ni-Fe-Pt",
+      "triplet:geometry=1-1-2:Ni-Fe-X",
+      "triplet:geometry=1-1-2:Ni-Ni-Ni",
+      "triplet:geometry=1-1-2:Ni-Ni-Pd",
+      "triplet:geometry=1-1-2:Ni-Ni-Pt",
+      "triplet:geometry=1-1-2:Ni-Ni-X",
+      "triplet:geometry=1-1-2:Ni-Pd-Pd",
+      "triplet:geometry=1-1-2:Ni-Pd-Pt",
+      "triplet:geometry=1-1-2:Ni-Pd-X",
+      "triplet:geometry=1-1-2:Ni-Pt-Pt",
+      "triplet:geometry=1-1-2:Ni-Pt-X",
+      "triplet:geometry=1-1-2:Ni-X-X",
+      "triplet:geometry=1-1-2:Pd-Co-Co",
+      "triplet:geometry=1-1-2:Pd-Co-Fe",
+      "triplet:geometry=1-1-2:Pd-Co-Ni",
+      "triplet:geometry=1-1-2:Pd-Co-Pd",
+      "triplet:geometry=1-1-2:Pd-Co-Pt",
+      "triplet:geometry=1-1-2:Pd-Co-X",
+      "triplet:geometry=1-1-2:Pd-Fe-Fe",
+      "triplet:geometry=1-1-2:Pd-Fe-Ni",
+      "triplet:geometry=1-1-2:Pd-Fe-Pd",
+      "triplet:geometry=1-1-2:Pd-Fe-Pt",
+      "triplet:geometry=1-1-2:Pd-Fe-X",
+      "triplet:geometry=1-1-2:Pd-Ni-Ni",
+      "triplet:geometry=1-1-2:Pd-Ni-Pd",
+      "triplet:geometry=1-1-2:Pd-Ni-Pt",
+      "triplet:geometry=1-1-2:Pd-Ni-X",
+      "triplet:geometry=1-1-2:Pd-Pd-Pd",
+      "triplet:geometry=1-1-2:Pd-Pd-Pt",
+      "triplet:geometry=1-1-2:Pd-Pd-X",
+      "triplet:geometry=1-1-2:Pd-Pt-Pt",
+      "triplet:geometry=1-1-2:Pd-Pt-X",
+      "triplet:geometry=1-1-2:Pd-X-X",
+      "triplet:geometry=1-1-2:Pt-Co-Co",
+      "triplet:geometry=1-1-2:Pt-Co-Fe",
+      "triplet:geometry=1-1-2:Pt-Co-Ni",
+      "triplet:geometry=1-1-2:Pt-Co-Pd",
+      "triplet:geometry=1-1-2:Pt-Co-Pt",
+      "triplet:geometry=1-1-2:Pt-Co-X",
+      "triplet:geometry=1-1-2:Pt-Fe-Fe",
+      "triplet:geometry=1-1-2:Pt-Fe-Ni",
+      "triplet:geometry=1-1-2:Pt-Fe-Pd",
+      "triplet:geometry=1-1-2:Pt-Fe-Pt",
+      "triplet:geometry=1-1-2:Pt-Fe-X",
+      "triplet:geometry=1-1-2:Pt-Ni-Ni",
+      "triplet:geometry=1-1-2:Pt-Ni-Pd",
+      "triplet:geometry=1-1-2:Pt-Ni-Pt",
+      "triplet:geometry=1-1-2:Pt-Ni-X",
+      "triplet:geometry=1-1-2:Pt-Pd-Pd",
+      "triplet:geometry=1-1-2:Pt-Pd-Pt",
+      "triplet:geometry=1-1-2:Pt-Pd-X",
+      "triplet:geometry=1-1-2:Pt-Pt-Pt",
+      "triplet:geometry=1-1-2:Pt-Pt-X",
+      "triplet:geometry=1-1-2:Pt-X-X",
+      "triplet:geometry=1-1-2:X-Co-Co",
+      "triplet:geometry=1-1-2:X-Co-Fe",
+      "triplet:geometry=1-1-2:X-Co-Ni",
+      "triplet:geometry=1-1-2:X-Co-Pd",
+      "triplet:geometry=1-1-2:X-Co-Pt",
+      "triplet:geometry=1-1-2:X-Co-X",
+      "triplet:geometry=1-1-2:X-Fe-Fe",
+      "triplet:geometry=1-1-2:X-Fe-Ni",
+      "triplet:geometry=1-1-2:X-Fe-Pd",
+      "triplet:geometry=1-1-2:X-Fe-Pt",
+      "triplet:geometry=1-1-2:X-Fe-X",
+      "triplet:geometry=1-1-2:X-Ni-Ni",
+      "triplet:geometry=1-1-2:X-Ni-Pd",
+      "triplet:geometry=1-1-2:X-Ni-Pt",
+      "triplet:geometry=1-1-2:X-Ni-X",
+      "triplet:geometry=1-1-2:X-Pd-Pd",
+      "triplet:geometry=1-1-2:X-Pd-Pt",
+      "triplet:geometry=1-1-2:X-Pd-X",
+      "triplet:geometry=1-1-2:X-Pt-Pt",
+      "triplet:geometry=1-1-2:X-Pt-X"
+    ],
+    "geometries": [
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        2
+      ]
+    ],
+    "species": [
+      "Co",
+      "Fe",
+      "Ni",
+      "Pd",
+      "Pt",
+      "X"
+    ],
+    "vacancy_symbol": "X"
+  },
+  "format_version": 1,
+  "mapper_config": {
+    "force_kind": "auto",
+    "layer_tolerance_angstrom": 0.25,
+    "orientation_ratio_tolerance": 0.1,
+    "slab_gap_factor": 1.8,
+    "slab_vacuum_layers": 6,
+    "vacancy_symbol": "X",
+    "xy_match_tolerance_angstrom": 0.2
+  },
+  "metadata": {
+    "feature_scale_summary": {
+      "max": 1.1135970474004657,
+      "min": 0.02312738306218068
+    },
+    "metrics": {
+      "cross_validation": [
+        {
+          "alpha": 1e-08,
+          "mae_mean": 0.013172005704813732,
+          "mae_std": 0.0006083323789744259
+        },
+        {
+          "alpha": 2.1544346900318822e-08,
+          "mae_mean": 0.013172005704549374,
+          "mae_std": 0.0006083323789933695
+        },
+        {
+          "alpha": 4.641588833612782e-08,
+          "mae_mean": 0.013172005703979837,
+          "mae_std": 0.0006083323790341782
+        },
+        {
+          "alpha": 1e-07,
+          "mae_mean": 0.01317200570275279,
+          "mae_std": 0.0006083323791220992
+        },
+        {
+          "alpha": 2.1544346900318822e-07,
+          "mae_mean": 0.013172005700109216,
+          "mae_std": 0.0006083323793115189
+        },
+        {
+          "alpha": 4.6415888336127725e-07,
+          "mae_mean": 0.01317200569441381,
+          "mae_std": 0.0006083323797196041
+        },
+        {
+          "alpha": 1e-06,
+          "mae_mean": 0.013172005682143417,
+          "mae_std": 0.0006083323805988003
+        },
+        {
+          "alpha": 2.1544346900318822e-06,
+          "mae_mean": 0.013172005655707659,
+          "mae_std": 0.0006083323824929696
+        },
+        {
+          "alpha": 4.641588833612773e-06,
+          "mae_mean": 0.013172005598753556,
+          "mae_std": 0.0006083323865738403
+        },
+        {
+          "alpha": 9.999999999999999e-06,
+          "mae_mean": 0.013172005476049667,
+          "mae_std": 0.0006083323953658109
+        },
+        {
+          "alpha": 2.1544346900318823e-05,
+          "mae_mean": 0.013172005211692211,
+          "mae_std": 0.0006083324143075367
+        },
+        {
+          "alpha": 4.641588833612772e-05,
+          "mae_mean": 0.013172004642151597,
+          "mae_std": 0.0006083324551162686
+        },
+        {
+          "alpha": 0.0001,
+          "mae_mean": 0.013172003415114774,
+          "mae_std": 0.0006083325430360946
+        },
+        {
+          "alpha": 0.00021544346900318823,
+          "mae_mean": 0.013172000771549805,
+          "mae_std": 0.0006083327324539781
+        },
+        {
+          "alpha": 0.00046415888336127724,
+          "mae_mean": 0.013171995080583929,
+          "mae_std": 0.0006083331415960389
+        },
+        {
+          "alpha": 0.001,
+          "mae_mean": 0.013171982854756481,
+          "mae_std": 0.0006083340314171373
+        },
+        {
+          "alpha": 0.002154434690031882,
+          "mae_mean": 0.013171956515578532,
+          "mae_std": 0.000608335948517126
+        },
+        {
+          "alpha": 0.004641588833612773,
+          "mae_mean": 0.013171899772179923,
+          "mae_std": 0.0006083400789626963
+        },
+        {
+          "alpha": 0.01,
+          "mae_mean": 0.013171778647460903,
+          "mae_std": 0.0006083469138727951
+        },
+        {
+          "alpha": 0.021544346900318822,
+          "mae_mean": 0.013171518099107262,
+          "mae_std": 0.0006083609937041308
+        },
+        {
+          "alpha": 0.046415888336127725,
+          "mae_mean": 0.013170957024611995,
+          "mae_std": 0.0006083913530183104
+        },
+        {
+          "alpha": 0.1,
+          "mae_mean": 0.013169753815393703,
+          "mae_std": 0.0006084579319693219
+        },
+        {
+          "alpha": 0.21544346900318823,
+          "mae_mean": 0.013167180229876719,
+          "mae_std": 0.0006086051101049281
+        },
+        {
+          "alpha": 0.46415888336127725,
+          "mae_mean": 0.013161676793647914,
+          "mae_std": 0.0006089287460859053
+        },
+        {
+          "alpha": 1.0,
+          "mae_mean": 0.013149951038925124,
+          "mae_std": 0.0006096398914230168
+        },
+        {
+          "alpha": 2.1544346900318776,
+          "mae_mean": 0.013126301075936772,
+          "mae_std": 0.0006112194440775407
+        },
+        {
+          "alpha": 4.641588833612772,
+          "mae_mean": 0.013079648551607124,
+          "mae_std": 0.0006153888833584363
+        },
+        {
+          "alpha": 10.0,
+          "mae_mean": 0.012998125937342859,
+          "mae_std": 0.0006206403473007487
+        },
+        {
+          "alpha": 21.54434690031878,
+          "mae_mean": 0.012887155050726361,
+          "mae_std": 0.0006271811712145004
+        },
+        {
+          "alpha": 46.41588833612773,
+          "mae_mean": 0.012802853814907224,
+          "mae_std": 0.0006442204221598825
+        },
+        {
+          "alpha": 100.0,
+          "mae_mean": 0.012826172949944065,
+          "mae_std": 0.0006722027817491212
+        }
+      ],
+      "full_refit": {
+        "by_family": {
+          "bulk": {
+            "mae": 0.015674162309843937,
+            "n": 1100,
+            "r2": 0.4756077856660459,
+            "rmse": 0.0235986002772655
+          },
+          "slab100": {
+            "mae": 0.00721836017929313,
+            "n": 1019,
+            "r2": 0.9587437582835445,
+            "rmse": 0.009323558897861333
+          }
+        },
+        "mae": 0.011607875206950464,
+        "n": 2119,
+        "r2": 0.9711129265129533,
+        "rmse": 0.018190483451996416
+      },
+      "holdout": {
+        "by_family": {
+          "bulk": {
+            "mae": 0.012430041322002943,
+            "n": 110,
+            "r2": 0.49759934589675137,
+            "rmse": 0.01759203139611623
+          },
+          "slab100": {
+            "mae": 0.00716416643137437,
+            "n": 102,
+            "r2": 0.9651022088998317,
+            "rmse": 0.009174713140115667
+          }
+        },
+        "mae": 0.009896460006700514,
+        "n": 212,
+        "r2": 0.9821269255080838,
+        "rmse": 0.014180214656504115
+      },
+      "missing_target_structures": [],
+      "n_features": 266,
+      "n_nonzero_coefficients_1e-12": 266,
+      "n_samples": 2119,
+      "n_topology_classes": 2,
+      "selected_alpha": 46.41588833612773,
+      "training_split": {
+        "by_family": {
+          "bulk": {
+            "mae": 0.01616399411226187,
+            "n": 990,
+            "r2": 0.47354145068638265,
+            "rmse": 0.024185870900789292
+          },
+          "slab100": {
+            "mae": 0.007368256268309366,
+            "n": 917,
+            "r2": 0.9568379178054253,
+            "rmse": 0.009456762572782192
+          }
+        },
+        "mae": 0.011934475704865726,
+        "n": 1907,
+        "r2": 0.9697930558906956,
+        "rmse": 0.01861928375352528
+      }
+    },
+    "package_versions": {
+      "ase": "3.29.0",
+      "numba": "0.65.1",
+      "numpy": "2.4.6",
+      "pandas": "3.0.3",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0"
+    },
+    "training_config": {
+      "clusters": {
+        "include_triplets": true,
+        "pair_max_shell": 4,
+        "shell_tolerance": 0.08,
+        "triplet_max_shell": 2
+      },
+      "data": {
+        "energy_unit": "eV",
+        "extensions": [
+          ".cif",
+          ".vasp",
+          ".poscar",
+          ".xyz",
+          ".extxyz"
+        ],
+        "strict": true,
+        "structures": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/cgcnn/100/add_data/results_dir",
+        "target_normalization": "per_atom",
+        "targets": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/cgcnn/100/add_data/results_dir/id_prop.csv"
+      },
+      "lattice": {
+        "force_kind": "auto",
+        "layer_tolerance_angstrom": 0.25,
+        "orientation_ratio_tolerance": 0.1,
+        "slab_gap_factor": 1.8,
+        "slab_vacuum_layers": 6,
+        "vacancy_symbol": "X",
+        "xy_match_tolerance_angstrom": 0.2
+      },
+      "output": {
+        "directory": "./ce_training_output"
+      },
+      "regression": {
+        "alpha_log10_max": 2,
+        "alpha_log10_min": -8,
+        "cv_folds": 5,
+        "n_alphas": 31,
+        "random_seed": 42,
+        "test_fraction": 0.1
+      }
+    }
+  },
+  "target_normalization": "per_atom"
+}

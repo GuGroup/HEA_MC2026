@@ -1,0 +1,144 @@
+{
+  "case": "FeCoNiPdPt fcc(100) hollow",
+  "source_archive": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/equi-atomic/100/hollow/compact_cemc_10K/cemc_structures_10K.npz",
+  "original_100K_figure_preserved": true,
+  "temperature_count": 172,
+  "temperature_spacing": "10 K from 2000 K through 300 K, plus 298 K",
+  "temperature_axis_direction": "2000 K left to 298 K right",
+  "n_slabs_per_temperature": 20,
+  "pairs": [
+    "Fe-Co",
+    "Co-Pd",
+    "Fe-Ni",
+    "Co-Pt",
+    "Co-Ni",
+    "Pd-Pt",
+    "Fe-Pd",
+    "Ni-Pt",
+    "Fe-Pt"
+  ],
+  "duplicate_requested_pair_removed": "Co-Pt",
+  "wc_definition": "alpha_ij = 1 - P_ij/x_j",
+  "x_j": "N_j_surface/N_surface for each slab",
+  "averaging": "alpha calculated per slab, then arithmetic mean over 20 slabs",
+  "smoothing": {
+    "method": "Gaussian temperature-kernel weighted mean",
+    "sigma_K": 50.0,
+    "truncate_sigma": 3.0,
+    "uses_actual_temperature_coordinates": true,
+    "raw_values_retained_in_csv": true,
+    "note": "Smoothing is for visualization and does not add independent MC samples."
+  },
+  "surface_coordination": 4,
+  "surface_1NN_distance_A": 2.6520390968425573,
+  "roughness": {
+    "Fe-Co": {
+      "max_abs_adjacent_10K_change_raw": 0.9208437761069339,
+      "max_abs_adjacent_10K_change_smoothed": 0.025605452162365594
+    },
+    "Co-Pd": {
+      "max_abs_adjacent_10K_change_raw": 0.1316101486994275,
+      "max_abs_adjacent_10K_change_smoothed": 0.004196481236578994
+    },
+    "Fe-Ni": {
+      "max_abs_adjacent_10K_change_raw": 1.3169642857142858,
+      "max_abs_adjacent_10K_change_smoothed": 0.042492041765330835
+    },
+    "Co-Pt": {
+      "max_abs_adjacent_10K_change_raw": 0.8480286364058293,
+      "max_abs_adjacent_10K_change_smoothed": 0.02386884817272925
+    },
+    "Co-Ni": {
+      "max_abs_adjacent_10K_change_raw": 0.5453857180830862,
+      "max_abs_adjacent_10K_change_smoothed": 0.02399011365556769
+    },
+    "Pd-Pt": {
+      "max_abs_adjacent_10K_change_raw": 0.06033241326389063,
+      "max_abs_adjacent_10K_change_smoothed": 0.003327770225378446
+    },
+    "Fe-Pd": {
+      "max_abs_adjacent_10K_change_raw": 0.1775171099946052,
+      "max_abs_adjacent_10K_change_smoothed": 0.005736778707201129
+    },
+    "Ni-Pt": {
+      "max_abs_adjacent_10K_change_raw": 0.3517980613962757,
+      "max_abs_adjacent_10K_change_smoothed": 0.021470822754483698
+    },
+    "Fe-Pt": {
+      "max_abs_adjacent_10K_change_raw": 6.25,
+      "max_abs_adjacent_10K_change_smoothed": 0.3831427376835732
+    }
+  },
+  "valid_slab_counts_by_pair": {
+    "Fe-Co": {
+      "minimum": 2,
+      "maximum": 20,
+      "temperatures_below_20": 66,
+      "temperatures_with_zero_valid_slabs": 0
+    },
+    "Co-Pd": {
+      "minimum": 17,
+      "maximum": 20,
+      "temperatures_below_20": 28,
+      "temperatures_with_zero_valid_slabs": 0
+    },
+    "Fe-Ni": {
+      "minimum": 2,
+      "maximum": 20,
+      "temperatures_below_20": 63,
+      "temperatures_with_zero_valid_slabs": 0
+    },
+    "Co-Pt": {
+      "minimum": 14,
+      "maximum": 20,
+      "temperatures_below_20": 34,
+      "temperatures_with_zero_valid_slabs": 0
+    },
+    "Co-Ni": {
+      "minimum": 17,
+      "maximum": 20,
+      "temperatures_below_20": 28,
+      "temperatures_with_zero_valid_slabs": 0
+    },
+    "Pd-Pt": {
+      "minimum": 14,
+      "maximum": 20,
+      "temperatures_below_20": 12,
+      "temperatures_with_zero_valid_slabs": 0
+    },
+    "Fe-Pd": {
+      "minimum": 2,
+      "maximum": 20,
+      "temperatures_below_20": 63,
+      "temperatures_with_zero_valid_slabs": 0
+    },
+    "Ni-Pt": {
+      "minimum": 14,
+      "maximum": 20,
+      "temperatures_below_20": 12,
+      "temperatures_with_zero_valid_slabs": 0
+    },
+    "Fe-Pt": {
+      "minimum": 2,
+      "maximum": 20,
+      "temperatures_below_20": 63,
+      "temperatures_with_zero_valid_slabs": 0
+    }
+  },
+  "y_limits": [
+    -2.0,
+    1.0
+  ],
+  "style": {
+    "title": false,
+    "markers": false,
+    "grid": false,
+    "legend_frame": false,
+    "axis_label_size": 32,
+    "tick_label_size": 28,
+    "legend_size": 26,
+    "legend_columns": 3,
+    "legend_rows": 4,
+    "third_column_nonempty_row": 4
+  }
+}

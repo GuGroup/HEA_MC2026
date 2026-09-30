@@ -1,0 +1,1058 @@
+[
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/src/uq_cemc_mpi.cpp",
+    "destination": "workflows/PtPdRhRuIr_fcc111/src/uq_cemc_mpi.cpp",
+    "sha256": "590ae901fe77797fbb21d35cc883b8425496ccc6f41d9cc712b8ff49ac307e1f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/src/recover_cemc_slabs_3bit_mpi.cpp",
+    "destination": "workflows/PtPdRhRuIr_fcc111/src/recover_cemc_slabs_3bit_mpi.cpp",
+    "sha256": "d2fa1ac634fab0c855155cf9d533eacfdbb28d98a608ed09c3daf1d015f46832"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/recover_from_slab3bit_mpi.cpp",
+    "destination": "workflows/PtPdRhRuIr_fcc111/src/recover_from_slab3bit_mpi.cpp",
+    "sha256": "3c49ca6ca846d398c4b0e6a3239f6f5b2fe3156a4a43ea21132f62867e926254"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/recover_random_activity_mpi.cpp",
+    "destination": "workflows/PtPdRhRuIr_fcc111/src/recover_random_activity_mpi.cpp",
+    "sha256": "045e84c272418d7e5570b52b5dd5ee7ba93acc593abc5a761ff30a79ea3213e7"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML1_full/ce_export.txt",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/10c333b2ccca_ce_export.txt",
+    "sha256": "10c333b2cccabf258d52111ae59dcbfcfb4044979d76084a2afb644b5bfd3cd2"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML1_full/schedule_snapshots.txt",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/7e97257cb41f_schedule_snapshots.txt",
+    "sha256": "7e97257cb41fed34956f688ad230db603625fd578ede24d1a1d63522912f8607"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML1_full/activity_model_oh.txt",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/c2dd0b378b1a_activity_model_oh.txt",
+    "sha256": "c2dd0b378b1a8d98bd460eca3838b6675eac26d6e2db44c50382efa9cfd65123"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/ktg/ML1_composition_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/434d6f35f22e_ML1_composition_data.csv",
+    "sha256": "434d6f35f22e730b2f8cf0d97650d87d1bb8e568d18d37c10f6ad72bc939b13e"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML1_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/4399ed2589ce_ML1_activity_data.csv",
+    "sha256": "4399ed2589ce6363d1d9ded06be1abb420730e334bad013f66fc4d31945346f1"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML1_full/uq_config.ini",
+    "destination": "workflows/PtPdRhRuIr_fcc111/provenance/ML1_original.ini",
+    "sha256": "939df4222536256d88fdc698175286257d8202013a70dccc5b749546c33bd62f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML1_log_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/ML1_experimental_log_activity.csv",
+    "sha256": "1b59edfa07330b4c26bd58290222023d5d49a14ee171dfe74e3e7cddbba336a0"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/ktg/ML2_composition_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/9e0f6d52aee3_ML2_composition_data.csv",
+    "sha256": "9e0f6d52aee377891e98917bfb02ea4c247080a463b6e3964fc416b924231f23"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML2_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/a2db7112095c_ML2_activity_data.csv",
+    "sha256": "a2db7112095c04a51cd18dd21374459754ccb0bf27153311bc6fe4bf11d7d2df"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML2_full/uq_config.ini",
+    "destination": "workflows/PtPdRhRuIr_fcc111/provenance/ML2_original.ini",
+    "sha256": "dd0b8bf233ca40928d98bbc6efd370f927a38c91468d1ea6223f0892914bb112"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML2_log_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/ML2_experimental_log_activity.csv",
+    "sha256": "cb9b98d17dc191786c683ac1b72c7bb6bffa24f6ac6affb3824164c88bacc6af"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/ktg/ML3_composition_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/215016af4910_ML3_composition_data.csv",
+    "sha256": "215016af49106a6be011452829177895d28c5a0444ad2c28dcda94f3c72987ee"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML3_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/6e3aaa32345b_ML3_activity_data.csv",
+    "sha256": "6e3aaa32345b415d7fe4314522e327ed6a715121f99cf10b6cdf24e9ddb31a02"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML3_full/uq_config.ini",
+    "destination": "workflows/PtPdRhRuIr_fcc111/provenance/ML3_original.ini",
+    "sha256": "9afeb5d7e831bba4a91901bae51172003ce8250eaad4d170029ae65c82605f18"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML3_log_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/ML3_experimental_log_activity.csv",
+    "sha256": "310f799dc9de3c5ef2e551e2f452170e94000e092973306c291d7a343af5758f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/ktg/ML4_composition_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/0b46d51a84ff_ML4_composition_data.csv",
+    "sha256": "0b46d51a84ff1f284be08d457e1764b422aa7d81f872d30e503cbc1ab3b27c4d"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML4_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/aa4059f1cac6_ML4_activity_data.csv",
+    "sha256": "aa4059f1cac6a56364db74f6ecc8574c21c9b57f7f06157047c8768b3c318beb"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML4_full/uq_config.ini",
+    "destination": "workflows/PtPdRhRuIr_fcc111/provenance/ML4_original.ini",
+    "sha256": "2ce57e1640e314dd9534dc5d77dd2612023c68b6b74c17446e0f63d1c0acdac5"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML4_log_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/ML4_experimental_log_activity.csv",
+    "sha256": "a12c1ed9b5969f52956cd2e2a34f1ea9843ed9f47194cf0f6e132a393cc0524e"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/ktg/ML5_composition_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/46bcf02020a4_ML5_composition_data.csv",
+    "sha256": "46bcf02020a447c8b47c9e66bca34e5312d145c823c3c1fb52403b8bf52e4151"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML5_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/d9664439d182_ML5_activity_data.csv",
+    "sha256": "d9664439d18267aa57a419d361f01467778c0af4af6ac6a5bcb25a6d1f6abae8"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML5_full/uq_config.ini",
+    "destination": "workflows/PtPdRhRuIr_fcc111/provenance/ML5_original.ini",
+    "sha256": "7465c0851ba764370999fe3efbbe2619570bca9a40e435a385132c3112dcde2b"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML5_log_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/ML5_experimental_log_activity.csv",
+    "sha256": "c2c036d1f03f0508da67b390452be452ecfc1535a03f032f94fe79b01830915b"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/ktg/ML6_composition_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/72b3e3a41825_ML6_composition_data.csv",
+    "sha256": "72b3e3a4182584cdea5f7641cfbb5c63bb5d6a8693cdfe807ae6d2a9d54939cd"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML6_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/8ec56248d4be_ML6_activity_data.csv",
+    "sha256": "8ec56248d4be1a5ed2119b7aad535f30ae831682ecfdf75cea4b4fedb114d499"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/uq_ML6_full/uq_config.ini",
+    "destination": "workflows/PtPdRhRuIr_fcc111/provenance/ML6_original.ini",
+    "sha256": "642edc9088cea90f25fbb882568cdee042b437af94355e11c8d4b6b393672737"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/exp_activity/ML6_log_activity_data.csv",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/ML6_experimental_log_activity.csv",
+    "sha256": "4d48024fccbf10b8e5e2399eac8eb5398999a4be2b4d00c39160c1f3a5c77a75"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/valid_grid_mask.npy",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inputs/valid_grid_mask.npy",
+    "sha256": "203e38af2832f3dd1c087d15a94f6aecf563d7e7ecdd3f982bbab0837120396a"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/scripts/inspect_slab3bit.py",
+    "destination": "workflows/PtPdRhRuIr_fcc111/inspect_slab3bit.py",
+    "sha256": "b43f0b9447166edc00d30e5d47938af09effeeb8abadfd95ce62a5993f706dfd"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/src/uq_cemc_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc111/src/uq_cemc_mpi.cpp",
+    "sha256": "76a513b2a8b7ed9ee0d8a222180d05a1be1331437dbc399881445f92e012c462"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/src/recover_cemc_slabs_3bit_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc111/src/recover_cemc_slabs_3bit_mpi.cpp",
+    "sha256": "5e76701a6ecbe9f921cbb6b58a8492074b846d950e856375c7791f1e3cfb1fad"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/recover_from_slab3bit_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc111/src/recover_from_slab3bit_mpi.cpp",
+    "sha256": "3c49ca6ca846d398c4b0e6a3239f6f5b2fe3156a4a43ea21132f62867e926254"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/recover_random_activity_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc111/src/recover_random_activity_mpi.cpp",
+    "sha256": "045e84c272418d7e5570b52b5dd5ee7ba93acc593abc5a761ff30a79ea3213e7"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/uq_HER_fcc_full/ce_export.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc111/inputs/4871e526e100_ce_export.txt",
+    "sha256": "4871e526e100620dd14cb19497e38e848215ef9de3d5741a27b672c6109b093c"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/uq_HER_fcc_full/schedule_snapshots.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc111/inputs/7e97257cb41f_schedule_snapshots.txt",
+    "sha256": "7e97257cb41fed34956f688ad230db603625fd578ede24d1a1d63522912f8607"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/uq_HER_fcc_full/activity_model_H_fcc.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc111/inputs/18f89d284dec_activity_model_H_fcc.txt",
+    "sha256": "18f89d284dec740d20210140c3e74681db1c6f2038a38bb80ed60d5df83886c5"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/uq_HER_fcc_full/her_compositions_activity_scaled.csv",
+    "destination": "workflows/FeCoNiPdPt_fcc111/inputs/d7e9e2665c94_her_compositions_activity_scaled.csv",
+    "sha256": "d7e9e2665c943557c641a85e9a4c1ece56d2691aa6d790ecc66138a1b40d4cc7"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/fcc/uq_config.ini",
+    "destination": "workflows/FeCoNiPdPt_fcc111/provenance/fcc_original.ini",
+    "sha256": "6462d1f36ba35804306710f2f369e8c8fa6983e8687b260a734393656a1d5e15"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/uq_HER_fcc_full/her_composition_log_activity_scaled.csv",
+    "destination": "workflows/FeCoNiPdPt_fcc111/inputs/fcc_experimental_log_activity.csv",
+    "sha256": "e5beb6ca3bc0159a657bff7cb39a06b17fff3d28667462259ad581091de831fa"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/uq_HER_top_full/activity_model_H_top.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc111/inputs/39d658bcff5c_activity_model_H_top.txt",
+    "sha256": "39d658bcff5c7d8aec7b91eb05266d8fd1ac0380ee7d83a254057d0e4e5ebc1a"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/top/uq_config.ini",
+    "destination": "workflows/FeCoNiPdPt_fcc111/provenance/top_original.ini",
+    "sha256": "8bf4a4119f8fc29c0c45357ed58569b37acb9310b18a0be02931a2682e8e6b49"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc111/no_log_activity/uq_HER_top_full/her_composition_log_activity_scaled.csv",
+    "destination": "workflows/FeCoNiPdPt_fcc111/inputs/top_experimental_log_activity.csv",
+    "sha256": "e5beb6ca3bc0159a657bff7cb39a06b17fff3d28667462259ad581091de831fa"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/scripts/inspect_slab3bit.py",
+    "destination": "workflows/FeCoNiPdPt_fcc111/inspect_slab3bit.py",
+    "sha256": "b43f0b9447166edc00d30e5d47938af09effeeb8abadfd95ce62a5993f706dfd"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her110_uq_cemc_cpp_v1.0/src/uq_cemc_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc110/src/uq_cemc_mpi.cpp",
+    "sha256": "33c9d93879e905d1dfa497731009f8a7b98bda28918070dda79c5cb10e631b16"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her110_uq_cemc_cpp_v1.0/src/recover_cemc_slabs_3bit_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc110/src/recover_cemc_slabs_3bit_mpi.cpp",
+    "sha256": "5e76701a6ecbe9f921cbb6b58a8492074b846d950e856375c7791f1e3cfb1fad"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/recover_from_slab3bit_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc110/src/recover_from_slab3bit_mpi.cpp",
+    "sha256": "3c49ca6ca846d398c4b0e6a3239f6f5b2fe3156a4a43ea21132f62867e926254"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/recover_random_activity_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc110/src/recover_random_activity_mpi.cpp",
+    "sha256": "045e84c272418d7e5570b52b5dd5ee7ba93acc593abc5a761ff30a79ea3213e7"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her110_uq_cemc_cpp_v1.0/uq_HER110_bridge_full/ce_export.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc110/inputs/1363bff87d24_ce_export.txt",
+    "sha256": "1363bff87d245ec78ff2f2b63bda201c7acbf371d9e0a6736b1899876d7f3e0c"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her110_uq_cemc_cpp_v1.0/uq_HER110_bridge_full/schedule_snapshots.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc110/inputs/7e97257cb41f_schedule_snapshots.txt",
+    "sha256": "7e97257cb41fed34956f688ad230db603625fd578ede24d1a1d63522912f8607"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her110_uq_cemc_cpp_v1.0/uq_HER110_bridge_full/activity_model_H110_bridge.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc110/inputs/4038866d8e78_activity_model_H110_bridge.txt",
+    "sha256": "4038866d8e781d7fdc0bd7d5a4b04fd334d9ccb0421feaa801ef2cf091bf1f77"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her110_uq_cemc_cpp_v1.0/uq_HER110_bridge_full/her110_compositions_activity_scaled.csv",
+    "destination": "workflows/FeCoNiPdPt_fcc110/inputs/d7e9e2665c94_her110_compositions_activity_scaled.csv",
+    "sha256": "d7e9e2665c943557c641a85e9a4c1ece56d2691aa6d790ecc66138a1b40d4cc7"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/bridge/uq_config.ini",
+    "destination": "workflows/FeCoNiPdPt_fcc110/provenance/bridge_original.ini",
+    "sha256": "8d517c6ca9ec33e6ffc8c2b34a14a9fe5c16fe77adcad990a35dfb99c80c0d74"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her110_uq_cemc_cpp_v1.0/uq_HER110_bridge_full/her110_composition_log_activity_scaled.csv",
+    "destination": "workflows/FeCoNiPdPt_fcc110/inputs/bridge_experimental_log_activity.csv",
+    "sha256": "e5beb6ca3bc0159a657bff7cb39a06b17fff3d28667462259ad581091de831fa"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/scripts/inspect_slab3bit.py",
+    "destination": "workflows/FeCoNiPdPt_fcc110/inspect_slab3bit.py",
+    "sha256": "b43f0b9447166edc00d30e5d47938af09effeeb8abadfd95ce62a5993f706dfd"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/src/uq_cemc_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc100/src/uq_cemc_mpi.cpp",
+    "sha256": "8d59583374dbc996838e7261ef27f1949cd5d4ffd91ba838badd61ed9097f186"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/src/recover_cemc_slabs_3bit_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc100/src/recover_cemc_slabs_3bit_mpi.cpp",
+    "sha256": "5e76701a6ecbe9f921cbb6b58a8492074b846d950e856375c7791f1e3cfb1fad"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/recover_from_slab3bit_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc100/src/recover_from_slab3bit_mpi.cpp",
+    "sha256": "3c49ca6ca846d398c4b0e6a3239f6f5b2fe3156a4a43ea21132f62867e926254"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/recover_random_activity_mpi.cpp",
+    "destination": "workflows/FeCoNiPdPt_fcc100/src/recover_random_activity_mpi.cpp",
+    "sha256": "045e84c272418d7e5570b52b5dd5ee7ba93acc593abc5a761ff30a79ea3213e7"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/uq_HER100_hollow_full/ce_export.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc100/inputs/e88c57c57519_ce_export.txt",
+    "sha256": "e88c57c57519672fb5a433a9f016752053c5cbac5ae4ab47bf36f5c50ca1f982"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/uq_HER100_hollow_full/schedule_snapshots.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc100/inputs/7e97257cb41f_schedule_snapshots.txt",
+    "sha256": "7e97257cb41fed34956f688ad230db603625fd578ede24d1a1d63522912f8607"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/uq_HER100_hollow_full/activity_model_H100_hollow.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc100/inputs/fdc865096b10_activity_model_H100_hollow.txt",
+    "sha256": "fdc865096b100f8e8150d6dc5b02a3352167106bd80af5b8e6bfbad89c47ef85"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/uq_HER100_hollow_full/her100_compositions_activity_scaled.csv",
+    "destination": "workflows/FeCoNiPdPt_fcc100/inputs/d7e9e2665c94_her100_compositions_activity_scaled.csv",
+    "sha256": "d7e9e2665c943557c641a85e9a4c1ece56d2691aa6d790ecc66138a1b40d4cc7"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/hollow/uq_config.ini",
+    "destination": "workflows/FeCoNiPdPt_fcc100/provenance/hollow_original.ini",
+    "sha256": "47882ec6ed28e00600df18f79f45604fab73c370014afa406fc22a415ba5a20d"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/uq_HER100_hollow_full/her100_composition_log_activity_scaled.csv",
+    "destination": "workflows/FeCoNiPdPt_fcc100/inputs/hollow_experimental_log_activity.csv",
+    "sha256": "e5beb6ca3bc0159a657bff7cb39a06b17fff3d28667462259ad581091de831fa"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/uq_HER100_bridge_full/activity_model_H100_bridge.txt",
+    "destination": "workflows/FeCoNiPdPt_fcc100/inputs/63b684870c4a_activity_model_H100_bridge.txt",
+    "sha256": "63b684870c4a27b029b9a28f46c8b313e4aea1ef6efb8f9c0aeff94e51830d0b"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/bridge/uq_config.ini",
+    "destination": "workflows/FeCoNiPdPt_fcc100/provenance/bridge_original.ini",
+    "sha256": "4eee316fbff21d3236020a030ef3ddf1b42ab5457d1ca0a49a6cba713bbab683"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/her_uq_cemc_cpp_v1.0_fcc100/her100_uq_cemc_cpp_v1.0/uq_HER100_bridge_full/her100_composition_log_activity_scaled.csv",
+    "destination": "workflows/FeCoNiPdPt_fcc100/inputs/bridge_experimental_log_activity.csv",
+    "sha256": "e5beb6ca3bc0159a657bff7cb39a06b17fff3d28667462259ad581091de831fa"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/scripts/inspect_slab3bit.py",
+    "destination": "workflows/FeCoNiPdPt_fcc100/inspect_slab3bit.py",
+    "sha256": "b43f0b9447166edc00d30e5d47938af09effeeb8abadfd95ce62a5993f706dfd"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML1/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "e48454489773dd15d22b60c28f737bde97a03cf56ae4f0a2b525aa7ca8e99457"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML1/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "16b6cc53fb9d0b1045480389e931966cbfcd5c00ba5b3f843c64f4f892f32739"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Pt_ML1/selected_kde_representative_trials.csv",
+    "sha256": "5c145481e449e2bc403d5f55501cb1e0d085d01b96cab06984bc6c9f61926076"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Pt_ML1/cemc_best_temperature_by_trial.csv",
+    "sha256": "b4318d472f373420ef197f8a54dc96072c3a846430eead9ba252dc4b4093107f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML1/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "9688febc6c7cfdc3cf9a0e76f603f928d48fa598da73507823dd1dca470bd5b5"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML1/random_3d_histogram_kde_bins.csv",
+    "sha256": "d536ed6c3c8ae9aa4c173b778f1ad5ef32618e1988407461c4d8f96d59bc6678"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_log_activity_kde_representative_activity_values.csv",
+    "destination": "analysis_data/Pt_ML1/most_probable_activity.csv",
+    "sha256": "c49a8bf02319536cfc0f453ae0f63723e56d37f3e0718304fcfbdfab465ed06a"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_log_activity_best_tau_mse_crps_activity_values.csv",
+    "destination": "analysis_data/Pt_ML1/best_activity.csv",
+    "sha256": "c7e8b6e291c9296fa82cdbe0798978cebef5813d33dbfa1062c5677f3da830e3"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_best_tau_mse_crps_activity_map_selection.csv",
+    "destination": "analysis_data/Pt_ML1/best_selection.csv",
+    "sha256": "2e39d4e1c069f611ccfd3472331228bb99e5bedf076e33d2d55c3a5353867588"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Pt_ML1/reference_recall.csv",
+    "sha256": "cc93062922824cd33a6e5ee6c9942110eb1274bfcd4ec6b3dbed66fc84428945"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/cache/joint_metrics_cemc_all_temperatures.csv",
+    "destination": "analysis_data/Pt_ML1/cemc_all_temperatures.csv.gz",
+    "source_sha256": "48ad4edd3cd0586cacf4b0b3d3ad08781e78264ff2cca4f49ba40982f8a51836",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML1/ML1_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Pt_ML1_histogram.png",
+    "sha256": "ec7cb2656a9ee00e65b364f70419636ca0d35deae45fcf774db31da2a1fa78b9"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML2/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "6609047b2c2627cd5ba679d7373cef6fec1ce845b471280768b155780a5d93a4"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML2/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "7b110dbe6ca8c933bc4de43ed937c2d9c363bdc0933f1877294cc353612b7290"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Pt_ML2/selected_kde_representative_trials.csv",
+    "sha256": "84938acf792aa19df1b73cacf63fc2f643c0e0ddd5b1bc0c0050c49a04da6ded"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Pt_ML2/cemc_best_temperature_by_trial.csv",
+    "sha256": "4c4105045df08894bea214c56cd1de5e2c6cfd9d50c3820ef47786651d9c03b4"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML2/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "12d0986b2c7283ec9e4afe5b85ce806354f6ffac741a5c63e090e9b6c3a5a829"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML2/random_3d_histogram_kde_bins.csv",
+    "sha256": "a48992c10badd68e360a4c5e4818f740831332962bae3221a5011c33de87073f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_log_activity_kde_representative_activity_values.csv",
+    "destination": "analysis_data/Pt_ML2/most_probable_activity.csv",
+    "sha256": "61e1201fd3dcf40c9aed49fd3086414ac7d48ad7e5b5e6de4c7dc8b7c01589a3"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_log_activity_best_tau_mse_crps_activity_values.csv",
+    "destination": "analysis_data/Pt_ML2/best_activity.csv",
+    "sha256": "3a5fa54b30ba961a7c992adcc624caff8652afff070ea110ed2115943d0fc601"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_best_tau_mse_crps_activity_map_selection.csv",
+    "destination": "analysis_data/Pt_ML2/best_selection.csv",
+    "sha256": "f55a78d038a06c68e1e3f518f8441ba282d2a46ac40f5091adb24af6e76475b8"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Pt_ML2/reference_recall.csv",
+    "sha256": "6d37977013647a86db876adb9b1f06a31a9834d15afab17677025f205fac1c60"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/cache/joint_metrics_cemc_all_temperatures.csv",
+    "destination": "analysis_data/Pt_ML2/cemc_all_temperatures.csv.gz",
+    "source_sha256": "a575a9cb28d841cf5fb02e65a77390a2404bd6706f0debcd661df4e4e2323be6",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML2/ML2_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Pt_ML2_histogram.png",
+    "sha256": "6a12d7e18cbb75c969585d9cac5d74a7ebff1a7db9fd6462561ea8f41800bb81"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML3/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "2faa248f835a9b9ef286b883ca1d21c9b94890619cb5bf8e91055803096c159e"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML3/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "3b3cdcbd52cbcc496a5223db2cdf0532baf59841e72390e4e05c3016d93f5acf"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Pt_ML3/selected_kde_representative_trials.csv",
+    "sha256": "94ac766432ca394943beea6175e975fa3b0051de0abda059bae55751354bbaea"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Pt_ML3/cemc_best_temperature_by_trial.csv",
+    "sha256": "5f93c49aafa329b4eb353a122f62b1aef2e0ce38ec5c070f69630972d67319d0"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML3/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "e361c40279e530c4fed357432943d09ec0876ec0c09ba5ec34414077b6ac35cc"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML3/random_3d_histogram_kde_bins.csv",
+    "sha256": "0dff1f3a34b828a1b22b7aeb47c3cccbf448f8ba54394d6f154f8c5d012160e5"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_log_activity_kde_representative_activity_values.csv",
+    "destination": "analysis_data/Pt_ML3/most_probable_activity.csv",
+    "sha256": "259b209efa5d14ee2a21387092346f4220fba7f82b0b9ce417dbf7484526d9f8"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_log_activity_best_tau_mse_crps_activity_values.csv",
+    "destination": "analysis_data/Pt_ML3/best_activity.csv",
+    "sha256": "87e87e928af288a0772c204bb3bad633e86815c1acabf5100868044cbc6e2906"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_best_tau_mse_crps_activity_map_selection.csv",
+    "destination": "analysis_data/Pt_ML3/best_selection.csv",
+    "sha256": "bd468777f96f8662051101b470279410a7e04a626786a943f6cb60f66bebfb74"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Pt_ML3/reference_recall.csv",
+    "sha256": "c3c36a07bb9d8ff1270337b77d14bb76875e0c1a7a5d6126ba521303c193c791"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/cache/joint_metrics_cemc_all_temperatures.csv",
+    "destination": "analysis_data/Pt_ML3/cemc_all_temperatures.csv.gz",
+    "source_sha256": "8f3a95f9e2f8ac1b3e4efa1c4251fedac21a0890cc7244f34830b5d480d7dfd9",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML3/ML3_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Pt_ML3_histogram.png",
+    "sha256": "6a2d445f4063437884b9f43644279d55f6b08a6522e91ebb65a8f599f9838d57"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML4/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "a4ede1e770bf2fec1c47609492ac41c91e8b0cb5f1e7eb1c64c819733490e383"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML4/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "6d4816ade22eeba923bacca91dcf00cd70c1d58a5fbf19d317b26b8606441359"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Pt_ML4/selected_kde_representative_trials.csv",
+    "sha256": "36be4243d0401210912d24abf365f57f079850c7cf8b14d5272a93aa6c1686c5"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Pt_ML4/cemc_best_temperature_by_trial.csv",
+    "sha256": "b4bcaeed35cf3a757dc11f71974c6e64e0c62bda5a80fcf7e02282950d3cb9e3"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML4/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "c8a4a166342d61dda1cd8c961dd7d29267e0e97f5566a4a97698ad33cdd11f77"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML4/random_3d_histogram_kde_bins.csv",
+    "sha256": "2a86447884a8bf6aa5137985df317d98fb3c6fb02c460704d7ce51c5edec0645"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_kde_representative_activity_values.csv",
+    "destination": "analysis_data/Pt_ML4/most_probable_activity.csv",
+    "sha256": "655fddedc852bdc87e723edd0e094f0b0bf5f6260510733bf351965133db063f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_best_tau_mse_crps_activity_values.csv",
+    "destination": "analysis_data/Pt_ML4/best_activity.csv",
+    "sha256": "ba9f5ba0eb06bf03a9a2d03ce44e426f59c81daa3a1cd93b2c1f0c8f1acdc0f3"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_best_tau_mse_crps_activity_map_selection.csv",
+    "destination": "analysis_data/Pt_ML4/best_selection.csv",
+    "sha256": "65137fda66bee96672ee86fe81d4c05fcb1b6b74afc722c18651a1d49e5e2c8f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Pt_ML4/reference_recall.csv",
+    "sha256": "b2c34a2e93a140b2d23964b8b60ef7e698b937ec64dabc7e694f8e7909a5dced"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/cache/joint_metrics_cemc_all_temperatures.csv",
+    "destination": "analysis_data/Pt_ML4/cemc_all_temperatures.csv.gz",
+    "source_sha256": "87c474316339d9ccaeaf941f50242f7eb0c90cb569dba664048b0e80ceeeb8d9",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Pt_ML4_histogram.png",
+    "sha256": "5abb7bc617d56448418a3ec8311b731cc804b7e6f4130474ecaf0bb0f4c7a3c9"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML5/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "0fe89ecef307fc22ce172d812fbd6c20cc9bea442e44d887bcf12052fddce9b9"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML5/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "1e6fcd578ec4e3bb8670226cd815e2f29cb905b4b0614c5817bee0ebc808c769"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Pt_ML5/selected_kde_representative_trials.csv",
+    "sha256": "cea6700f2aee78b5d309a08c4522ebb774b0e631fd0a99294796fdda40e132fe"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Pt_ML5/cemc_best_temperature_by_trial.csv",
+    "sha256": "d295e4f5481881798672cd2501b243d909fe27f79077f74b2a7ee3927c0ecde3"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML5/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "c8a6f884a3454dc93a5fe5b8e11a7b51f0a60351a53a69633f03c099588b80c1"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML5/random_3d_histogram_kde_bins.csv",
+    "sha256": "a7a5ade9e8b5f7cc839dca0c80292c940fe3fcb4ab9f3e18f4c315475bc8eef7"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_log_activity_kde_representative_activity_values.csv",
+    "destination": "analysis_data/Pt_ML5/most_probable_activity.csv",
+    "sha256": "224901927083a5d7644b9032daee2716c9888bc3041b86fc46e76600727190d3"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_log_activity_best_tau_mse_crps_activity_values.csv",
+    "destination": "analysis_data/Pt_ML5/best_activity.csv",
+    "sha256": "7842bac0a310247c7064c5b4cd8cb9b46a4ed43012245ff9cb8b945231e56a71"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_best_tau_mse_crps_activity_map_selection.csv",
+    "destination": "analysis_data/Pt_ML5/best_selection.csv",
+    "sha256": "361e345d601ee61da9d531575d55907033378b97cd945b2c73c751838c626b0e"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Pt_ML5/reference_recall.csv",
+    "sha256": "6aed662b56a2dd76f3595e379a5c13753c52286a41c78fe419173be9d565f1c4"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/cache/joint_metrics_cemc_all_temperatures.csv",
+    "destination": "analysis_data/Pt_ML5/cemc_all_temperatures.csv.gz",
+    "source_sha256": "862918470e7d7d2188737607ffd1fdc1a65f84470b7189179bb381c726dc4e61",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML5/ML5_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Pt_ML5_histogram.png",
+    "sha256": "5cf3f0c126b932deea1f3b18e11de943a1d085968f554205db72bf4f8713f1ee"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML6/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "8cba96efeb6ccdd9716619bb43990a2402060e9b2c16cc07881527ab55e657f5"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Pt_ML6/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "7cbe205a1589162fcd2250b049164aa22b50ef1789cbefdd66626eff71c9e350"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Pt_ML6/selected_kde_representative_trials.csv",
+    "sha256": "bd31e568ef878a1a58ea5f940cdb7c52fd5d50064948ae5eb9984f463b503f74"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Pt_ML6/cemc_best_temperature_by_trial.csv",
+    "sha256": "97a55ae8522232b14e8bc1ed210eb5fb95d791c42d69e0d9851ec4ae6b79cde6"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML6/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "218e4ca9125507686b4e0d0a6218271392a2b1e9e883de948ef2df369f983f26"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Pt_ML6/random_3d_histogram_kde_bins.csv",
+    "sha256": "1e707829523e4683f150e5ec83093d97a3d9797092e1d4e46ea125f3d7f01160"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_log_activity_kde_representative_activity_values.csv",
+    "destination": "analysis_data/Pt_ML6/most_probable_activity.csv",
+    "sha256": "3db754c8b0fb9692605d7e2ec6ecbc5602952b51eee4f14289c7e1f043cbcc33"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_log_activity_best_tau_mse_crps_activity_values.csv",
+    "destination": "analysis_data/Pt_ML6/best_activity.csv",
+    "sha256": "a089811a95c608b57f9a29cd2a738f40385d8ab3a9a351455be07170f27aa7c4"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_best_tau_mse_crps_activity_map_selection.csv",
+    "destination": "analysis_data/Pt_ML6/best_selection.csv",
+    "sha256": "25448a39e48ad6293b02401c9c72b066003124a6f7026037f7bea5a34c615c92"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Pt_ML6/reference_recall.csv",
+    "sha256": "1385f3a9eb633719b06bfc8bf91fcbece2d3ed82cddc188ba7730dc0b3e1e860"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/cache/joint_metrics_cemc_all_temperatures.csv",
+    "destination": "analysis_data/Pt_ML6/cemc_all_temperatures.csv.gz",
+    "source_sha256": "354f22addb5b73544b6b5016ad2933f88b134cf62b149a2ab6cd904919ec2098",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML6/ML6_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Pt_ML6_histogram.png",
+    "sha256": "d781039cd64f921d40eadc4e78788009b04b84e535ee730372f63760e11988c3"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "846b6589017b423b959482322e2eb70a7f1fa71f495aeac2fac64613bc87fa48"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "23ddf99e7e17f5af4a76ae05d820da8a647a2ea447b8e1dfcaacc2c58ea403ae"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/selected_kde_representative_trials.csv",
+    "sha256": "b3f2304e304fe9bc962239751cdf1e6b81ec4c7f5c1dfea82ed3d364497a28a9"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/cemc_best_temperature_by_trial.csv",
+    "sha256": "904d54b2a5e95ed5c83343b8779b392cb377be01d859224d0ab122f6b92100a8"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "684465930e545e85e0a3f76901fc944b6e1ec4b5018fd7e9e7a303586c85e51a"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/random_3d_histogram_kde_bins.csv",
+    "sha256": "f05d26588cb1f034a0ed0ae5145e59ecdcf04a8824482742e55b4fe7da538045"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/analysis_method.json",
+    "destination": "analysis_data/Fe_fcc100_hollow/method.json",
+    "sha256": "c9a6ba6f8ba1ca46b136ff6bcab854a493e8729030190848f2c3ca5f64360c29"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_kde_representative_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/most_probable_activity.csv",
+    "sha256": "de80721e211b923619ea0ec370bf2be2bf1675b599b0e8ce78850c2ec8d59191"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/fcc100_hollow_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/best_activity.csv",
+    "sha256": "1d6c15a10b63ac842fe0b870282beb60307cec34476b0e19755fc7d22b64d229"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/fcc100_hollow_log_activity_best_tau_mse_crps_trial_selection.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/best_selection.csv",
+    "sha256": "bc7c3d7ac875e7c3af60ec03c0e002a19272a275d8c86456d465eb48709acf2d"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/reference_recall.csv",
+    "sha256": "4429f68e2d2480d34772a8e5aea49293be984876a7afac29add35820277c6a92"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/cemc_metrics_all_trial_temperatures.csv",
+    "destination": "analysis_data/Fe_fcc100_hollow/cemc_all_temperatures.csv.gz",
+    "source_sha256": "f39201c0591995564f26dd146a2b1014c3e85cdd257a7d3ae80f2aa9416c11af",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Fe_fcc100_hollow_histogram.png",
+    "sha256": "718261b40681bb3fe67c985835215d8ab75519510f52c412e6a962532a6b1142"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "55297147790dca6ca376538e1c80af5b35781c39ea40bbb19bda5750a8851f3c"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "8798aaaf31c229d669a59aa54f72eacf49b1a05aa6795f6a6c892833f934350b"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/selected_kde_representative_trials.csv",
+    "sha256": "61be3b18f8a4b0293b93abe0bd0b5368a94c88059d4ec4070d1e73c1c1e71183"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/cemc_best_temperature_by_trial.csv",
+    "sha256": "b4fd08a6cf925a7c28bccd18e717ba4e6e58246f4ecb82e7a5dc7357caed669e"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "0bf2b549312d6b2fab46dbde564998d0c2f63d199eb38f6e3951a41906e28196"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/random_3d_histogram_kde_bins.csv",
+    "sha256": "3581aae34431f7fe4c2f2581894daf581b6dafee86570611f60202a56f095df8"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/analysis_method.json",
+    "destination": "analysis_data/Fe_fcc100_bridge/method.json",
+    "sha256": "451c59366ce294a1cba792587bdd268b763b729e1f2e580ed4cea2bb027671a1"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_kde_representative_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/most_probable_activity.csv",
+    "sha256": "9f9a863d36918d5ed57bddbd8fc22a9ff823e8d273c57abf59341571a5752a02"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/best_activity.csv",
+    "sha256": "90647280454b260a62304ad4b13def950cf0ef53d4f0c4ea0bd7f6d023fddcc9"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_best_tau_mse_crps_trial_selection.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/best_selection.csv",
+    "sha256": "852e1b0a36125e41fc2780f5fcfb8db8219b4324a90b6a9a10da5c4ed2ee87ad"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/reference_recall.csv",
+    "sha256": "ddd0ac8c2bd8cb862f93e0795dfc96455cc1a953ad30d0072d918650548ad2e2"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/cemc_metrics_all_trial_temperatures.csv",
+    "destination": "analysis_data/Fe_fcc100_bridge/cemc_all_temperatures.csv.gz",
+    "source_sha256": "32bf734ddd68e86e0f8d40d0be0cb6f93b7159972e34d3016f7c1ad4c17063ab",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Fe_fcc100_bridge_histogram.png",
+    "sha256": "af1c07af7daf570f3a37b2d9ca1a4a3e2bb22316762d96814dbb6976ec040afe"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "7db305dfcefadbfb6ed865f04e14daa2fb56e2ca121154b792a53a14c3c74845"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "b1ee76b1bde1af1da3c81157355d2d321a628a051c6812c134cd9f64f23b77c6"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/selected_kde_representative_trials.csv",
+    "sha256": "291f8f0f6ca8787479cf573bdaf38421aa9613ed0ea037814edbd684e513c859"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/cemc_best_temperature_by_trial.csv",
+    "sha256": "9212d3bd236329d8fbc4f75bdd1022bfa0819d42d348cff621371a7c7c0c5c32"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "d3e9153df621ee857fcdb4bca2f5a8acff47fab24cb8061af4db3ec6157b6dae"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/random_3d_histogram_kde_bins.csv",
+    "sha256": "34fcf1eab1ff0d3d3de5f96d17f5e7bc06db70d7f7cb792c180be0c8eb320cf4"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/analysis_method.json",
+    "destination": "analysis_data/Fe_fcc110_bridge/method.json",
+    "sha256": "451c59366ce294a1cba792587bdd268b763b729e1f2e580ed4cea2bb027671a1"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_kde_representative_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/most_probable_activity.csv",
+    "sha256": "4b841d0a6b416d53748a3c50153d6a7369a1209f2923ff5e39b2131ad2e3c4ff"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/fcc110_bridge_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/best_activity.csv",
+    "sha256": "7e7a2751926cf58123eb4a3d09868b7687e8edef659dc461698444833d2f613a"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/fcc110_bridge_log_activity_best_tau_mse_crps_trial_selection.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/best_selection.csv",
+    "sha256": "90304dd09b7b8942b6b2b3d61bc51d410b39413c2c0b1181dbc2d86498ff3fc8"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/reference_recall.csv",
+    "sha256": "e1d3b9bcb886ba0f84ee699cc425d009f691ca9d473094e40460472c86147459"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/cemc_metrics_all_trial_temperatures.csv",
+    "destination": "analysis_data/Fe_fcc110_bridge/cemc_all_temperatures.csv.gz",
+    "source_sha256": "ad5b130d0751ae4d994500345d747689cae902b1f3e77bd9215b7b7c6ed35b9d",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_110/individual_slab_joint_probability_tsne_analysis/bridge/log_activity/bridge_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Fe_fcc110_bridge_histogram.png",
+    "sha256": "b3f8bb74dfb7e90ac142ddd0965988c9bdf4505f0db3ef16d5cd009d5215f4a3"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "256215b6f8722e45de79f32b0246c9aea4bec35213a0d1f04188d653886c6bc0"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "4ed1dc27869fb5cd0ec7fa4c9afddb5abcfc3bbe76355da562527bfdaae38d25"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/selected_kde_representative_trials.csv",
+    "sha256": "32af3582ccb29bb735c2bd0058b6be705b948c5f59aea5059ae240b12a2bcd96"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/cemc_best_temperature_by_trial.csv",
+    "sha256": "885ca614a580ef84104936df0196c6fddddb3443eec62d59845a95f4f3523cdc"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "2749d7530ec05201ba530e3fdcad74771d3db4d0ca7ea8b6be809dce69fb5191"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/random_3d_histogram_kde_bins.csv",
+    "sha256": "02f2593c20678f81c9037d12dbc5d63edfd429915c79ffc16463132045aad5c6"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/analysis_method.json",
+    "destination": "analysis_data/Fe_fcc111_fcc/method.json",
+    "sha256": "7c87125150c74169dddc761bd69ca545f1ae49404e3ff68fca58c75d7cfb566d"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc_log_activity_kde_representative_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/most_probable_activity.csv",
+    "sha256": "d1586079890fff5cba4bc07080ce78bc6b3d6f306df759fe0099eb493c61d824"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc111_fcc_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/best_activity.csv",
+    "sha256": "82f5fd88c2f15a9e10271969a372cbf2bc31fa9691de14d9adf960f23d0f4a6f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc111_fcc_log_activity_best_tau_mse_crps_trial_selection.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/best_selection.csv",
+    "sha256": "1812c81f4493fc450c2a388faea30f699b304c5a415d34bf7704e46f3cb07480"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/reference_recall.csv",
+    "sha256": "390957bebb6944acade29ad4258db6d9db6d1417e3bc419b73c24426fb88361a"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/cemc_metrics_all_trial_temperatures.csv",
+    "destination": "analysis_data/Fe_fcc111_fcc/cemc_all_temperatures.csv.gz",
+    "source_sha256": "11dae8edc8ed1b42e7e3d028153690b489d11f44fb101719bc0824307f54efe3",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/fcc/log_activity/fcc_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Fe_fcc111_fcc_histogram.png",
+    "sha256": "8b14e3133c56a88ae2273078da11ff044028d4685a8d28d8f55c86df0fbe0a2f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/cemc_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc111_top/cemc_10000_trial_points_with_kde_probability.csv",
+    "sha256": "9060401e8f340b570ef2f00181e959c89f6ba58aefd7e29bf9e6ea12d1e8456c"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/random_10000_trial_points_with_kde_probability.csv",
+    "destination": "analysis_data/Fe_fcc111_top/random_10000_trial_points_with_kde_probability.csv",
+    "sha256": "f6b8a38d118f1901f8ce1681d982b6704b3a984b2e83f8ff05aa1eae978e91a0"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/selected_kde_representative_trials.csv",
+    "destination": "analysis_data/Fe_fcc111_top/selected_kde_representative_trials.csv",
+    "sha256": "ca52ca8ee376b1e86efcc1d02e9291049aa69a0391f1005a53ca1d55b78ba93f"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/cemc_best_temperature_by_trial.csv",
+    "destination": "analysis_data/Fe_fcc111_top/cemc_best_temperature_by_trial.csv",
+    "sha256": "340995e54d47efc11aaea62f1e7d44be028465217dd1feb304952df6c7198edd"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/cemc_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc111_top/cemc_3d_histogram_kde_bins.csv",
+    "sha256": "e3a6c8cf67b2dc379d212e328369d378db471b92215f74a20dc17836d8810231"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/random_3d_histogram_kde_bins.csv",
+    "destination": "analysis_data/Fe_fcc111_top/random_3d_histogram_kde_bins.csv",
+    "sha256": "d0cb1f064eaee9c61f16f905b05cbd89574d59c23d4ccfaa29961e6c82d4d36c"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/analysis_method.json",
+    "destination": "analysis_data/Fe_fcc111_top/method.json",
+    "sha256": "70c39b61cd6ba85419aa57f52cc2787ba67d12bb0c313c6f649b9fb1c6fe7b35"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/top_log_activity_kde_representative_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc111_top/most_probable_activity.csv",
+    "sha256": "d4fd00170a669982e06d2956ec27b7301b6052e7cfee5028a01d2e61785c6e50"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/fcc111_top_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+    "destination": "analysis_data/Fe_fcc111_top/best_activity.csv",
+    "sha256": "0cf5d5f96b5eb3a3d8618fc28fc2f68adb6107194e7b62ffa8d50885dc1f0514"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/fcc111_top_log_activity_best_tau_mse_crps_trial_selection.csv",
+    "destination": "analysis_data/Fe_fcc111_top/best_selection.csv",
+    "sha256": "34bf84c695eabde13418d8a3cd9fe2af94de616a39b4df0b07c1373a4bccc15d"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/top_log_activity_continuous_recall_analysis.csv",
+    "destination": "analysis_data/Fe_fcc111_top/reference_recall.csv",
+    "sha256": "127edfce822f0b65b6059a4f558b8b2f175333d8723a91e2b6252edfc5d5949c"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/cemc_metrics_all_trial_temperatures.csv",
+    "destination": "analysis_data/Fe_fcc111_top/cemc_all_temperatures.csv.gz",
+    "source_sha256": "212f7a43730ad0cc9e9ee54a7bd7b71791e9c3ff036086f0b33f2e22009e776c",
+    "encoding": "gzip"
+  },
+  {
+    "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_111/individual_slab_joint_probability_tsne_analysis/top/log_activity/top_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+    "destination": "validation/reference_images/Fe_fcc111_top_histogram.png",
+    "sha256": "426b1686aafd965c878e039e1ec11819b23fdc6c15e870e6f3d488bc07b08142"
+  }
+]

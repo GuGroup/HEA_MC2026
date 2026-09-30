@@ -1,0 +1,6 @@
+Loaded 1 compositions; 19 CEMC snapshot target temperatures; 1 trials; 1 runs; MPI ranks=1
+Starting trial 0
+Finished trial 0 compute_s=0.248176 merge_s=0.0346344 summary_s=0 total_s=0.282811
+Final uncertainty/plot summary written in 0.00336681 s
+All requested trials are complete. Output: "/home/jinsookim/HEA_MC/HEA_UQMC_CEMC_figures/workflows/PtPdRhRuIr_fcc111/equi-atomic/validation_runs/smoke/results"
+/home/jinsookim/HEA_MC/HEA_UQMC_CEMC_figures/workflows/PtPdRhRuIr_fcc111/equi-atomic/validation_runs/smoke/structures.npz

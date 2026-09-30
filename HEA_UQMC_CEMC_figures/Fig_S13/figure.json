@@ -1,0 +1,15 @@
+{
+  "figure": "S13",
+  "entrypoint": "plot.py",
+  "numeric_data": [
+    "data/Fe100.csv",
+    "data/Fe110.csv",
+    "data/Fe111.csv",
+    "data/Pt.csv"
+  ],
+  "outputs": [
+    "outputs/Fig_S13.png",
+    "outputs/Fig_S13.pdf"
+  ],
+  "recompute_from_structures": "../analysis/equiatomic/recompute.py"
+}

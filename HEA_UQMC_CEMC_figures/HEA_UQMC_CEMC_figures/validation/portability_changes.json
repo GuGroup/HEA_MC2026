@@ -1,0 +1,15 @@
+{
+  "original_CEMC_logic": "unchanged",
+  "portable_wrappers": "resolve packaged configuration paths and keep new results separate",
+  "Pt_random_adapter": "uses the Pt trial-global sample_trial_uncertainty API",
+  "Study1_simple_fs": "fully qualified path type for GCC compilation",
+  "Study1_score": "optional include-center-cross flag; wrapper uses original full 1400-composition histogram scope",
+  "plotting": "original histogram functions extracted with directory arguments; maps rendered from original saved values; recall recalculated and checked",
+  "dependency_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "scipy": "1.18.0",
+    "matplotlib": "3.11.0",
+    "pillow": "12.2.0"
+  }
+}

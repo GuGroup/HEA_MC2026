@@ -1,0 +1,197 @@
+{
+  "description": "Frozen per-trial CEMC and homogeneous scores used in the figure package. CEMC temperature has already been selected by the original per-trial procedure. No KDE weighting is used for Table 1.",
+  "datasets": [
+    {
+      "id": "Pt_Study1",
+      "dataset": "Study 1",
+      "file": "Pt_Study1.csv.gz",
+      "sha256": "7e0493f4b8a2743db8096eb74b6ed2874ed6a4d4f293909f3d1a44a8de6140b2",
+      "source_files": [
+        {
+          "path": "analysis_data/Pt_Study1/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "6a68acba9209040b92b520497a62a864dcd99354c217dc145586033e8a36a313"
+        },
+        {
+          "path": "analysis_data/Pt_Study1/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "2800dbef8e5790c5c4d0f7716abd629cb47ebf1690412c5a8332ffe6dead703a"
+        }
+      ]
+    },
+    {
+      "id": "Pt_ML1",
+      "dataset": "Study 2, ML1",
+      "file": "Pt_ML1.csv.gz",
+      "sha256": "c297184a6f5a3b529137f3f7e4e69138ca1c25e06c2f55e0119cf69528457342",
+      "source_files": [
+        {
+          "path": "analysis_data/Pt_ML1/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "e48454489773dd15d22b60c28f737bde97a03cf56ae4f0a2b525aa7ca8e99457"
+        },
+        {
+          "path": "analysis_data/Pt_ML1/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "16b6cc53fb9d0b1045480389e931966cbfcd5c00ba5b3f843c64f4f892f32739"
+        }
+      ]
+    },
+    {
+      "id": "Pt_ML2",
+      "dataset": "Study 2, ML2",
+      "file": "Pt_ML2.csv.gz",
+      "sha256": "84d9c7d3fc9cb06a9e17409f14572bf139b7d7908833b0f53cab9dc473811216",
+      "source_files": [
+        {
+          "path": "analysis_data/Pt_ML2/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "6609047b2c2627cd5ba679d7373cef6fec1ce845b471280768b155780a5d93a4"
+        },
+        {
+          "path": "analysis_data/Pt_ML2/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "7b110dbe6ca8c933bc4de43ed937c2d9c363bdc0933f1877294cc353612b7290"
+        }
+      ]
+    },
+    {
+      "id": "Pt_ML3",
+      "dataset": "Study 2, ML3",
+      "file": "Pt_ML3.csv.gz",
+      "sha256": "b8a2fab3ef7d203bd08b379cc76e28a2d14f667fc4ae5b0b60f1280f397ee31d",
+      "source_files": [
+        {
+          "path": "analysis_data/Pt_ML3/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "2faa248f835a9b9ef286b883ca1d21c9b94890619cb5bf8e91055803096c159e"
+        },
+        {
+          "path": "analysis_data/Pt_ML3/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "3b3cdcbd52cbcc496a5223db2cdf0532baf59841e72390e4e05c3016d93f5acf"
+        }
+      ]
+    },
+    {
+      "id": "Pt_ML4",
+      "dataset": "Study 2, ML4",
+      "file": "Pt_ML4.csv.gz",
+      "sha256": "a7298eaaca7c81d329a6123838ef107a4e89f547fb2a4767fdea39464a6c7d7d",
+      "source_files": [
+        {
+          "path": "analysis_data/Pt_ML4/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "a4ede1e770bf2fec1c47609492ac41c91e8b0cb5f1e7eb1c64c819733490e383"
+        },
+        {
+          "path": "analysis_data/Pt_ML4/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "6d4816ade22eeba923bacca91dcf00cd70c1d58a5fbf19d317b26b8606441359"
+        }
+      ]
+    },
+    {
+      "id": "Pt_ML5",
+      "dataset": "Study 2, ML5",
+      "file": "Pt_ML5.csv.gz",
+      "sha256": "ca425c32b6d97b56727d26355ab19e4c3f9bfbbe4dbd4f4ac9999bf38cc99f74",
+      "source_files": [
+        {
+          "path": "analysis_data/Pt_ML5/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "0fe89ecef307fc22ce172d812fbd6c20cc9bea442e44d887bcf12052fddce9b9"
+        },
+        {
+          "path": "analysis_data/Pt_ML5/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "1e6fcd578ec4e3bb8670226cd815e2f29cb905b4b0614c5817bee0ebc808c769"
+        }
+      ]
+    },
+    {
+      "id": "Pt_ML6",
+      "dataset": "Study 2, ML6",
+      "file": "Pt_ML6.csv.gz",
+      "sha256": "8e891a07c46e2e50fa88138f3bf325d5cf8dd6a1d929c679699b5a01e9518cd1",
+      "source_files": [
+        {
+          "path": "analysis_data/Pt_ML6/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "8cba96efeb6ccdd9716619bb43990a2402060e9b2c16cc07881527ab55e657f5"
+        },
+        {
+          "path": "analysis_data/Pt_ML6/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "7cbe205a1589162fcd2250b049164aa22b50ef1789cbefdd66626eff71c9e350"
+        }
+      ]
+    },
+    {
+      "id": "Fe_fcc100_hollow",
+      "dataset": "Study 3, fcc(100) hollow",
+      "file": "Fe_fcc100_hollow.csv.gz",
+      "sha256": "1eca5028ae747d701d46a67b5617f9a7e7e561ac5ce7d425cd89a791f534cf80",
+      "source_files": [
+        {
+          "path": "analysis_data/Fe_fcc100_hollow/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "846b6589017b423b959482322e2eb70a7f1fa71f495aeac2fac64613bc87fa48"
+        },
+        {
+          "path": "analysis_data/Fe_fcc100_hollow/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "23ddf99e7e17f5af4a76ae05d820da8a647a2ea447b8e1dfcaacc2c58ea403ae"
+        }
+      ]
+    },
+    {
+      "id": "Fe_fcc100_bridge",
+      "dataset": "Study 3, fcc(100) bridge",
+      "file": "Fe_fcc100_bridge.csv.gz",
+      "sha256": "65bb91b5b2f66bc91d5f0a5915edc6790360424fb03c0d42b5bebb63a0df63e2",
+      "source_files": [
+        {
+          "path": "analysis_data/Fe_fcc100_bridge/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "55297147790dca6ca376538e1c80af5b35781c39ea40bbb19bda5750a8851f3c"
+        },
+        {
+          "path": "analysis_data/Fe_fcc100_bridge/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "8798aaaf31c229d669a59aa54f72eacf49b1a05aa6795f6a6c892833f934350b"
+        }
+      ]
+    },
+    {
+      "id": "Fe_fcc110_bridge",
+      "dataset": "Study 3, fcc(110) bridge",
+      "file": "Fe_fcc110_bridge.csv.gz",
+      "sha256": "38f7e1da25939b9a603b2262cda24691326353cd7d11f74aa1e52062ef039ec0",
+      "source_files": [
+        {
+          "path": "analysis_data/Fe_fcc110_bridge/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "7db305dfcefadbfb6ed865f04e14daa2fb56e2ca121154b792a53a14c3c74845"
+        },
+        {
+          "path": "analysis_data/Fe_fcc110_bridge/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "b1ee76b1bde1af1da3c81157355d2d321a628a051c6812c134cd9f64f23b77c6"
+        }
+      ]
+    },
+    {
+      "id": "Fe_fcc111_fcc",
+      "dataset": "Study 3, fcc(111) hollow",
+      "file": "Fe_fcc111_fcc.csv.gz",
+      "sha256": "d14b58ab6ec18c6d670b850bd3c579f873cb62f30ea1c24a95fb72d73c944dc8",
+      "source_files": [
+        {
+          "path": "analysis_data/Fe_fcc111_fcc/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "256215b6f8722e45de79f32b0246c9aea4bec35213a0d1f04188d653886c6bc0"
+        },
+        {
+          "path": "analysis_data/Fe_fcc111_fcc/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "4ed1dc27869fb5cd0ec7fa4c9afddb5abcfc3bbe76355da562527bfdaae38d25"
+        }
+      ]
+    },
+    {
+      "id": "Fe_fcc111_top",
+      "dataset": "Study 3, fcc(111) top",
+      "file": "Fe_fcc111_top.csv.gz",
+      "sha256": "4c8f580ed45394d320efeeea6930b72a88750004f30b3c7134c8fb47d855add0",
+      "source_files": [
+        {
+          "path": "analysis_data/Fe_fcc111_top/cemc_10000_trial_points_with_kde_probability.csv",
+          "sha256": "9060401e8f340b570ef2f00181e959c89f6ba58aefd7e29bf9e6ea12d1e8456c"
+        },
+        {
+          "path": "analysis_data/Fe_fcc111_top/random_10000_trial_points_with_kde_probability.csv",
+          "sha256": "f6b8a38d118f1901f8ce1681d982b6704b3a984b2e83f8ff05aa1eae978e91a0"
+        }
+      ]
+    }
+  ]
+}

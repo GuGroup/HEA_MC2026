@@ -1,0 +1,47 @@
+{
+  "case": "FeCoNiPdPt_fcc111/top",
+  "elements": [
+    "Fe",
+    "Co",
+    "Ni",
+    "Pd",
+    "Pt"
+  ],
+  "shifts_eV": {
+    "Fe": 0.0,
+    "Co": 0.0,
+    "Ni": 0.0,
+    "Pd": 0.0,
+    "Pt": 0.0
+  },
+  "optimum_eV": 0.0,
+  "activity_temperature_K": 298.0,
+  "temperatures_K": [
+    2000,
+    1900,
+    1800,
+    1700,
+    1600,
+    1500,
+    1400,
+    1300,
+    1200,
+    1100,
+    1000,
+    900,
+    800,
+    700,
+    600,
+    500,
+    400,
+    300,
+    298
+  ],
+  "n_runs": 20,
+  "energy_coordinate": "DeltaG_H_eV",
+  "activities": {
+    "Homogeneous": 0.03304627678347196,
+    "CEMC": 0.03513063897691375,
+    "CEMC + layer shuffled": 0.03700827352520688
+  }
+}

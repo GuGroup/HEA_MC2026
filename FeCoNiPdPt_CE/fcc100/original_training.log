@@ -1,0 +1,32 @@
+nohup: ignoring input
+Matched 2119 structures to 2119 target rows
+Mapped 1/2119 structures; topology classes=1
+Mapped 100/2119 structures; topology classes=1
+Mapped 200/2119 structures; topology classes=1
+Mapped 300/2119 structures; topology classes=1
+Mapped 400/2119 structures; topology classes=1
+Mapped 500/2119 structures; topology classes=1
+Mapped 600/2119 structures; topology classes=1
+Mapped 700/2119 structures; topology classes=1
+Mapped 800/2119 structures; topology classes=1
+Mapped 900/2119 structures; topology classes=1
+Mapped 1000/2119 structures; topology classes=1
+Mapped 1100/2119 structures; topology classes=1
+Mapped 1200/2119 structures; topology classes=2
+Mapped 1300/2119 structures; topology classes=2
+Mapped 1400/2119 structures; topology classes=2
+Mapped 1500/2119 structures; topology classes=2
+Mapped 1600/2119 structures; topology classes=2
+Mapped 1700/2119 structures; topology classes=2
+Mapped 1800/2119 structures; topology classes=2
+Mapped 1900/2119 structures; topology classes=2
+Mapped 2000/2119 structures; topology classes=2
+Mapped 2100/2119 structures; topology classes=2
+Mapped 2119/2119 structures; topology classes=2
+Feature space: 266 terms, species=['Co', 'Fe', 'Ni', 'Pd', 'Pt', 'X'], triplet geometries=[(1, 1, 1), (1, 1, 2)]
+Selected ridge alpha=46.4159; CV MAE=0.0128029 eV
+Holdout: MAE=0.00989646 eV, RMSE=0.014180215 eV, n=212
+  bulk: MAE=0.012430041 eV, n=110
+  slab100: MAE=0.0071641664 eV, n=102
+Full refit: MAE=0.011607875 eV, RMSE=0.018190483 eV, n=2119
+Saved model and diagnostics to /home/jinsookim/HEA_MC/FeCoNiPtPd_HER/CEMC/100/ce_training_output

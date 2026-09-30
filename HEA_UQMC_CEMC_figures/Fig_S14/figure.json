@@ -1,0 +1,19 @@
+{
+  "figure": "S14",
+  "entrypoint": "plot.py",
+  "numeric_data": [
+    "data/fcc100_bridge_density.csv",
+    "data/fcc100_bridge_metadata.json",
+    "data/fcc110_bridge_density.csv",
+    "data/fcc110_bridge_metadata.json",
+    "data/fcc111_hollow_density.csv",
+    "data/fcc111_hollow_metadata.json",
+    "data/fcc111_top_density.csv",
+    "data/fcc111_top_metadata.json"
+  ],
+  "outputs": [
+    "outputs/Fig_S14.png",
+    "outputs/Fig_S14.pdf"
+  ],
+  "recompute_from_structures": "../analysis/equiatomic/recompute.py"
+}

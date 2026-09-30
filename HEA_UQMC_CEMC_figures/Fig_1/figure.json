@@ -1,0 +1,52 @@
+{
+  "figure": "Fig_1",
+  "type": "histogram",
+  "panels": [
+    {
+      "dataset": "Pt_Study1",
+      "case": {
+        "system": "Study1",
+        "label": "Study 1: 1400 compositions",
+        "n": 1400,
+        "source": "/home/ktg0829/project/HEA/CEMC/UQMC_new_composition_shift",
+        "recall_n": 1317
+      },
+      "label": "(a) Study 1: 1400 compositions"
+    },
+    {
+      "dataset": "Pt_ML4",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4",
+        "system": "Pt",
+        "ml": 4,
+        "label": "Study 2: ML4",
+        "n": 342,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_kde_representative_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_best_tau_mse_crps_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/PtPdRhRuIr/fit_exp/hea_uq_cemc_cpp_v1.0/trial_global_composition_shift_3bit/logmean_slab_kde_analysis/ML4/ML4_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(b) Study 2: ML4"
+    },
+    {
+      "dataset": "Fe_fcc100_hollow",
+      "case": {
+        "source": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity",
+        "system": "Fe",
+        "facet": "100",
+        "site": "hollow",
+        "label": "Study 3: fcc(100) hollow",
+        "n": 238,
+        "files": {
+          "histogram": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_cemc_random_3d_histogram_with_axis_marginals.png",
+          "most_probable": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_kde_representative_tsne_activity_values.csv",
+          "best": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/fcc100_hollow_log_activity_best_tau_mse_crps_tsne_activity_values.csv",
+          "recall": "/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/fit_exp/uqmc_new_BE_shift_fcc_100/individual_slab_joint_probability_tsne_analysis/hollow/log_activity/hollow_log_activity_continuous_recall_analysis.csv"
+        }
+      },
+      "label": "(c) Study 3: fcc(100) hollow"
+    }
+  ]
+}

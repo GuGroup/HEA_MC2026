@@ -1,0 +1,24 @@
+{
+  "site": "fcc111/fcc_hollow",
+  "training": {
+    "n": 2011,
+    "mae_eV": 0.03999737181305168,
+    "rmse_eV": 0.050990382759946114,
+    "r2": 0.9346795206085163
+  },
+  "test_all": {
+    "n": 102,
+    "mae_eV": 0.05205871364915371,
+    "rmse_eV": 0.06698108134506305,
+    "r2": 0.41360564079138584
+  },
+  "test_original_plot": {
+    "n": 102,
+    "mae_eV": 0.05205871364915371,
+    "rmse_eV": 0.06698108134506305,
+    "r2": 0.41360564079138584
+  },
+  "original_plot_selection": "all",
+  "excluded_from_original_plot_indices": [],
+  "note": "Error-filtered subsets reproduce historical plots; use test_all for complete test-set performance."
+}

@@ -1,0 +1,2 @@
+trial,cemc_selected_temp,cemc_selected_tau,cemc_selected_mse,cemc_selected_score,random_tau,random_mse,random_score,delta_tau_cemc_minus_random,delta_mse_random_minus_cemc,delta_score_cemc_minus_random
+0,2000,nan,0,nan,nan,0,nan,nan,0,nan

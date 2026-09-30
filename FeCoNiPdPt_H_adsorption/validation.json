@@ -1,0 +1,265 @@
+{
+  "environment": {
+    "python": "3.12.7",
+    "ase": "3.28.0",
+    "numpy": "2.4.3",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "pandas": "3.0.2",
+    "matplotlib": "3.10.9"
+  },
+  "sites": {
+    "fcc111/fcc_hollow": {
+      "training_n": 2011,
+      "test_all_n": 102,
+      "original_model_coef_max_abs_difference": 5.9396931817445875e-15,
+      "original_model_prediction_max_abs_difference_eV": 4.274358644806853e-15,
+      "all_csv_indices_included": true,
+      "legacy_features_match": true,
+      "ase_roundtrip_verified": true,
+      "original_plot_selection": "all",
+      "training_reference_prediction_max_abs_difference_eV": 4.3298697960381105e-15,
+      "testing_reference_prediction_max_abs_difference_eV": 1.887379141862766e-15,
+      "metrics": {
+        "site": "fcc111/fcc_hollow",
+        "training": {
+          "n": 2011,
+          "mae_eV": 0.03999737181305168,
+          "rmse_eV": 0.050990382759946114,
+          "r2": 0.9346795206085163
+        },
+        "test_all": {
+          "n": 102,
+          "mae_eV": 0.05205871364915371,
+          "rmse_eV": 0.06698108134506305,
+          "r2": 0.41360564079138584
+        },
+        "test_original_plot": {
+          "n": 102,
+          "mae_eV": 0.05205871364915371,
+          "rmse_eV": 0.06698108134506305,
+          "r2": 0.41360564079138584
+        },
+        "original_plot_selection": "all",
+        "excluded_from_original_plot_indices": [],
+        "note": "Error-filtered subsets reproduce historical plots; use test_all for complete test-set performance."
+      }
+    },
+    "fcc111/top": {
+      "training_n": 1056,
+      "test_all_n": 95,
+      "original_model_coef_max_abs_difference": 0.0,
+      "original_model_prediction_max_abs_difference_eV": 0.0,
+      "all_csv_indices_included": true,
+      "legacy_features_match": true,
+      "ase_roundtrip_verified": true,
+      "original_plot_selection": "all",
+      "training_reference_prediction_max_abs_difference_eV": 1.6653345369377348e-16,
+      "testing_reference_prediction_max_abs_difference_eV": 1.6653345369377348e-16,
+      "metrics": {
+        "site": "fcc111/top",
+        "training": {
+          "n": 1056,
+          "mae_eV": 0.03912060597386844,
+          "rmse_eV": 0.04943042482993594,
+          "r2": 0.9511291629312152
+        },
+        "test_all": {
+          "n": 95,
+          "mae_eV": 0.03788432211157539,
+          "rmse_eV": 0.048270722299640294,
+          "r2": 0.9612452479072553
+        },
+        "test_original_plot": {
+          "n": 95,
+          "mae_eV": 0.03788432211157539,
+          "rmse_eV": 0.048270722299640294,
+          "r2": 0.9612452479072553
+        },
+        "original_plot_selection": "all",
+        "excluded_from_original_plot_indices": [],
+        "note": "Error-filtered subsets reproduce historical plots; use test_all for complete test-set performance."
+      }
+    },
+    "fcc100/hollow": {
+      "training_n": 1071,
+      "test_all_n": 108,
+      "original_model_coef_max_abs_difference": 0.0,
+      "original_model_prediction_max_abs_difference_eV": 0.0,
+      "all_csv_indices_included": true,
+      "legacy_features_match": true,
+      "ase_roundtrip_verified": true,
+      "original_plot_selection": "absolute_error_le_0.1",
+      "training_reference_prediction_max_abs_difference_eV": 1.3877787807814457e-16,
+      "testing_reference_prediction_max_abs_difference_eV": 1.1102230246251565e-16,
+      "metrics": {
+        "site": "fcc100/hollow",
+        "training": {
+          "n": 1071,
+          "mae_eV": 0.038007652536886954,
+          "rmse_eV": 0.053338958372893853,
+          "r2": 0.7967307006610791
+        },
+        "test_all": {
+          "n": 108,
+          "mae_eV": 0.08949604759835748,
+          "rmse_eV": 0.11400138148403413,
+          "r2": -0.4395341388351144
+        },
+        "test_original_plot": {
+          "n": 69,
+          "mae_eV": 0.04844442440955122,
+          "rmse_eV": 0.055339841437100835,
+          "r2": 0.4245920268542681
+        },
+        "original_plot_selection": "absolute_error_le_0.1",
+        "excluded_from_original_plot_indices": [
+          9,
+          13,
+          14,
+          15,
+          16,
+          17,
+          24,
+          26,
+          28,
+          29,
+          40,
+          41,
+          46,
+          53,
+          54,
+          63,
+          66,
+          70,
+          74,
+          76,
+          79,
+          84,
+          90,
+          97,
+          98,
+          100,
+          102,
+          106,
+          107,
+          108,
+          111,
+          114,
+          115,
+          116,
+          120,
+          140,
+          143,
+          146,
+          147
+        ],
+        "note": "Error-filtered subsets reproduce historical plots; use test_all for complete test-set performance."
+      }
+    },
+    "fcc100/bridge": {
+      "training_n": 1123,
+      "test_all_n": 69,
+      "original_model_coef_max_abs_difference": 0.0,
+      "original_model_prediction_max_abs_difference_eV": 0.0,
+      "all_csv_indices_included": true,
+      "legacy_features_match": true,
+      "ase_roundtrip_verified": true,
+      "original_plot_selection": "all",
+      "training_reference_prediction_max_abs_difference_eV": 1.1102230246251565e-16,
+      "testing_reference_prediction_max_abs_difference_eV": 1.1102230246251565e-16,
+      "metrics": {
+        "site": "fcc100/bridge",
+        "training": {
+          "n": 1123,
+          "mae_eV": 0.033151974588055806,
+          "rmse_eV": 0.042873916268361595,
+          "r2": 0.8908380568740528
+        },
+        "test_all": {
+          "n": 69,
+          "mae_eV": 0.034152232889497244,
+          "rmse_eV": 0.044681167430696216,
+          "r2": 0.5861955809676092
+        },
+        "test_original_plot": {
+          "n": 69,
+          "mae_eV": 0.034152232889497244,
+          "rmse_eV": 0.044681167430696216,
+          "r2": 0.5861955809676092
+        },
+        "original_plot_selection": "all",
+        "excluded_from_original_plot_indices": [],
+        "note": "Error-filtered subsets reproduce historical plots; use test_all for complete test-set performance."
+      }
+    },
+    "fcc110/bridge": {
+      "training_n": 722,
+      "test_all_n": 130,
+      "original_model_coef_max_abs_difference": 0.0,
+      "original_model_prediction_max_abs_difference_eV": 0.0,
+      "all_csv_indices_included": true,
+      "legacy_features_match": true,
+      "ase_roundtrip_verified": true,
+      "original_plot_selection": "exclude_largest_3_absolute_errors",
+      "training_reference_prediction_max_abs_difference_eV": 1.6653345369377348e-16,
+      "testing_reference_prediction_max_abs_difference_eV": 1.249000902703301e-16,
+      "metrics": {
+        "site": "fcc110/bridge",
+        "training": {
+          "n": 722,
+          "mae_eV": 0.07681901098855241,
+          "rmse_eV": 0.09686766992474376,
+          "r2": 0.6517860843247023
+        },
+        "test_all": {
+          "n": 130,
+          "mae_eV": 0.097925049414451,
+          "rmse_eV": 0.12703082024446163,
+          "r2": 0.524723636495545
+        },
+        "test_original_plot": {
+          "n": 127,
+          "mae_eV": 0.09126326848254492,
+          "rmse_eV": 0.11376844084486444,
+          "r2": 0.5354320227704661
+        },
+        "original_plot_selection": "exclude_largest_3_absolute_errors",
+        "excluded_from_original_plot_indices": [
+          133,
+          36,
+          95
+        ],
+        "note": "Error-filtered subsets reproduce historical plots; use test_all for complete test-set performance."
+      }
+    }
+  },
+  "plots": {
+    "fcc111": {
+      "same_plot_function_source": true,
+      "width": 5400,
+      "height": 2700,
+      "original_identical_pixel_fraction": 0.9956958847736626,
+      "original_mean_abs_pixel_difference": 0.2064443072702332
+    },
+    "fcc100": {
+      "same_plot_function_source": true,
+      "width": 5400,
+      "height": 2700,
+      "original_identical_pixel_fraction": 0.9791826474622771,
+      "original_mean_abs_pixel_difference": 0.5495099622770919
+    },
+    "fcc110": {
+      "same_plot_function_source": true,
+      "width": 2700,
+      "height": 2700,
+      "original_identical_pixel_fraction": 1.0,
+      "original_mean_abs_pixel_difference": 0.0
+    }
+  },
+  "verification": {
+    "all_five_training_clis_reproduce_packaged_models": true,
+    "all_five_evaluators_run_without_original_files": true,
+    "all_csv_records_preserved": true
+  }
+}

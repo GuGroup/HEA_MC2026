@@ -1,0 +1,2849 @@
+// uq_cemc_mpi.cpp
+// C++17/MPI Monte Carlo uncertainty + CEMC annealing for Ir-Pd-Pt-Rh-Ru fcc(111) slabs.
+// v1.0: writes selected-temperature per-composition predicted activities for map/scatter diagnostics; keeps v1.0 seed-only production mode.
+// Build with MPI when available: mpicxx -std=c++17 -O3 -DUSE_MPI -o uq_cemc_mpi uq_cemc_mpi.cpp
+// Serial fallback: g++ -std=c++17 -O3 -o uq_cemc_mpi uq_cemc_mpi.cpp
+
+#include <algorithm>
+#include <array>
+#include <cmath>
+#include <cstdint>
+#include <chrono>
+#include <cctype>
+#include <cstdlib>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <limits>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <random>
+#include <set>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+
+#ifdef USE_MPI
+#include <mpi.h>
+#endif
+
+#include "simple_fs.hpp"
+
+namespace fs = simple_fs;
+static constexpr double KB_EV_PER_K = 8.617333262145e-5;
+static constexpr int BE_HIST_ELEMENT_COUNT = 5;
+static constexpr double BE_HIST_MIN = -3.0;
+static constexpr double BE_HIST_MAX = 5.0;
+static constexpr double BE_HIST_WIDTH = 0.01;
+static constexpr int BE_HIST_BINS = static_cast<int>((BE_HIST_MAX - BE_HIST_MIN) / BE_HIST_WIDTH);
+
+static std::string trim(const std::string &s) {
+    size_t b = 0;
+    while (b < s.size() && std::isspace(static_cast<unsigned char>(s[b]))) b++;
+    size_t e = s.size();
+    while (e > b && std::isspace(static_cast<unsigned char>(s[e-1]))) e--;
+    return s.substr(b, e-b);
+}
+
+static bool starts_with(const std::string &s, const std::string &p) {
+    return s.rfind(p, 0) == 0;
+}
+
+static std::string clean_header_name(std::string s) {
+    s = trim(s);
+    if (s.size() >= 3 &&
+        static_cast<unsigned char>(s[0]) == 0xef &&
+        static_cast<unsigned char>(s[1]) == 0xbb &&
+        static_cast<unsigned char>(s[2]) == 0xbf) {
+        s = s.substr(3);
+    }
+    return trim(s);
+}
+
+static std::vector<std::string> split_csv_line(const std::string &line) {
+    std::vector<std::string> out;
+    std::string cur;
+    bool quoted = false;
+    for (char c : line) {
+        if (c == '"') { quoted = !quoted; continue; }
+        if (c == ',' && !quoted) { out.push_back(trim(cur)); cur.clear(); }
+        else cur.push_back(c);
+    }
+    out.push_back(trim(cur));
+    return out;
+}
+
+static uint64_t splitmix64(uint64_t x) {
+    x += 0x9e3779b97f4a7c15ULL;
+    x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
+    x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
+    return x ^ (x >> 31);
+}
+
+static uint64_t make_seed(uint64_t base, int a, int b=0, int c=0, int d=0) {
+    uint64_t x = base;
+    x ^= splitmix64(static_cast<uint64_t>(a) + 0x100000001b3ULL);
+    x ^= splitmix64(static_cast<uint64_t>(b) + 0x9e3779b97f4a7c15ULL);
+    x ^= splitmix64(static_cast<uint64_t>(c) + 0xbf58476d1ce4e5b9ULL);
+    x ^= splitmix64(static_cast<uint64_t>(d) + 0x94d049bb133111ebULL);
+    return splitmix64(x);
+}
+
+static uint64_t uniform_uint_inclusive(std::mt19937_64 &rng, uint64_t hi) {
+    // Deterministic bounded integer draw, independent of std::uniform_int_distribution.
+    // Returns an integer in [0, hi].
+    if (hi == std::numeric_limits<uint64_t>::max()) return rng();
+    const uint64_t bound = hi + 1ULL;
+    const uint64_t threshold = (uint64_t)(-bound) % bound;
+    for (;;) {
+        uint64_t r = rng();
+        if (r >= threshold) return r % bound;
+    }
+}
+
+template <class T>
+static void deterministic_shuffle(std::vector<T> &v, std::mt19937_64 &rng) {
+    // Fisher-Yates shuffle using the deterministic bounded draw above. This makes
+    // saved random_slab_seed + element counts sufficient to reproduce a random slab.
+    if (v.size() <= 1) return;
+    for (size_t i = v.size() - 1; i > 0; --i) {
+        size_t j = static_cast<size_t>(uniform_uint_inclusive(rng, static_cast<uint64_t>(i)));
+        std::swap(v[i], v[j]);
+    }
+}
+
+struct Config {
+    std::string ce_export;
+    std::string schedule_export;
+    std::string activity_model;
+    std::string composition_csv;
+    std::string experimental_activity_csv;
+    std::string output_dir = "uq_output";
+    int ml_index = 1;
+    int n_trials = 2;
+    int n_runs = 2;
+    int max_compositions = -1;
+    int trial_start = 0;
+    int trial_stride = 1;
+    uint64_t random_seed = 20260706ULL;
+    double comp_error_mean = 0.000347;
+    double comp_error_sigma = 0.046858;
+    std::string comp_error_units = "fraction"; // fraction or percent
+    double be_error_mean = 0.04233;
+    double be_error_sigma = 0.2604;
+    bool write_structures = false;
+    bool write_random_structures = false;
+    bool write_random_seeds = true;
+    bool write_packed_atoms = false;
+    bool structure_only = false;
+    bool write_predicted_activities = true;
+    bool write_all_snapshot_activities = true;
+    bool write_trial_zarr_summaries = true;
+    bool predicted_better_is_higher = true;
+    bool experimental_better_is_lower = true;
+    int summary_every_trials = 0; // 0=end only; N=also every N trials
+};
+
+static Config read_config(const std::string &path) {
+    std::ifstream in(path);
+    if (!in) throw std::runtime_error("Could not open config: " + path);
+    Config cfg;
+    std::string line;
+    int lineno = 0;
+    while (std::getline(in, line)) {
+        lineno++;
+        auto hash = line.find('#');
+        if (hash != std::string::npos) line = line.substr(0, hash);
+        line = trim(line);
+        if (line.empty() || line.front() == '[') continue;
+        auto eq = line.find('=');
+        if (eq == std::string::npos) continue;
+        std::string key = trim(line.substr(0, eq));
+        std::string val = trim(line.substr(eq+1));
+        auto unquote = [](std::string v) {
+            v = trim(v);
+            if (v.size() >= 2 && ((v.front()=='"' && v.back()=='"') || (v.front()=='\'' && v.back()=='\'')))
+                v = v.substr(1, v.size()-2);
+            return v;
+        };
+        val = unquote(val);
+        auto as_bool = [](const std::string &v) {
+            std::string x = v;
+            std::transform(x.begin(), x.end(), x.begin(), ::tolower);
+            return x == "1" || x == "true" || x == "yes" || x == "y";
+        };
+        try {
+            if (key == "ce_export") cfg.ce_export = val;
+            else if (key == "schedule_export") cfg.schedule_export = val;
+            else if (key == "activity_model") cfg.activity_model = val;
+            else if (key == "composition_csv") cfg.composition_csv = val;
+            else if (key == "experimental_activity_csv") cfg.experimental_activity_csv = val;
+            else if (key == "output_dir") cfg.output_dir = val;
+            else if (key == "ml_index") cfg.ml_index = std::stoi(val);
+            else if (key == "n_trials") cfg.n_trials = std::stoi(val);
+            else if (key == "n_runs") cfg.n_runs = std::stoi(val);
+            else if (key == "max_compositions") cfg.max_compositions = std::stoi(val);
+            else if (key == "trial_start") cfg.trial_start = std::stoi(val);
+            else if (key == "trial_stride") cfg.trial_stride = std::stoi(val);
+            else if (key == "random_seed") cfg.random_seed = static_cast<uint64_t>(std::stoull(val));
+            else if (key == "comp_error_mean") cfg.comp_error_mean = std::stod(val);
+            else if (key == "comp_error_sigma") cfg.comp_error_sigma = std::stod(val);
+            else if (key == "comp_error_units") cfg.comp_error_units = val;
+            else if (key == "be_error_mean") cfg.be_error_mean = std::stod(val);
+            else if (key == "be_error_sigma") cfg.be_error_sigma = std::stod(val);
+            else if (key == "write_structures") cfg.write_structures = as_bool(val);
+            else if (key == "write_random_structures") cfg.write_random_structures = as_bool(val);
+            else if (key == "write_random_seeds") cfg.write_random_seeds = as_bool(val);
+            else if (key == "write_packed_atoms") cfg.write_packed_atoms = as_bool(val);
+            else if (key == "structure_only") cfg.structure_only = as_bool(val);
+            else if (key == "write_predicted_activities") cfg.write_predicted_activities = as_bool(val);
+            else if (key == "write_all_snapshot_activities") cfg.write_all_snapshot_activities = as_bool(val);
+            else if (key == "write_trial_zarr_summaries") cfg.write_trial_zarr_summaries = as_bool(val);
+            else if (key == "predicted_better_is_higher") cfg.predicted_better_is_higher = as_bool(val);
+            else if (key == "experimental_better_is_lower") cfg.experimental_better_is_lower = as_bool(val);
+            else if (key == "summary_every_trials") cfg.summary_every_trials = std::stoi(val);
+        } catch (const std::exception &e) {
+            throw std::runtime_error("Bad config line " + std::to_string(lineno) + ": " + line + " (" + e.what() + ")");
+        }
+    }
+    if (cfg.ce_export.empty() || cfg.schedule_export.empty() || cfg.activity_model.empty() ||
+        cfg.composition_csv.empty() || cfg.experimental_activity_csv.empty()) {
+        throw std::runtime_error("Config must define ce_export, schedule_export, activity_model, composition_csv, experimental_activity_csv");
+    }
+    if (cfg.trial_start < 0) throw std::runtime_error("trial_start must be >= 0");
+    if (cfg.trial_stride < 1) throw std::runtime_error("trial_stride must be >= 1");
+    return cfg;
+}
+
+template <typename T>
+static std::vector<T> read_vec(std::istream &in, size_t n) {
+    std::vector<T> v(n);
+    for (size_t i=0; i<n; ++i) {
+        if (!(in >> v[i])) throw std::runtime_error("Unexpected EOF while reading vector");
+    }
+    return v;
+}
+
+struct CEData {
+    int q = 0;
+    int vacancy_code = -1;
+    int n_sites = 0;
+    int n_metal_sites = 0;
+    int pair_shell_count = 0;
+    int n_triplet_geometries = 0;
+    std::vector<std::string> species;
+    std::vector<int> atomic_numbers;
+    std::vector<int> metal_sites;
+    std::vector<int> active_sites;
+    std::vector<int> surface_sites;
+    double zero = 0.0;
+    std::vector<double> point;          // q
+    std::vector<double> pair_coeff;     // pair_shell_count*q*q, shell included, shell 0 unused
+    std::vector<int> pair_i, pair_j, pair_shell;
+    std::vector<double> triplet_coeff;  // G*q*q*q
+    std::vector<int> triplet_i, triplet_j, triplet_k, triplet_gid;
+    std::vector<int> site_pair_ptr, site_pair_indices;
+    std::vector<int> site_triplet_ptr, site_triplet_indices;
+    std::unordered_map<std::string, int> species_to_code;
+
+    double pairC(int shell, int a, int b) const {
+        size_t idx = (static_cast<size_t>(shell) * q + a) * q + b;
+        return pair_coeff[idx];
+    }
+    double tripletC(int gid, int a, int b, int c) const {
+        size_t idx = (((static_cast<size_t>(gid) * q + a) * q + b) * q + c);
+        return triplet_coeff[idx];
+    }
+};
+
+static CEData read_ce_export(const std::string &path) {
+    std::ifstream in(path);
+    if (!in) throw std::runtime_error("Could not open CE export: " + path);
+    std::string magic;
+    in >> magic;
+    if (magic != "FCC_CE_EXPORT_V1") throw std::runtime_error("Bad CE export magic: " + magic);
+    CEData ce;
+    std::string key;
+    while (in >> key) {
+        if (key == "n_species") { in >> ce.q; }
+        else if (key == "species") {
+            if (ce.q <= 0) throw std::runtime_error("species before n_species");
+            ce.species = read_vec<std::string>(in, ce.q);
+            ce.species_to_code.clear();
+            for (int i=0;i<ce.q;i++) ce.species_to_code[ce.species[i]] = i;
+        }
+        else if (key == "atomic_numbers") ce.atomic_numbers = read_vec<int>(in, ce.q);
+        else if (key == "vacancy_code") in >> ce.vacancy_code;
+        else if (key == "n_sites") in >> ce.n_sites;
+        else if (key == "n_metal_sites") in >> ce.n_metal_sites;
+        else if (key == "metal_sites") ce.metal_sites = read_vec<int>(in, ce.n_metal_sites);
+        else if (key == "n_active_sites") {
+            int n; in >> n;
+            std::string k2; in >> k2; if (k2 != "active_sites") throw std::runtime_error("Expected active_sites");
+            ce.active_sites = read_vec<int>(in, n);
+        }
+        else if (key == "n_surface_sites") {
+            int n; in >> n;
+            std::string k2; in >> k2; if (k2 != "surface_sites") throw std::runtime_error("Expected surface_sites");
+            ce.surface_sites = read_vec<int>(in, n);
+        }
+        else if (key == "zero") in >> ce.zero;
+        else if (key == "point") ce.point = read_vec<double>(in, ce.q);
+        else if (key == "pair_shape") {
+            int s,q1,q2; in >> s >> q1 >> q2;
+            if (q1 != ce.q || q2 != ce.q) throw std::runtime_error("pair_shape species mismatch");
+            ce.pair_shell_count = s;
+            ce.pair_coeff = read_vec<double>(in, static_cast<size_t>(s)*ce.q*ce.q);
+        }
+        else if (key == "n_pairs") {
+            int n; in >> n;
+            std::string k2; in >> k2; if (k2 != "pair_i") throw std::runtime_error("Expected pair_i");
+            ce.pair_i = read_vec<int>(in, n);
+            in >> k2; if (k2 != "pair_j") throw std::runtime_error("Expected pair_j");
+            ce.pair_j = read_vec<int>(in, n);
+            in >> k2; if (k2 != "pair_shell") throw std::runtime_error("Expected pair_shell");
+            ce.pair_shell = read_vec<int>(in, n);
+        }
+        else if (key == "triplet_shape") {
+            int g,q1,q2,q3; in >> g >> q1 >> q2 >> q3;
+            if (q1 != ce.q || q2 != ce.q || q3 != ce.q) throw std::runtime_error("triplet_shape species mismatch");
+            ce.n_triplet_geometries = g;
+            ce.triplet_coeff = read_vec<double>(in, static_cast<size_t>(std::max(g,0))*ce.q*ce.q*ce.q);
+        }
+        else if (key == "n_triplets") {
+            int n; in >> n;
+            std::string k2; in >> k2; if (k2 != "triplet_i") throw std::runtime_error("Expected triplet_i");
+            ce.triplet_i = read_vec<int>(in, n);
+            in >> k2; if (k2 != "triplet_j") throw std::runtime_error("Expected triplet_j");
+            ce.triplet_j = read_vec<int>(in, n);
+            in >> k2; if (k2 != "triplet_k") throw std::runtime_error("Expected triplet_k");
+            ce.triplet_k = read_vec<int>(in, n);
+            in >> k2; if (k2 != "triplet_gid") throw std::runtime_error("Expected triplet_gid");
+            ce.triplet_gid = read_vec<int>(in, n);
+        }
+        else if (key == "site_pair_ptr") ce.site_pair_ptr = read_vec<int>(in, ce.n_sites + 1);
+        else if (key == "site_pair_indices") { int n; in >> n; ce.site_pair_indices = read_vec<int>(in, n); }
+        else if (key == "site_triplet_ptr") ce.site_triplet_ptr = read_vec<int>(in, ce.n_sites + 1);
+        else if (key == "site_triplet_indices") { int n; in >> n; ce.site_triplet_indices = read_vec<int>(in, n); }
+        else {
+            throw std::runtime_error("Unknown CE export key: " + key);
+        }
+    }
+    if (ce.q <= 0 || ce.n_sites <= 0 || ce.n_metal_sites <= 0 || ce.vacancy_code < 0) throw std::runtime_error("Incomplete CE export");
+    if (static_cast<int>(ce.point.size()) != ce.q) throw std::runtime_error("CE point coeff missing");
+    if (static_cast<int>(ce.atomic_numbers.size()) != ce.q) throw std::runtime_error("CE atomic numbers missing");
+    return ce;
+}
+
+struct ScheduleSegment {
+    int profile = 0; // 0 hold, 1 linear, 2 exponential
+    double start = 300.0;
+    double stop = 300.0;
+    int64_t steps = 0;
+};
+
+struct SchedulePlan {
+    std::vector<double> target_temperatures;
+    std::vector<ScheduleSegment> segments;
+};
+
+static SchedulePlan read_schedule_export(const std::string &path) {
+    std::ifstream in(path);
+    if (!in) throw std::runtime_error("Could not open schedule export: " + path);
+    std::string magic;
+    in >> magic;
+    if (magic != "SCHEDULE_SNAPSHOTS_V1") throw std::runtime_error("Bad schedule export magic: " + magic);
+    SchedulePlan plan;
+    std::string key;
+    int n_targets = 0;
+    in >> key >> n_targets;
+    if (key != "n_targets" || n_targets <= 0) throw std::runtime_error("Bad schedule n_targets");
+    in >> key;
+    if (key != "target_temperatures") throw std::runtime_error("Expected target_temperatures in schedule export");
+    plan.target_temperatures = read_vec<double>(in, n_targets);
+    int nseg = 0;
+    in >> key >> nseg;
+    if (key != "n_segments" || nseg <= 0) throw std::runtime_error("Expected n_segments in schedule export");
+    for (int s=0; s<nseg; ++s) {
+        std::string segkey;
+        ScheduleSegment seg;
+        in >> segkey >> seg.profile >> seg.start >> seg.stop >> seg.steps;
+        if (segkey != "segment") throw std::runtime_error("Expected segment in schedule export");
+        if (seg.steps <= 0) throw std::runtime_error("Schedule segment has nonpositive steps");
+        plan.segments.push_back(seg);
+    }
+    return plan;
+}
+
+struct ActivityModel {
+    std::vector<std::string> elements;
+    std::vector<double> zone1, zone2, zone3;
+    double intercept = 0.0;
+    double e_opt = 1.1;
+    double activity_temperature = 300.0;
+    std::vector<int> zone2_ptr, zone2_indices;
+    std::vector<int> zone3_ptr, zone3_indices;
+};
+
+static ActivityModel read_activity_model(const std::string &path, const CEData &ce) {
+    std::ifstream in(path);
+    if (!in) throw std::runtime_error("Could not open activity model: " + path);
+    std::string magic;
+    in >> magic;
+    if (magic != "ACTIVITY_MODEL_OH_V1") throw std::runtime_error("Bad activity model magic: " + magic);
+    ActivityModel am;
+    std::string key;
+    while (in >> key) {
+        if (key == "elements") am.elements = read_vec<std::string>(in, 5);
+        else if (key == "intercept") in >> am.intercept;
+        else if (key == "zone1") am.zone1 = read_vec<double>(in, 5);
+        else if (key == "zone2") am.zone2 = read_vec<double>(in, 5);
+        else if (key == "zone3") am.zone3 = read_vec<double>(in, 5);
+        else if (key == "e_opt") in >> am.e_opt;
+        else if (key == "activity_temperature") in >> am.activity_temperature;
+        else if (key == "zone2_ptr") am.zone2_ptr = read_vec<int>(in, ce.surface_sites.size()+1);
+        else if (key == "zone2_indices") { int n; in >> n; am.zone2_indices = read_vec<int>(in, n); }
+        else if (key == "zone3_ptr") am.zone3_ptr = read_vec<int>(in, ce.surface_sites.size()+1);
+        else if (key == "zone3_indices") { int n; in >> n; am.zone3_indices = read_vec<int>(in, n); }
+        else throw std::runtime_error("Unknown activity model key: " + key);
+    }
+    if (am.elements.size() != 5 || am.zone1.size() != 5 || am.zone2.size() != 5 || am.zone3.size() != 5) {
+        throw std::runtime_error("Activity model requires 5 elements and zone1/2/3 coefficients");
+    }
+    if (am.zone2_ptr.size() != ce.surface_sites.size()+1 || am.zone3_ptr.size() != ce.surface_sites.size()+1) {
+        throw std::runtime_error("Activity model neighbor topology size mismatch");
+    }
+    return am;
+}
+
+struct CompositionRow {
+    int row_idx = 0;
+    int col_idx = 0;
+    std::array<double,5> fraction{}; // Ir,Pd,Pt,Rh,Ru order in code below
+    double experimental = 0.0;
+};
+
+static std::map<int, double> read_activity_json_by_pixel(const std::string &act_path) {
+    std::ifstream in(act_path);
+    if (!in) throw std::runtime_error("Could not open activity JSON: " + act_path);
+    std::string text((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+    std::map<int, double> out;
+    size_t i = 0;
+    while (i < text.size()) {
+        while (i < text.size() && text[i] != '"') i++;
+        if (i >= text.size()) break;
+        size_t key_begin = ++i;
+        while (i < text.size() && text[i] != '"') i++;
+        if (i >= text.size()) break;
+        std::string key = text.substr(key_begin, i - key_begin);
+        i++;
+        while (i < text.size() && (std::isspace(static_cast<unsigned char>(text[i])) || text[i] == ':')) i++;
+        size_t val_begin = i;
+        while (i < text.size() && (std::isdigit(static_cast<unsigned char>(text[i])) || text[i] == '-' || text[i] == '+' || text[i] == '.' || text[i] == 'e' || text[i] == 'E')) i++;
+        if (val_begin == i) continue;
+        try {
+            out[std::stoi(key)] = std::stod(text.substr(val_begin, i - val_begin));
+        } catch (...) {
+        }
+    }
+    if (out.empty()) throw std::runtime_error("No pixel activity values found in JSON: " + act_path);
+    return out;
+}
+
+static std::vector<CompositionRow> read_compositions_and_activity(const std::string &comp_path, const std::string &act_path, int max_compositions) {
+    std::ifstream cinp(comp_path), ainp(act_path);
+    if (!cinp) throw std::runtime_error("Could not open composition CSV: " + comp_path);
+    if (!ainp) throw std::runtime_error("Could not open activity file: " + act_path);
+    std::string line;
+    if (!std::getline(cinp, line)) throw std::runtime_error("Empty composition CSV");
+    auto h = split_csv_line(line);
+    std::unordered_map<std::string,int> hc;
+    for (int i=0;i<(int)h.size();i++) hc[clean_header_name(h[i])] = i;
+
+    const bool pixel_format =
+        hc.count("Pixel_Index") && hc.count("Ir") && hc.count("Pd") &&
+        hc.count("Pt") && hc.count("Rh") && hc.count("Ru");
+
+    if (pixel_format) {
+        auto activity = read_activity_json_by_pixel(act_path);
+        std::vector<CompositionRow> rows;
+        while (std::getline(cinp, line)) {
+            if (trim(line).empty()) continue;
+            auto v = split_csv_line(line);
+            int pixel = std::stoi(v[hc["Pixel_Index"]]);
+            auto ait = activity.find(pixel);
+            if (ait == activity.end()) throw std::runtime_error("Pixel_Index has no activity entry: " + std::to_string(pixel));
+            std::array<double,5> f = {
+                std::stod(v[hc["Ir"]]),
+                std::stod(v[hc["Pd"]]),
+                std::stod(v[hc["Pt"]]),
+                std::stod(v[hc["Rh"]]),
+                std::stod(v[hc["Ru"]])
+            };
+            double sum = std::accumulate(f.begin(), f.end(), 0.0);
+            if (sum > 1.5) for (double &x : f) x /= 100.0;
+            double s = std::accumulate(f.begin(), f.end(), 0.0);
+            if (s <= 0) throw std::runtime_error("Bad composition row with zero sum");
+            for (double &x : f) x /= s;
+            CompositionRow row;
+            row.row_idx = pixel;
+            row.col_idx = 0;
+            row.fraction = f;
+            row.experimental = ait->second;
+            rows.push_back(row);
+            if (max_compositions > 0 && (int)rows.size() >= max_compositions) break;
+        }
+        return rows;
+    }
+
+    const std::array<std::string,5> ratio_cols = {"Ir_ratio","Pd_ratio","Pt_ratio","Rh_ratio","Ru_ratio"};
+    for (auto &c : ratio_cols) if (!hc.count(c)) throw std::runtime_error("Missing composition column: " + c);
+    if (!hc.count("Row_Idx") || !hc.count("Col_Idx")) throw std::runtime_error("Missing Row_Idx/Col_Idx in composition CSV");
+    std::map<std::pair<int,int>, std::array<double,5>> comp_map;
+    while (std::getline(cinp, line)) {
+        if (trim(line).empty()) continue;
+        auto v = split_csv_line(line);
+        int r = std::stoi(v[hc["Row_Idx"]]);
+        int c = std::stoi(v[hc["Col_Idx"]]);
+        std::array<double,5> f{};
+        double sum = 0.0;
+        for (int k=0;k<5;k++) { f[k] = std::stod(v[hc[ratio_cols[k]]]); sum += f[k]; }
+        if (sum > 1.5) for (double &x : f) x /= 100.0;
+        double s = std::accumulate(f.begin(), f.end(), 0.0);
+        if (s <= 0) throw std::runtime_error("Bad composition row with zero sum");
+        for (double &x : f) x /= s;
+        comp_map[{r,c}] = f;
+    }
+    if (!std::getline(ainp, line)) throw std::runtime_error("Empty activity CSV");
+    h = split_csv_line(line);
+    std::unordered_map<std::string,int> ha;
+    for (int i=0;i<(int)h.size();i++) ha[clean_header_name(h[i])] = i;
+    if (!ha.count("Row_Idx") || !ha.count("Col_Idx") || !ha.count("Activity")) throw std::runtime_error("Missing Row_Idx/Col_Idx/Activity in activity CSV");
+    std::vector<CompositionRow> rows;
+    while (std::getline(ainp, line)) {
+        if (trim(line).empty()) continue;
+        auto v = split_csv_line(line);
+        int r = std::stoi(v[ha["Row_Idx"]]);
+        int c = std::stoi(v[ha["Col_Idx"]]);
+        auto it = comp_map.find({r,c});
+        if (it == comp_map.end()) throw std::runtime_error("Activity row has no composition row");
+        CompositionRow row;
+        row.row_idx = r; row.col_idx = c; row.fraction = it->second; row.experimental = std::stod(v[ha["Activity"]]);
+        rows.push_back(row);
+        if (max_compositions > 0 && (int)rows.size() >= max_compositions) break;
+    }
+    return rows;
+}
+
+static double total_energy(const CEData &ce, const std::vector<int> &occ) {
+    double e = ce.zero * static_cast<double>(ce.n_metal_sites);
+    for (int code : occ) e += ce.point[code];
+    for (size_t p=0;p<ce.pair_i.size();p++) e += ce.pairC(ce.pair_shell[p], occ[ce.pair_i[p]], occ[ce.pair_j[p]]);
+    for (size_t t=0;t<ce.triplet_i.size();t++) e += ce.tripletC(ce.triplet_gid[t], occ[ce.triplet_i[t]], occ[ce.triplet_j[t]], occ[ce.triplet_k[t]]);
+    return e;
+}
+
+static inline int swapped_code(int idx, int a, int b, int code_a, int code_b, int cur) {
+    if (idx == a) return code_b;
+    if (idx == b) return code_a;
+    return cur;
+}
+
+static double swap_delta(
+    const CEData &ce, int a, int b, const std::vector<int> &occ,
+    std::vector<int> &pair_marks, std::vector<int> &triplet_marks, int token
+) {
+    int ca = occ[a], cb = occ[b];
+    if (ca == cb) return 0.0;
+    double d = 0.0; // canonical point terms cancel
+    int actives[2] = {a,b};
+    for (int active : actives) {
+        for (int ptr = ce.site_pair_ptr[active]; ptr < ce.site_pair_ptr[active+1]; ++ptr) {
+            int p = ce.site_pair_indices[ptr];
+            if (pair_marks[p] == token) continue;
+            pair_marks[p] = token;
+            int i = ce.pair_i[p], j = ce.pair_j[p];
+            int oi = occ[i], oj = occ[j];
+            int ni = swapped_code(i, a, b, ca, cb, oi);
+            int nj = swapped_code(j, a, b, ca, cb, oj);
+            int sh = ce.pair_shell[p];
+            d += ce.pairC(sh, ni, nj) - ce.pairC(sh, oi, oj);
+        }
+    }
+    for (int active : actives) {
+        for (int ptr = ce.site_triplet_ptr[active]; ptr < ce.site_triplet_ptr[active+1]; ++ptr) {
+            int t = ce.site_triplet_indices[ptr];
+            if (triplet_marks[t] == token) continue;
+            triplet_marks[t] = token;
+            int i = ce.triplet_i[t], j = ce.triplet_j[t], k = ce.triplet_k[t];
+            int oi = occ[i], oj = occ[j], ok = occ[k];
+            int ni = swapped_code(i, a, b, ca, cb, oi);
+            int nj = swapped_code(j, a, b, ca, cb, oj);
+            int nk = swapped_code(k, a, b, ca, cb, ok);
+            int gid = ce.triplet_gid[t];
+            d += ce.tripletC(gid, ni, nj, nk) - ce.tripletC(gid, oi, oj, ok);
+        }
+    }
+    return d;
+}
+
+static double schedule_temperature(const ScheduleSegment &seg, int64_t local_step) {
+    if (seg.profile == 0 || seg.steps <= 1) return seg.start;
+    double f = static_cast<double>(local_step) / static_cast<double>(seg.steps - 1);
+    if (seg.profile == 1) return seg.start + f * (seg.stop - seg.start);
+    if (seg.start <= 0 || seg.stop <= 0) return seg.stop;
+    return seg.start * std::exp(f * std::log(seg.stop / seg.start));
+}
+
+struct Snapshot {
+    std::vector<int> occ;
+    double energy = 0.0;
+    int64_t global_step = 0;
+    double actual_temperature = 0.0;
+    int64_t attempted = 0;
+    int64_t accepted = 0;
+    double temperature_error = std::numeric_limits<double>::infinity();
+    bool captured = false;
+};
+
+struct MCOutcome {
+    std::vector<int> occ;
+    std::vector<Snapshot> snapshots;
+    double energy = 0.0;
+    int64_t attempted = 0;
+    int64_t accepted = 0;
+};
+
+static void capture_snapshot(MCOutcome &out, size_t ti, double target_T, double T, int64_t global_step) {
+    double diff = std::abs(T - target_T);
+    if (!out.snapshots[ti].captured || diff + 1e-12 < out.snapshots[ti].temperature_error) {
+        out.snapshots[ti].occ = out.occ;
+        out.snapshots[ti].energy = out.energy;
+        out.snapshots[ti].global_step = global_step;
+        out.snapshots[ti].actual_temperature = T;
+        out.snapshots[ti].attempted = out.attempted;
+        out.snapshots[ti].accepted = out.accepted;
+        out.snapshots[ti].temperature_error = diff;
+        out.snapshots[ti].captured = true;
+    }
+}
+
+static void maybe_capture_crossing(
+    MCOutcome &out, const SchedulePlan &plan, double previous_T, double T, bool have_previous, int64_t global_step
+) {
+    for (size_t ti=0; ti<plan.target_temperatures.size(); ++ti) {
+        double target = plan.target_temperatures[ti];
+        bool exact = std::abs(T - target) <= 1e-9;
+        bool crossed = false;
+        if (have_previous) {
+            crossed = (previous_T >= target && T <= target) || (previous_T <= target && T >= target);
+        }
+        if (exact || crossed) capture_snapshot(out, ti, target, T, global_step);
+    }
+}
+
+static MCOutcome run_cemc_snapshots(const CEData &ce, const std::vector<int> &initial, const SchedulePlan &plan, std::mt19937_64 &rng) {
+    MCOutcome out;
+    out.occ = initial;
+    out.energy = total_energy(ce, out.occ);
+    out.snapshots.resize(plan.target_temperatures.size());
+    std::uniform_int_distribution<int> active_dist(0, static_cast<int>(ce.active_sites.size()) - 1);
+    std::uniform_real_distribution<double> uni(0.0, 1.0);
+    std::vector<int> pair_marks(ce.pair_i.size(), 0), triplet_marks(ce.triplet_i.size(), 0);
+    int token = 1;
+    int64_t global_step = 0;
+    bool have_previous_T = false;
+    double previous_T = 0.0;
+    for (const auto &seg : plan.segments) {
+        for (int64_t step=0; step<seg.steps; ++step) {
+            double T = schedule_temperature(seg, step);
+            int a=-1,b=-1;
+            for (int tries=0; tries<64; ++tries) {
+                a = ce.active_sites[active_dist(rng)];
+                b = ce.active_sites[active_dist(rng)];
+                if (a != b && out.occ[a] != out.occ[b]) break;
+            }
+            if (!(a == b || out.occ[a] == out.occ[b])) {
+                double de = swap_delta(ce, a, b, out.occ, pair_marks, triplet_marks, token++);
+                bool accept = de <= 0.0;
+                if (!accept && T > 0.0) {
+                    double p = std::exp(-de / (KB_EV_PER_K * T));
+                    accept = uni(rng) < p;
+                }
+                out.attempted++;
+                if (accept) {
+                    std::swap(out.occ[a], out.occ[b]);
+                    out.energy += de;
+                    out.accepted++;
+                }
+                if (token > 2000000000) {
+                    std::fill(pair_marks.begin(), pair_marks.end(), 0);
+                    std::fill(triplet_marks.begin(), triplet_marks.end(), 0);
+                    token = 1;
+                }
+            }
+            global_step++;
+            // Preserve the original schedule.yaml. Capture a snapshot only when the
+            // cooling/heating trajectory crosses a requested target temperature, or
+            // when a hold segment exactly matches the target. This avoids running
+            // 18 independent anneals and avoids copying the full slab every step.
+            maybe_capture_crossing(out, plan, previous_T, T, have_previous_T, global_step);
+            previous_T = T;
+            have_previous_T = true;
+        }
+    }
+    // Fallback for unusual schedules that never cross a target: write the final state.
+    for (size_t ti=0; ti<plan.target_temperatures.size(); ++ti) {
+        if (!out.snapshots[ti].captured) {
+            capture_snapshot(out, ti, plan.target_temperatures[ti], previous_T, global_step);
+        }
+    }
+    return out;
+}
+
+static int code_to_activity_element(const ActivityModel &am, const CEData &ce, int code) {
+    const std::string &sym = ce.species[code];
+    for (int i=0;i<5;i++) if (am.elements[i] == sym) return i;
+    return -1;
+}
+
+struct BEHistogram {
+    int ntemps = 0;
+    std::vector<uint64_t> cemc;
+    std::vector<uint64_t> random;
+    std::vector<uint64_t> cemc_under, cemc_over;
+    std::vector<uint64_t> random_under, random_over;
+
+    BEHistogram() = default;
+    explicit BEHistogram(int ntemps_) { reset(ntemps_); }
+
+    void reset(int ntemps_) {
+        ntemps = ntemps_;
+        cemc.assign(static_cast<size_t>(ntemps) * BE_HIST_ELEMENT_COUNT * BE_HIST_BINS, 0);
+        random.assign(static_cast<size_t>(BE_HIST_ELEMENT_COUNT) * BE_HIST_BINS, 0);
+        cemc_under.assign(static_cast<size_t>(ntemps) * BE_HIST_ELEMENT_COUNT, 0);
+        cemc_over.assign(static_cast<size_t>(ntemps) * BE_HIST_ELEMENT_COUNT, 0);
+        random_under.assign(BE_HIST_ELEMENT_COUNT, 0);
+        random_over.assign(BE_HIST_ELEMENT_COUNT, 0);
+    }
+
+    size_t cidx(int ti, int elem, int bin) const {
+        return (static_cast<size_t>(ti) * BE_HIST_ELEMENT_COUNT + elem) * BE_HIST_BINS + bin;
+    }
+    size_t ridx(int elem, int bin) const {
+        return static_cast<size_t>(elem) * BE_HIST_BINS + bin;
+    }
+    size_t coidx(int ti, int elem) const {
+        return static_cast<size_t>(ti) * BE_HIST_ELEMENT_COUNT + elem;
+    }
+
+    int bin_for(double be) const {
+        if (be < BE_HIST_MIN) return -1;
+        if (be >= BE_HIST_MAX) return BE_HIST_BINS;
+        int b = static_cast<int>((be - BE_HIST_MIN) / BE_HIST_WIDTH);
+        if (b < 0) return -1;
+        if (b >= BE_HIST_BINS) return BE_HIST_BINS;
+        return b;
+    }
+
+    void add_cemc(int ti, int elem, double be) {
+        if (ti < 0 || ti >= ntemps || elem < 0 || elem >= BE_HIST_ELEMENT_COUNT) return;
+        int b = bin_for(be);
+        if (b < 0) cemc_under[coidx(ti, elem)]++;
+        else if (b >= BE_HIST_BINS) cemc_over[coidx(ti, elem)]++;
+        else cemc[cidx(ti, elem, b)]++;
+    }
+
+    void add_random(int elem, double be) {
+        if (elem < 0 || elem >= BE_HIST_ELEMENT_COUNT) return;
+        int b = bin_for(be);
+        if (b < 0) random_under[elem]++;
+        else if (b >= BE_HIST_BINS) random_over[elem]++;
+        else random[ridx(elem, b)]++;
+    }
+
+    void add_from(const BEHistogram &other) {
+        if (ntemps != other.ntemps) throw std::runtime_error("BE histogram temperature dimension mismatch");
+        for (size_t i=0; i<cemc.size(); ++i) cemc[i] += other.cemc[i];
+        for (size_t i=0; i<random.size(); ++i) random[i] += other.random[i];
+        for (size_t i=0; i<cemc_under.size(); ++i) cemc_under[i] += other.cemc_under[i];
+        for (size_t i=0; i<cemc_over.size(); ++i) cemc_over[i] += other.cemc_over[i];
+        for (size_t i=0; i<random_under.size(); ++i) random_under[i] += other.random_under[i];
+        for (size_t i=0; i<random_over.size(); ++i) random_over[i] += other.random_over[i];
+    }
+};
+
+static void write_be_hist_sparse(const fs::path &path, const BEHistogram &hist) {
+    if (!path.parent_path().empty()) fs::create_directories(path.parent_path());
+    std::ofstream out(path);
+    out << "method,temp_idx,element_idx,bin,count\n";
+    for (int ti=0; ti<hist.ntemps; ++ti) {
+        for (int e=0; e<BE_HIST_ELEMENT_COUNT; ++e) {
+            uint64_t under = hist.cemc_under[hist.coidx(ti, e)];
+            uint64_t over = hist.cemc_over[hist.coidx(ti, e)];
+            if (under) out << "cemc," << ti << ',' << e << ",-1," << under << "\n";
+            if (over) out << "cemc," << ti << ',' << e << ",-2," << over << "\n";
+            for (int b=0; b<BE_HIST_BINS; ++b) {
+                uint64_t c = hist.cemc[hist.cidx(ti, e, b)];
+                if (c) out << "cemc," << ti << ',' << e << ',' << b << ',' << c << "\n";
+            }
+        }
+    }
+    for (int e=0; e<BE_HIST_ELEMENT_COUNT; ++e) {
+        if (hist.random_under[e]) out << "random,-1," << e << ",-1," << hist.random_under[e] << "\n";
+        if (hist.random_over[e]) out << "random,-1," << e << ",-2," << hist.random_over[e] << "\n";
+        for (int b=0; b<BE_HIST_BINS; ++b) {
+            uint64_t c = hist.random[hist.ridx(e, b)];
+            if (c) out << "random,-1," << e << ',' << b << ',' << c << "\n";
+        }
+    }
+}
+
+static void read_be_hist_sparse_into(const fs::path &path, BEHistogram &hist) {
+    if (!fs::exists(path)) return;
+    std::ifstream in(path);
+    std::string line;
+    bool first = true;
+    while (std::getline(in, line)) {
+        if (trim(line).empty()) continue;
+        if (first) { first = false; if (line.find("method,") == 0) continue; }
+        auto v = split_csv_line(line);
+        if (v.size() < 5) continue;
+        std::string method = v[0];
+        int ti = std::stoi(v[1]);
+        int elem = std::stoi(v[2]);
+        int bin = std::stoi(v[3]);
+        uint64_t count = static_cast<uint64_t>(std::stoull(v[4]));
+        if (method == "cemc") {
+            if (ti < 0 || ti >= hist.ntemps || elem < 0 || elem >= BE_HIST_ELEMENT_COUNT) continue;
+            if (bin == -1) hist.cemc_under[hist.coidx(ti, elem)] += count;
+            else if (bin == -2) hist.cemc_over[hist.coidx(ti, elem)] += count;
+            else if (bin >= 0 && bin < BE_HIST_BINS) hist.cemc[hist.cidx(ti, elem, bin)] += count;
+        } else if (method == "random") {
+            if (elem < 0 || elem >= BE_HIST_ELEMENT_COUNT) continue;
+            if (bin == -1) hist.random_under[elem] += count;
+            else if (bin == -2) hist.random_over[elem] += count;
+            else if (bin >= 0 && bin < BE_HIST_BINS) hist.random[hist.ridx(elem, bin)] += count;
+        }
+    }
+}
+
+static std::set<int> read_be_completed_trials(const fs::path &outdir) {
+    std::set<int> done;
+    std::ifstream in(outdir / "be_histograms" / "completed_trials.txt");
+    int t;
+    while (in >> t) done.insert(t);
+    return done;
+}
+
+static void write_be_hist_outputs(const fs::path &outdir, const BEHistogram &hist, const SchedulePlan &plan, const ActivityModel &am) {
+    fs::path hdir = outdir / "be_histograms";
+    fs::create_directories(hdir);
+    fs::path tmp_checkpoint = hdir / "be_histogram_checkpoint.tmp";
+    fs::path checkpoint = hdir / "be_histogram_checkpoint.csv";
+    write_be_hist_sparse(tmp_checkpoint, hist);
+    fs::rename(tmp_checkpoint, checkpoint);
+
+    {
+        std::ofstream meta(hdir / "be_histogram_meta.json");
+        meta << "{\n";
+        meta << "  \"be_min\": " << BE_HIST_MIN << ",\n";
+        meta << "  \"be_max\": " << BE_HIST_MAX << ",\n";
+        meta << "  \"bin_width\": " << BE_HIST_WIDTH << ",\n";
+        meta << "  \"n_bins\": " << BE_HIST_BINS << ",\n";
+        meta << "  \"elements\": [";
+        for (int e=0; e<BE_HIST_ELEMENT_COUNT; ++e) {
+            if (e) meta << ", ";
+            meta << "\"" << am.elements[e] << "\"";
+        }
+        meta << "],\n";
+        meta << "  \"target_temperatures\": [";
+        for (size_t i=0; i<plan.target_temperatures.size(); ++i) {
+            if (i) meta << ", ";
+            meta << plan.target_temperatures[i];
+        }
+        meta << "]\n";
+        meta << "}\n";
+    }
+
+    std::ofstream csv(hdir / "be_histogram_counts.csv");
+    csv << "method,temperature,element,bin_left,bin_right,count\n";
+    for (int ti=0; ti<hist.ntemps; ++ti) {
+        for (int e=0; e<BE_HIST_ELEMENT_COUNT; ++e) {
+            uint64_t under = hist.cemc_under[hist.coidx(ti, e)];
+            uint64_t over = hist.cemc_over[hist.coidx(ti, e)];
+            if (under) csv << "cemc," << plan.target_temperatures[ti] << ',' << am.elements[e] << ",-inf," << BE_HIST_MIN << ',' << under << "\n";
+            for (int b=0; b<BE_HIST_BINS; ++b) {
+                uint64_t c = hist.cemc[hist.cidx(ti, e, b)];
+                if (!c) continue;
+                double left = BE_HIST_MIN + BE_HIST_WIDTH * b;
+                csv << "cemc," << plan.target_temperatures[ti] << ',' << am.elements[e] << ','
+                    << left << ',' << (left + BE_HIST_WIDTH) << ',' << c << "\n";
+            }
+            if (over) csv << "cemc," << plan.target_temperatures[ti] << ',' << am.elements[e] << ',' << BE_HIST_MAX << ",inf," << over << "\n";
+        }
+    }
+    for (int e=0; e<BE_HIST_ELEMENT_COUNT; ++e) {
+        if (hist.random_under[e]) csv << "random,nan," << am.elements[e] << ",-inf," << BE_HIST_MIN << ',' << hist.random_under[e] << "\n";
+        for (int b=0; b<BE_HIST_BINS; ++b) {
+            uint64_t c = hist.random[hist.ridx(e, b)];
+            if (!c) continue;
+            double left = BE_HIST_MIN + BE_HIST_WIDTH * b;
+            csv << "random,nan," << am.elements[e] << ',' << left << ',' << (left + BE_HIST_WIDTH) << ',' << c << "\n";
+        }
+        if (hist.random_over[e]) csv << "random,nan," << am.elements[e] << ',' << BE_HIST_MAX << ",inf," << hist.random_over[e] << "\n";
+    }
+}
+
+struct ActivityPrediction {
+    double activity = -std::numeric_limits<double>::infinity();
+    std::array<double,5> be_mean{};
+};
+
+static ActivityPrediction evaluate_slab(const CEData &ce, const ActivityModel &am, const std::vector<int> &occ,
+                                        const std::array<double,5> &be_shift, BEHistogram *hist=nullptr,
+                                        bool hist_cemc=false, int hist_temp_idx=-1) {
+    // Match Get_activities.py: slab activity = log(mean(site_activity(E_OH))).
+    // site_activity = (k_B T / h) * exp(-abs(E_OH - 1.1) / kBT).
+    ActivityPrediction pred;
+    pred.be_mean.fill(std::numeric_limits<double>::quiet_NaN());
+    int n = static_cast<int>(ce.surface_sites.size());
+    if (n == 0) return pred;
+    double Tact = am.activity_temperature > 0.0 ? am.activity_temperature : 298.0;
+    double kT = KB_EV_PER_K * Tact;
+    const double kB_SI = 1.38e-23;
+    const double h_SI = 6.626e-34;
+    double log_prefactor = std::log((kB_SI * Tact) / h_SI);
+    double logsum = -std::numeric_limits<double>::infinity();
+    std::array<double,5> be_sum{};
+    std::array<int,5> be_count{};
+    be_sum.fill(0.0);
+    be_count.fill(0);
+    int n_valid = 0;
+    for (int sidx=0; sidx<n; ++sidx) {
+        int site = ce.surface_sites[sidx];
+        int a0 = code_to_activity_element(am, ce, occ[site]);
+        if (a0 < 0) continue;
+        double e = am.intercept + am.zone1[a0];
+        for (int p=am.zone2_ptr[sidx]; p<am.zone2_ptr[sidx+1]; ++p) {
+            int code = occ[am.zone2_indices[p]];
+            int ai = code_to_activity_element(am, ce, code);
+            if (ai >= 0) e += am.zone2[ai];
+        }
+        for (int p=am.zone3_ptr[sidx]; p<am.zone3_ptr[sidx+1]; ++p) {
+            int code = occ[am.zone3_indices[p]];
+            int ai = code_to_activity_element(am, ce, code);
+            if (ai >= 0) e += am.zone3[ai];
+        }
+        // Trial-level element-specific BE correction.  The sampled value is the
+        // model error delta for the element occupying the OH top site:
+        // dE_OH_used = dE_OH_linear_model - delta_element.
+        e -= be_shift[a0];
+        if (hist) {
+            if (hist_cemc) hist->add_cemc(hist_temp_idx, a0, e);
+            else hist->add_random(a0, e);
+        }
+        be_sum[a0] += e;
+        be_count[a0] += 1;
+        double ln_site = log_prefactor - std::abs(e - am.e_opt) / kT;
+        if (!std::isfinite(logsum)) logsum = ln_site;
+        else if (ln_site > logsum) logsum = ln_site + std::log1p(std::exp(logsum - ln_site));
+        else logsum = logsum + std::log1p(std::exp(ln_site - logsum));
+        n_valid++;
+    }
+    if (n_valid == 0) return pred;
+    pred.activity = logsum - std::log(static_cast<double>(n_valid));
+    for (int i=0; i<5; ++i) {
+        if (be_count[i] > 0) pred.be_mean[i] = be_sum[i] / be_count[i];
+    }
+    return pred;
+}
+
+static double predict_activity(const CEData &ce, const ActivityModel &am, const std::vector<int> &occ, const std::array<double,5> &be_shift) {
+    return evaluate_slab(ce, am, occ, be_shift).activity;
+}
+
+static uint64_t composition_seed(const Config &cfg, int trial, int comp_idx) {
+    return make_seed(cfg.random_seed, trial, 0, 17, 0);
+}
+
+static uint64_t be_shift_seed(const Config &cfg, int trial) {
+    // BE prediction uncertainty is treated as a trial-level systematic model error,
+    // not an independent noise term for every composition.  The five sampled values
+    // are applied by the element at the OH binding top site.
+    return make_seed(cfg.random_seed, trial, 0, 202607, 505);
+}
+
+static std::array<double,5> sample_be_shifts(const Config &cfg, int trial) {
+    std::mt19937_64 rng(be_shift_seed(cfg, trial));
+    std::normal_distribution<double> be_norm(cfg.be_error_mean, cfg.be_error_sigma);
+    std::array<double,5> shifts{};
+    for (int k=0; k<5; ++k) shifts[k] = be_norm(rng);
+    return shifts;
+}
+
+static uint64_t random_slab_seed(const Config &cfg, int trial, int comp_idx, int run_idx) {
+    return make_seed(cfg.random_seed, trial, comp_idx, run_idx, 777);
+}
+
+static uint64_t cemc_seed(const Config &cfg, int trial, int comp_idx, int run_idx) {
+    return make_seed(cfg.random_seed, trial, comp_idx, run_idx, 0);
+}
+
+struct SampledComposition {
+    std::array<double,5> delta{};
+    std::array<double,5> fraction{};
+    std::array<int,5> counts{};
+    std::array<double,5> be_shift{};
+};
+
+static SampledComposition sample_composition(const CompositionRow &row, const Config &cfg, int n_metal, int trial, int comp_idx) {
+    std::mt19937_64 rng(composition_seed(cfg, trial, comp_idx));
+    std::normal_distribution<double> comp_norm(cfg.comp_error_mean, cfg.comp_error_sigma);
+    SampledComposition s;
+    double unit_scale = (cfg.comp_error_units == "percent" || cfg.comp_error_units == "at_percent") ? 0.01 : 1.0;
+    double total = 0.0;
+    for (int k=0;k<5;k++) {
+        s.delta[k] = comp_norm(rng) * unit_scale;
+        s.fraction[k] = row.fraction[k] - s.delta[k];
+        if (s.fraction[k] < 0.0) s.fraction[k] = 0.0;
+        total += s.fraction[k];
+    }
+    if (total <= 1e-15) {
+        s.fraction = row.fraction;
+        total = std::accumulate(s.fraction.begin(), s.fraction.end(), 0.0);
+    }
+    for (double &x : s.fraction) x /= total;
+    s.be_shift = sample_be_shifts(cfg, trial);
+
+    std::array<double,5> exact{};
+    std::array<double,5> fracpart{};
+    int sum = 0;
+    for (int k=0;k<5;k++) {
+        exact[k] = s.fraction[k] * n_metal;
+        s.counts[k] = static_cast<int>(std::floor(exact[k]));
+        fracpart[k] = exact[k] - s.counts[k];
+        sum += s.counts[k];
+    }
+    int remaining = n_metal - sum;
+    std::array<int,5> order = {0,1,2,3,4};
+    std::sort(order.begin(), order.end(), [&](int a, int b){ return fracpart[a] > fracpart[b]; });
+    for (int i=0; i<remaining; ++i) s.counts[order[i % 5]]++;
+    return s;
+}
+
+static std::vector<int> make_initial_occupations(const CEData &ce, const SampledComposition &s, const std::array<int,5> &element_to_code, std::mt19937_64 &rng) {
+    std::vector<int> occ(ce.n_sites, ce.vacancy_code);
+    std::vector<int> metal_codes;
+    metal_codes.reserve(ce.n_metal_sites);
+    for (int k=0;k<5;k++) {
+        for (int c=0;c<s.counts[k];c++) metal_codes.push_back(element_to_code[k]);
+    }
+    if (static_cast<int>(metal_codes.size()) != ce.n_metal_sites) throw std::runtime_error("Counts do not sum to n_metal_sites");
+    deterministic_shuffle(metal_codes, rng);
+    for (int i=0; i<ce.n_metal_sites; ++i) occ[ce.metal_sites[i]] = metal_codes[i];
+    return occ;
+}
+
+static std::vector<int> physical_atomic_numbers(const CEData &ce, const std::vector<int> &occ) {
+    std::vector<int> z;
+    z.reserve(ce.metal_sites.size());
+    for (int site : ce.metal_sites) z.push_back(ce.atomic_numbers[occ[site]]);
+    return z;
+}
+
+static std::vector<uint8_t> pack_atomic_codes_3bit(const CEData &ce, const std::vector<int> &occ) {
+    // Stable on-disk codes: Ru=0, Rh=1, Pd=2, Ir=3, Pt=4.
+    static const std::unordered_map<int, uint8_t> z_to_packed = {
+        {44, 0}, {45, 1}, {46, 2}, {77, 3}, {78, 4}
+    };
+    const size_t n = ce.metal_sites.size();
+    std::vector<uint8_t> packed((n * 3 + 7) / 8, 0);
+    size_t bit_offset = 0;
+    for (int site : ce.metal_sites) {
+        int z = ce.atomic_numbers[occ[site]];
+        auto it = z_to_packed.find(z);
+        if (it == z_to_packed.end())
+            throw std::runtime_error("Unsupported atomic number in packed slab: " + std::to_string(z));
+        const uint8_t code = it->second;
+        const size_t byte = bit_offset / 8;
+        const int shift = static_cast<int>(bit_offset % 8);
+        packed[byte] |= static_cast<uint8_t>(code << shift);
+        if (shift > 5) packed[byte + 1] |= static_cast<uint8_t>(code >> (8 - shift));
+        bit_offset += 3;
+    }
+    return packed;
+}
+
+static void write_packed_slab(std::ofstream &out, const CEData &ce, const std::vector<int> &occ) {
+    auto packed = pack_atomic_codes_3bit(ce, occ);
+    out.write(reinterpret_cast<const char *>(packed.data()), static_cast<std::streamsize>(packed.size()));
+    if (!out) throw std::runtime_error("Failed while writing packed atomic slab");
+}
+
+static void write_structure_json(std::ofstream &out, int trial, int comp_idx, const CompositionRow &row, int run_idx, int temp_idx, double target_temp,
+                                 const std::string &method, double activity, const Snapshot *snap, const CEData &ce, const std::vector<int> &occ) {
+    out << temp_idx << "\t" << comp_idx << "\t";
+    out << "{\"trial\":" << trial
+        << ",\"composition_index\":" << comp_idx
+        << ",\"row_idx\":" << row.row_idx
+        << ",\"col_idx\":" << row.col_idx
+        << ",\"run\":" << run_idx
+        << ",\"target_temperature\":" << std::fixed << std::setprecision(8) << target_temp
+        << ",\"method\":\"" << method << "\""
+        << ",\"activity\":" << std::setprecision(12) << activity;
+    if (snap) {
+        out << ",\"actual_temperature\":" << std::setprecision(8) << snap->actual_temperature
+            << ",\"temperature_error\":" << std::setprecision(8) << snap->temperature_error
+            << ",\"mc_step\":" << snap->global_step
+            << ",\"energy\":" << std::setprecision(12) << snap->energy
+            << ",\"attempted\":" << snap->attempted
+            << ",\"accepted\":" << snap->accepted;
+    }
+    out << ",\"Z\":[";
+    auto z = physical_atomic_numbers(ce, occ);
+    for (size_t i=0;i<z.size();i++) {
+        if (i) out << ',';
+        out << z[i];
+    }
+    out << "]}\n";
+}
+
+static std::vector<double> scale_to_minus1_0(const std::vector<double> &v, bool better_is_higher) {
+    std::vector<double> out(v.size(), 0.0);
+    if (v.empty()) return out;
+    auto [minit, maxit] = std::minmax_element(v.begin(), v.end());
+    double minv = *minit, maxv = *maxit;
+    double den = maxv - minv;
+    if (std::abs(den) < 1e-30) return out;
+    for (size_t i=0;i<v.size();i++) {
+        if (better_is_higher) out[i] = -(v[i] - minv) / den;     // max -> -1, min -> 0
+        else out[i] = -(maxv - v[i]) / den;                      // min -> -1, max -> 0
+    }
+    return out;
+}
+
+static double mse(const std::vector<double> &a, const std::vector<double> &b) {
+    if (a.size() != b.size() || a.empty()) return std::numeric_limits<double>::quiet_NaN();
+    double s = 0.0;
+    for (size_t i=0;i<a.size();i++) { double d = a[i] - b[i]; s += d*d; }
+    return s / static_cast<double>(a.size());
+}
+
+static int signum(double x) { return (x > 0) - (x < 0); }
+
+static double kendall_tau_b(const std::vector<double> &x, const std::vector<double> &y) {
+    if (x.size() != y.size() || x.size() < 2) return std::numeric_limits<double>::quiet_NaN();
+    long double concord = 0, discord = 0, ties_x = 0, ties_y = 0;
+    const double eps = 1e-14;
+    for (size_t i=0;i<x.size();i++) {
+        for (size_t j=i+1;j<x.size();j++) {
+            int sx = (std::abs(x[i]-x[j]) <= eps) ? 0 : signum(x[i]-x[j]);
+            int sy = (std::abs(y[i]-y[j]) <= eps) ? 0 : signum(y[i]-y[j]);
+            if (sx == 0 && sy == 0) continue;
+            if (sx == 0) ties_x += 1;
+            else if (sy == 0) ties_y += 1;
+            else if (sx == sy) concord += 1;
+            else discord += 1;
+        }
+    }
+    long double den = std::sqrt((concord + discord + ties_x) * (concord + discord + ties_y));
+    if (den <= 0) return std::numeric_limits<double>::quiet_NaN();
+    return static_cast<double>((concord - discord) / den);
+}
+
+static std::set<int> read_completed_trials(const fs::path &outdir) {
+    std::set<int> done;
+    std::ifstream in(outdir / "completed_trials.txt");
+    int t;
+    while (in >> t) done.insert(t);
+    return done;
+}
+
+static void filter_file_remove_trial(const fs::path &path, int trial, bool csv) {
+    if (!fs::exists(path)) return;
+    fs::path tmp = path;
+    tmp += ".repair";
+    std::ifstream in(path);
+    std::ofstream out(tmp);
+    std::string line;
+    bool first = true;
+    const std::string needle = "\"trial\":" + std::to_string(trial);
+    while (std::getline(in, line)) {
+        bool keep = true;
+        if (csv) {
+            if (!first && starts_with(line, std::to_string(trial) + ",")) keep = false;
+        } else {
+            if (line.find(needle) != std::string::npos) keep = false;
+        }
+        if (keep) out << line << "\n";
+        first = false;
+    }
+    in.close(); out.close();
+    fs::rename(tmp, path);
+}
+
+static void filter_completed_remove_trial(const fs::path &path, int trial) {
+    if (!fs::exists(path)) return;
+    fs::path tmp = path;
+    tmp += ".repair";
+    std::ifstream in(path);
+    std::ofstream out(tmp);
+    std::string line;
+    while (std::getline(in, line)) {
+        if (trim(line).empty()) continue;
+        try {
+            if (std::stoi(trim(line)) == trial) continue;
+        } catch (...) {}
+        out << line << "\n";
+    }
+    in.close(); out.close();
+    fs::rename(tmp, path);
+}
+
+static fs::path structure_file_path(const fs::path &outdir, double target_temperature, int comp_idx) {
+    int T = static_cast<int>(std::llround(target_temperature));
+    std::ostringstream tdir;
+    tdir << "T" << std::setw(5) << std::setfill('0') << T;
+    std::ostringstream cname;
+    cname << "comp_" << std::setw(4) << std::setfill('0') << comp_idx << ".jsonl";
+    return outdir / "structures_by_temperature" / tdir.str() / cname.str();
+}
+
+static void repair_partial_merge(const fs::path &outdir, const SchedulePlan &plan) {
+    fs::path marker = outdir / "merge_in_progress_trial.txt";
+    if (!fs::exists(marker)) return;
+    std::ifstream in(marker);
+    int trial = -1;
+    in >> trial;
+    if (trial < 0) return;
+    std::cerr << "Repairing partial merge for trial " << trial << "...\n";
+    filter_file_remove_trial(outdir / "metrics_by_trial_temperature.csv", trial, true);
+    filter_file_remove_trial(outdir / "random_metrics_by_trial.csv", trial, true);
+    filter_file_remove_trial(outdir / "selected_temperature_by_trial.csv", trial, true);
+    filter_file_remove_trial(outdir / "paired_comparison_by_trial.csv", trial, true);
+    filter_file_remove_trial(outdir / "trial_composition_samples.csv", trial, true);
+    filter_file_remove_trial(outdir / "random_slab_seeds.csv", trial, true);
+    filter_file_remove_trial(outdir / "predicted_activity_selected_by_trial.csv", trial, true);
+    filter_completed_remove_trial(outdir / "completed_trials.txt", trial);
+    fs::remove(outdir / "uncertainty_summary.csv");
+    fs::remove(outdir / "method_comparison_ci.csv");
+    fs::remove(outdir / "temperature_selection_counts.csv");
+    fs::remove(outdir / "uncertainty_decision.csv");
+    fs::remove(outdir / "uncertainty_comparison_summary.csv");
+    fs::remove(outdir / "plot_trial_metrics_long.csv");
+    fs::remove(outdir / "plot_tau_mse_scatter.csv");
+    fs::remove(outdir / "plot_paired_deltas_long.csv");
+    fs::remove(outdir / "plot_metric_summary.csv");
+    fs::remove(outdir / "plot_method_comparison_ci.csv");
+    fs::remove(outdir / "plot_cemc_temperature_metrics_long.csv");
+    fs::remove(outdir / "plot_cemc_temperature_summary.csv");
+    fs::remove(outdir / "plot_temperature_selection_counts.csv");
+    fs::remove_all(outdir / "plot_data");
+    fs::remove(outdir / "plot_tau_mse_scatter.csv");
+    fs::remove(outdir / "plot_metric_by_trial_long.csv");
+    fs::remove(outdir / "plot_paired_deltas.csv");
+    fs::remove(outdir / "plot_ci_intervals.csv");
+    fs::remove(outdir / "plot_temperature_response_long.csv");
+    fs::remove(outdir / "plot_temperature_response_summary.csv");
+    fs::remove(outdir / "plot_manifest.txt");
+    fs::remove_all(outdir / "plot_ready");
+
+    std::string pstr;
+    std::set<fs::path> touched;
+    while (in >> pstr) touched.insert(fs::path(pstr));
+    if (touched.empty()) {
+        // Backward-compatible repair for older temperature-wide structure files.
+        for (size_t ti=0; ti<plan.target_temperatures.size(); ++ti) {
+            int T = static_cast<int>(std::llround(plan.target_temperatures[ti]));
+            std::ostringstream name;
+            name << "structures_T" << std::setw(5) << std::setfill('0') << T << ".jsonl";
+            touched.insert(outdir / name.str());
+        }
+        fs::path root = outdir / "structures_by_temperature";
+        if (fs::exists(root)) {
+            for (auto const &entry : fs::recursive_directory_iterator(root)) {
+                if (entry.is_regular_file() && entry.path().extension() == ".jsonl") touched.insert(entry.path());
+            }
+        }
+    }
+    for (const auto &p : touched) filter_file_remove_trial(p, trial, false);
+    fs::remove(marker);
+}
+
+static void ensure_headers(const fs::path &outdir, bool structure_only) {
+    fs::create_directories(outdir);
+    // v1.0 compact predicted-activity mode: keep only the selected-temperature
+    // composition-level file.  The all-temperature CEMC and random-only files
+    // from older v1.0 drafts are intentionally not produced.
+    fs::remove(outdir / "predicted_activity_cemc_by_trial_temperature.csv");
+    fs::remove(outdir / "predicted_activity_random_by_trial.csv");
+    auto create_with_header = [](const fs::path &p, const std::string &h) {
+        if (!fs::exists(p) || fs::file_size(p) == 0) {
+            std::ofstream out(p);
+            out << h << "\n";
+            return;
+        }
+        std::ifstream in(p);
+        std::string first;
+        std::getline(in, first);
+        if (trim(first) != h) {
+            throw std::runtime_error(
+                "Existing output file has an old/incompatible header: " + p.string() +
+                "\nUse a new workdir/output_dir, or move/remove the old results directory before running v1.0."
+            );
+        }
+    };
+    if (structure_only) {
+        create_with_header(outdir / "trial_timing.csv",
+            "trial,compute_seconds,merge_seconds,summary_seconds,total_seconds,n_tasks,mpi_ranks,structures_written,summary_written");
+        return;
+    }
+    create_with_header(outdir / "metrics_by_trial_temperature.csv",
+        "trial,temp_idx,temperature,method,tau,mse,score_tau_minus_mse,n_compositions,n_run_records");
+    create_with_header(outdir / "random_metrics_by_trial.csv",
+        "trial,method,tau,mse,score_tau_minus_mse,n_compositions,n_run_records");
+    create_with_header(outdir / "selected_temperature_by_trial.csv",
+        "trial,cemc_selected_temp,cemc_score_tau_minus_mse,cemc_tau,cemc_mse,random_score_tau_minus_mse,random_tau,random_mse,delta_tau_cemc_minus_random,delta_mse_random_minus_cemc,delta_score_cemc_minus_random");
+    create_with_header(outdir / "paired_comparison_by_trial.csv",
+        "trial,cemc_selected_temp,cemc_selected_tau,cemc_selected_mse,cemc_selected_score,random_tau,random_mse,random_score,delta_tau_cemc_minus_random,delta_mse_random_minus_cemc,delta_score_cemc_minus_random");
+    create_with_header(outdir / "predicted_activity_selected_by_trial.csv",
+        "trial,composition_index,row_idx,col_idx,selected_temp_idx,selected_temperature,cemc_pred_activity_mean,cemc_pred_activity_sd,cemc_n_runs,random_pred_activity_mean,random_pred_activity_sd,random_n_runs,experimental_activity,cemc_pred_activity_scaled,random_pred_activity_scaled,experimental_activity_scaled");
+    create_with_header(outdir / "predicted_activity_all_snapshots_by_trial_temperature.csv",
+        "trial,temperature,composition_index,row_idx,col_idx,cemc_pred_activity_mean,cemc_pred_activity_sd,cemc_n_runs,experimental_activity,cemc_pred_activity_scaled,cemc_pred_activity_scaled_sd,experimental_activity_scaled");
+    create_with_header(outdir / "trial_timing.csv",
+        "trial,compute_seconds,merge_seconds,summary_seconds,total_seconds,n_tasks,mpi_ranks,structures_written,summary_written");
+    create_with_header(outdir / "uncertainty_summary.csv",
+        "quantity,metric,n_trials,mean,sd,sem,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion");
+    create_with_header(outdir / "method_comparison_ci.csv",
+        "comparison,metric,n_trials,mean_delta,sd_delta,sem_delta,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion,mean_ci_supports_cemc_better,empirical95_supports_cemc_better");
+    create_with_header(outdir / "temperature_selection_counts.csv",
+        "temperature,n_selected_trials,fraction_selected");
+}
+
+
+static constexpr int WC_PAIR_COUNT = 15;
+
+struct WCPairInfo {
+    int code1 = 0;
+    int code2 = 0;
+    int z1 = 0;
+    int z2 = 0;
+    std::string sym1;
+    std::string sym2;
+};
+
+static std::vector<WCPairInfo> make_wc_pairs(const CEData &ce) {
+    std::vector<int> codes;
+    codes.reserve(5);
+    for (int code=0; code<ce.q; ++code) {
+        if (code == ce.vacancy_code) continue;
+        codes.push_back(code);
+    }
+    std::sort(codes.begin(), codes.end(), [&](int a, int b) {
+        if (ce.atomic_numbers[a] != ce.atomic_numbers[b]) return ce.atomic_numbers[a] < ce.atomic_numbers[b];
+        return ce.species[a] < ce.species[b];
+    });
+    std::vector<WCPairInfo> pairs;
+    pairs.reserve(WC_PAIR_COUNT);
+    for (size_t i=0; i<codes.size(); ++i) {
+        for (size_t j=i; j<codes.size(); ++j) {
+            WCPairInfo p;
+            p.code1 = codes[i];
+            p.code2 = codes[j];
+            p.z1 = ce.atomic_numbers[p.code1];
+            p.z2 = ce.atomic_numbers[p.code2];
+            p.sym1 = ce.species[p.code1];
+            p.sym2 = ce.species[p.code2];
+            pairs.push_back(p);
+        }
+    }
+    if (static_cast<int>(pairs.size()) != WC_PAIR_COUNT) throw std::runtime_error("WC pair count is not 15");
+    return pairs;
+}
+
+static std::array<double, WC_PAIR_COUNT> compute_surface_wc(
+    const CEData &ce, const ActivityModel &am, const std::vector<int> &occ,
+    const std::vector<WCPairInfo> &pairs
+) {
+    const double nan = std::numeric_limits<double>::quiet_NaN();
+    std::array<double, WC_PAIR_COUNT> out{};
+    out.fill(nan);
+    const int q = ce.q;
+    const int nsurf = static_cast<int>(ce.surface_sites.size());
+    if (nsurf <= 0 || static_cast<int>(am.zone2_ptr.size()) != nsurf + 1) return out;
+
+    std::vector<int> surf_counts(q, 0);
+    for (int site : ce.surface_sites) {
+        int code = occ[site];
+        if (code >= 0 && code < q) surf_counts[code]++;
+    }
+    std::vector<double> conc(q, 0.0);
+    for (int c=0; c<q; ++c) conc[c] = static_cast<double>(surf_counts[c]) / static_cast<double>(nsurf);
+
+    std::vector<int64_t> center_neighbor_counts(static_cast<size_t>(q) * q, 0);
+    std::vector<int64_t> center_totals(q, 0);
+    for (int sidx=0; sidx<nsurf; ++sidx) {
+        int center_site = ce.surface_sites[sidx];
+        int center = occ[center_site];
+        if (center < 0 || center >= q) continue;
+        for (int p=am.zone2_ptr[sidx]; p<am.zone2_ptr[sidx+1]; ++p) {
+            int nbr_site = am.zone2_indices[p];
+            int nbr = occ[nbr_site];
+            if (nbr < 0 || nbr >= q) continue;
+            center_neighbor_counts[static_cast<size_t>(center) * q + nbr]++;
+            center_totals[center]++;
+        }
+    }
+
+    for (int pi=0; pi<WC_PAIR_COUNT; ++pi) {
+        int center = pairs[pi].code1;
+        int nbr = pairs[pi].code2;
+        if (center_totals[center] <= 0 || conc[nbr] <= 0.0) continue;
+        double pij = static_cast<double>(center_neighbor_counts[static_cast<size_t>(center) * q + nbr]) /
+                     static_cast<double>(center_totals[center]);
+        out[pi] = 1.0 - pij / conc[nbr];
+    }
+    return out;
+}
+
+static void write_zarr_array_f32(const fs::path &group, const std::string &name, const std::vector<size_t> &shape, const std::vector<float> &data) {
+    fs::path arr = group / name;
+    fs::create_directories(arr);
+    size_t expected = 1;
+    for (size_t x : shape) expected *= x;
+    if (expected != data.size()) throw std::runtime_error("Zarr array size mismatch for " + name);
+    {
+        std::ofstream meta(arr / ".zarray");
+        meta << "{\n";
+        meta << "  \"zarr_format\": 2,\n";
+        meta << "  \"shape\": [";
+        for (size_t i=0; i<shape.size(); ++i) { if (i) meta << ", "; meta << shape[i]; }
+        meta << "],\n  \"chunks\": [";
+        for (size_t i=0; i<shape.size(); ++i) { if (i) meta << ", "; meta << shape[i]; }
+        meta << "],\n";
+        meta << "  \"dtype\": \"<f4\",\n";
+        meta << "  \"compressor\": null,\n";
+        meta << "  \"fill_value\": \"NaN\",\n";
+        meta << "  \"order\": \"C\",\n";
+        meta << "  \"filters\": null\n";
+        meta << "}\n";
+    }
+    std::string chunk = "0";
+    for (size_t i=1; i<shape.size(); ++i) chunk += ".0";
+    std::ofstream out(arr / chunk, std::ios::binary);
+    out.write(reinterpret_cast<const char*>(data.data()), static_cast<std::streamsize>(data.size() * sizeof(float)));
+}
+
+static void write_zarr_group_attrs(
+    const fs::path &group, int trial, const std::vector<WCPairInfo> &pairs,
+    const std::vector<double> *temperatures
+) {
+    fs::create_directories(group);
+    { std::ofstream zg(group / ".zgroup"); zg << "{\"zarr_format\": 2}\n"; }
+    std::ofstream attrs(group / ".zattrs");
+    attrs << "{\n";
+    attrs << "  \"trial\": " << trial << ",\n";
+    attrs << "  \"pair_order\": [";
+    for (size_t i=0; i<pairs.size(); ++i) {
+        if (i) attrs << ", ";
+        attrs << "[\"" << pairs[i].sym1 << "\", \"" << pairs[i].sym2 << "\"]";
+    }
+    attrs << "],\n";
+    attrs << "  \"pair_atomic_numbers\": [";
+    for (size_t i=0; i<pairs.size(); ++i) {
+        if (i) attrs << ", ";
+        attrs << "[" << pairs[i].z1 << ", " << pairs[i].z2 << "]";
+    }
+    attrs << "]";
+    if (temperatures) {
+        attrs << ",\n  \"temperatures\": [";
+        for (size_t i=0; i<temperatures->size(); ++i) { if (i) attrs << ", "; attrs << (*temperatures)[i]; }
+        attrs << "]";
+    }
+    attrs << "\n}\n";
+}
+
+static float f32(double x) { return static_cast<float>(x); }
+
+static std::string zero_pad_int(int value, int width) {
+    std::ostringstream ss;
+    ss << std::setw(width) << std::setfill('0') << value;
+    return ss.str();
+}
+
+struct ResultRecord {
+    int trial=0, comp=0, run=0, temp_idx=0;
+    double temp=0.0;
+    std::string method;
+    double activity=0.0;
+    double energy=0.0;
+    int64_t attempted=0, accepted=0;
+    std::array<double, WC_PAIR_COUNT> wc{};
+};
+
+static ResultRecord parse_result_line(const std::string &line) {
+    auto v = split_csv_line(line);
+    if (v.size() < 10) throw std::runtime_error("Bad result shard line: " + line);
+    ResultRecord r;
+    r.trial = std::stoi(v[0]);
+    r.comp = std::stoi(v[1]);
+    r.run = std::stoi(v[2]);
+    r.temp_idx = std::stoi(v[3]);
+    r.temp = std::stod(v[4]);
+    r.method = v[5];
+    r.activity = std::stod(v[6]);
+    r.energy = std::stod(v[7]);
+    r.attempted = static_cast<int64_t>(std::stoll(v[8]));
+    r.accepted = static_cast<int64_t>(std::stoll(v[9]));
+    r.wc.fill(std::numeric_limits<double>::quiet_NaN());
+    if (v.size() >= 12 + WC_PAIR_COUNT) {
+        for (int i=0; i<WC_PAIR_COUNT; ++i) {
+            const std::string &s = v[12 + i];
+            if (s == "nan" || s == "NaN" || s == "NAN") r.wc[i] = std::numeric_limits<double>::quiet_NaN();
+            else r.wc[i] = std::stod(s);
+        }
+    }
+    return r;
+}
+
+static void append_trial_samples(const fs::path &outdir, int trial, const std::vector<CompositionRow> &rows, const Config &cfg, int n_metal) {
+    std::ofstream out(outdir / "trial_composition_samples.csv", std::ios::app);
+    out << std::setprecision(12);
+    for (int ci=0; ci<(int)rows.size(); ++ci) {
+        auto s = sample_composition(rows[ci], cfg, n_metal, trial, ci);
+        out << trial << ',' << ci << ',' << rows[ci].row_idx << ',' << rows[ci].col_idx;
+        for (double x : rows[ci].fraction) out << ',' << x;
+        for (double x : s.delta) out << ',' << x;
+        for (double x : s.fraction) out << ',' << x;
+        for (int x : s.counts) out << ',' << x;
+        for (double x : s.be_shift) out << ',' << x;
+        out << "\n";
+    }
+}
+
+static void append_random_seed_shards(const fs::path &outdir, const fs::path &trial_dir, int world_size) {
+    std::ofstream out(outdir / "random_slab_seeds.csv", std::ios::app);
+    for (int rank=0; rank<world_size; ++rank) {
+        std::ostringstream rp;
+        rp << "rank_" << std::setw(5) << std::setfill('0') << rank << "_seeds.csv";
+        fs::path p = trial_dir / rp.str();
+        if (!fs::exists(p)) continue;
+        std::ifstream in(p);
+        std::string line;
+        while (std::getline(in, line)) {
+            if (!trim(line).empty()) out << line << "\n";
+        }
+    }
+}
+
+struct RandomSeedRecord {
+    int trial = -1;
+    int comp = -1;
+    int row_idx = -1;
+    int col_idx = -1;
+    int run = -1;
+    uint64_t random_slab_seed = 0;
+    std::array<int,5> counts{};
+};
+
+static std::unordered_map<std::string, int> csv_header_map(const std::string &header) {
+    auto names = split_csv_line(header);
+    std::unordered_map<std::string, int> out;
+    for (int i=0; i<(int)names.size(); ++i) out[names[i]] = i;
+    return out;
+}
+
+static int required_col(const std::unordered_map<std::string,int> &m, const std::string &name) {
+    auto it = m.find(name);
+    if (it == m.end()) throw std::runtime_error("random_slab_seeds.csv missing column: " + name);
+    return it->second;
+}
+
+static RandomSeedRecord find_random_seed_record(const fs::path &outdir, int trial, int comp, int run) {
+    fs::path p = outdir / "random_slab_seeds.csv";
+    std::ifstream in(p);
+    if (!in) throw std::runtime_error("Could not open random slab seed file: " + p.string());
+    std::string header;
+    if (!std::getline(in, header)) throw std::runtime_error("Empty random_slab_seeds.csv");
+    auto h = csv_header_map(header);
+    const int c_trial = required_col(h, "trial");
+    const int c_comp = required_col(h, "composition_index");
+    const int c_run = required_col(h, "run");
+    const int c_row = required_col(h, "row_idx");
+    const int c_col = required_col(h, "col_idx");
+    const int c_rseed = required_col(h, "random_slab_seed");
+    const std::array<std::string,5> count_cols = {"count_Ir","count_Pd","count_Pt","count_Rh","count_Ru"};
+    std::array<int,5> c_count{};
+    for (int k=0; k<5; ++k) c_count[k] = required_col(h, count_cols[k]);
+    std::string line;
+    while (std::getline(in, line)) {
+        if (trim(line).empty()) continue;
+        auto v = split_csv_line(line);
+        if ((int)v.size() < (int)h.size()) throw std::runtime_error("Bad random_slab_seeds.csv line: " + line);
+        int t = std::stoi(v[c_trial]);
+        int c = std::stoi(v[c_comp]);
+        int r = std::stoi(v[c_run]);
+        if (t == trial && c == comp && r == run) {
+            RandomSeedRecord rec;
+            rec.trial = t;
+            rec.comp = c;
+            rec.row_idx = std::stoi(v[c_row]);
+            rec.col_idx = std::stoi(v[c_col]);
+            rec.run = r;
+            rec.random_slab_seed = static_cast<uint64_t>(std::stoull(v[c_rseed]));
+            for (int k=0; k<5; ++k) rec.counts[k] = std::stoi(v[c_count[k]]);
+            return rec;
+        }
+    }
+    throw std::runtime_error("No matching random slab seed row for trial=" + std::to_string(trial) +
+                             ", composition=" + std::to_string(comp) + ", run=" + std::to_string(run));
+}
+
+static std::array<int,5> parse_counts_arg(const std::string &text) {
+    std::array<int,5> counts{};
+    std::vector<std::string> parts;
+    std::string cur;
+    for (char ch : text) {
+        if (ch == ',' || ch == ':' || std::isspace(static_cast<unsigned char>(ch))) {
+            if (!cur.empty()) { parts.push_back(cur); cur.clear(); }
+        } else cur.push_back(ch);
+    }
+    if (!cur.empty()) parts.push_back(cur);
+    if (parts.size() != 5) throw std::runtime_error("--counts must contain five integers: Ir,Pd,Pt,Rh,Ru");
+    for (int k=0; k<5; ++k) counts[k] = std::stoi(parts[k]);
+    return counts;
+}
+
+static void write_atomic_numbers_json(const fs::path &outpath, const CEData &ce, const std::vector<int> &occ) {
+    if (!outpath.parent_path().empty()) fs::create_directories(outpath.parent_path());
+    std::ofstream out(outpath);
+    if (!out) throw std::runtime_error("Could not write random slab JSON: " + outpath.string());
+    auto z = physical_atomic_numbers(ce, occ);
+    out << "[";
+    for (size_t i=0; i<z.size(); ++i) { if (i) out << ","; out << z[i]; }
+    out << "]\n";
+}
+
+static void reconstruct_random_slab_file(const CEData &ce, const std::array<int,5> &element_to_code,
+                                         uint64_t seed, const std::array<int,5> &counts,
+                                         const fs::path &output_path) {
+    SampledComposition s;
+    s.counts = counts;
+    std::mt19937_64 rng(seed);
+    auto occ = make_initial_occupations(ce, s, element_to_code, rng);
+    write_atomic_numbers_json(output_path, ce, occ);
+}
+
+
+
+struct Metric { double tau = std::numeric_limits<double>::quiet_NaN(); double mse = std::numeric_limits<double>::quiet_NaN(); };
+static double metric_score(const Metric &m) { return m.tau - m.mse; }
+
+struct SimpleStats {
+    int n = 0;
+    double mean = std::numeric_limits<double>::quiet_NaN();
+    double stddev = std::numeric_limits<double>::quiet_NaN();
+    double sem = std::numeric_limits<double>::quiet_NaN();
+    double ci_low = std::numeric_limits<double>::quiet_NaN();
+    double ci_high = std::numeric_limits<double>::quiet_NaN();
+    double q025 = std::numeric_limits<double>::quiet_NaN();
+    double q50 = std::numeric_limits<double>::quiet_NaN();
+    double q975 = std::numeric_limits<double>::quiet_NaN();
+};
+
+static double quantile_sorted(const std::vector<double> &v, double q) {
+    if (v.empty()) return std::numeric_limits<double>::quiet_NaN();
+    if (v.size() == 1) return v[0];
+    double pos = q * static_cast<double>(v.size() - 1);
+    size_t lo = static_cast<size_t>(std::floor(pos));
+    size_t hi = static_cast<size_t>(std::ceil(pos));
+    double t = pos - static_cast<double>(lo);
+    return v[lo] * (1.0 - t) + v[hi] * t;
+}
+
+static SimpleStats compute_stats(std::vector<double> values) {
+    std::vector<double> v;
+    for (double x : values) if (std::isfinite(x)) v.push_back(x);
+    std::sort(v.begin(), v.end());
+    SimpleStats s;
+    s.n = static_cast<int>(v.size());
+    if (v.empty()) return s;
+    s.mean = std::accumulate(v.begin(), v.end(), 0.0) / static_cast<double>(v.size());
+    s.q025 = quantile_sorted(v, 0.025);
+    s.q50 = quantile_sorted(v, 0.500);
+    s.q975 = quantile_sorted(v, 0.975);
+    if (v.size() >= 2) {
+        double ss = 0.0;
+        for (double x : v) { double d = x - s.mean; ss += d*d; }
+        s.stddev = std::sqrt(ss / static_cast<double>(v.size() - 1));
+        s.sem = s.stddev / std::sqrt(static_cast<double>(v.size()));
+        s.ci_low = s.mean - 1.96 * s.sem;
+        s.ci_high = s.mean + 1.96 * s.sem;
+    } else {
+        s.stddev = 0.0;
+        s.sem = 0.0;
+        s.ci_low = s.mean;
+        s.ci_high = s.mean;
+    }
+    return s;
+}
+
+static void write_dist_row(std::ofstream &out, const std::string &quantity, const std::string &metric, const SimpleStats &s, const std::string &criterion) {
+    out << std::setprecision(12)
+        << quantity << ',' << metric << ',' << s.n << ',' << s.mean << ',' << s.stddev << ',' << s.sem << ','
+        << s.ci_low << ',' << s.ci_high << ',' << s.q025 << ',' << s.q50 << ',' << s.q975 << ','
+        << '"' << criterion << '"' << "\n";
+}
+
+static void write_comparison_row(std::ofstream &out, const std::string &comparison, const std::string &metric, const SimpleStats &s, const std::string &criterion) {
+    bool mean_support = std::isfinite(s.ci_low) && s.ci_low > 0.0;
+    bool empirical_support = std::isfinite(s.q025) && s.q025 > 0.0;
+    out << std::setprecision(12)
+        << comparison << ',' << metric << ',' << s.n << ',' << s.mean << ',' << s.stddev << ',' << s.sem << ','
+        << s.ci_low << ',' << s.ci_high << ',' << s.q025 << ',' << s.q50 << ',' << s.q975 << ','
+        << '"' << criterion << '"' << ','
+        << (mean_support ? "true" : "false") << ',' << (empirical_support ? "true" : "false") << "\n";
+}
+
+
+static void write_uncertainty_summary(const fs::path &outdir, int ml_index) {
+    fs::path selected_path = outdir / "selected_temperature_by_trial.csv";
+    if (!fs::exists(selected_path)) return;
+    std::ifstream in(selected_path);
+    std::string line;
+    std::getline(in, line); // header
+
+    struct SelectedRow {
+        int trial = 0;
+        double temp = std::numeric_limits<double>::quiet_NaN();
+        double cemc_score = std::numeric_limits<double>::quiet_NaN();
+        double cemc_tau = std::numeric_limits<double>::quiet_NaN();
+        double cemc_mse = std::numeric_limits<double>::quiet_NaN();
+        double random_score = std::numeric_limits<double>::quiet_NaN();
+        double random_tau = std::numeric_limits<double>::quiet_NaN();
+        double random_mse = std::numeric_limits<double>::quiet_NaN();
+        double delta_tau = std::numeric_limits<double>::quiet_NaN();      // CEMC tau - random tau; positive is better for CEMC
+        double delta_mse = std::numeric_limits<double>::quiet_NaN();      // random MSE - CEMC MSE; positive is better for CEMC
+        double delta_score = std::numeric_limits<double>::quiet_NaN();    // CEMC score - random score; positive is better for CEMC
+    };
+
+    std::vector<SelectedRow> selected_rows;
+    std::vector<double> cemc_temp, cemc_score, cemc_tau, cemc_mse, random_score, random_tau, random_mse, delta_tau, delta_mse, delta_score;
+    while (std::getline(in, line)) {
+        if (trim(line).empty()) continue;
+        auto v = split_csv_line(line);
+        if (v.size() < 11) continue;
+        try {
+            SelectedRow r;
+            r.trial = std::stoi(v[0]);
+            r.temp = std::stod(v[1]);
+            r.cemc_score = std::stod(v[2]);
+            r.cemc_tau = std::stod(v[3]);
+            r.cemc_mse = std::stod(v[4]);
+            r.random_score = std::stod(v[5]);
+            r.random_tau = std::stod(v[6]);
+            r.random_mse = std::stod(v[7]);
+            r.delta_tau = std::stod(v[8]);
+            r.delta_mse = std::stod(v[9]);
+            r.delta_score = std::stod(v[10]);
+            selected_rows.push_back(r);
+            cemc_temp.push_back(r.temp);
+            cemc_score.push_back(r.cemc_score);
+            cemc_tau.push_back(r.cemc_tau);
+            cemc_mse.push_back(r.cemc_mse);
+            random_score.push_back(r.random_score);
+            random_tau.push_back(r.random_tau);
+            random_mse.push_back(r.random_mse);
+            delta_tau.push_back(r.delta_tau);
+            // Positive delta_mse means CEMC MSE is lower because it is random_MSE - CEMC_MSE.
+            delta_mse.push_back(r.delta_mse);
+            delta_score.push_back(r.delta_score);
+        } catch (...) {}
+    }
+    if (selected_rows.empty()) return;
+
+    auto st_cemc_tau = compute_stats(cemc_tau);
+    auto st_random_tau = compute_stats(random_tau);
+    auto st_delta_tau = compute_stats(delta_tau);
+    auto st_cemc_mse = compute_stats(cemc_mse);
+    auto st_random_mse = compute_stats(random_mse);
+    auto st_delta_mse = compute_stats(delta_mse);
+    auto st_cemc_score = compute_stats(cemc_score);
+    auto st_random_score = compute_stats(random_score);
+    auto st_delta_score = compute_stats(delta_score);
+    auto st_temp = compute_stats(cemc_temp);
+
+    // Legacy compact summaries.
+    {
+        std::ofstream out(outdir / "uncertainty_summary.csv");
+        out << "quantity,metric,n_trials,mean,sd,sem,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion\n";
+        write_dist_row(out, "cemc_selected", "tau", st_cemc_tau, "higher tau is better");
+        write_dist_row(out, "random", "tau", st_random_tau, "higher tau is better; random has no temperature");
+        write_dist_row(out, "cemc_minus_random", "tau", st_delta_tau, "positive means CEMC tau is higher");
+        write_dist_row(out, "cemc_selected", "mse", st_cemc_mse, "lower MSE is better");
+        write_dist_row(out, "random", "mse", st_random_mse, "lower MSE is better; random has no temperature");
+        write_dist_row(out, "random_minus_cemc", "mse", st_delta_mse, "positive means CEMC MSE is lower");
+        write_dist_row(out, "cemc_selected", "score_tau_minus_mse", st_cemc_score, "temperature is selected by maximizing tau - MSE");
+        write_dist_row(out, "random", "score_tau_minus_mse", st_random_score, "random tau - MSE; no temperature selection");
+        write_dist_row(out, "cemc_minus_random", "score_tau_minus_mse", st_delta_score, "positive means selected CEMC score is higher");
+        write_dist_row(out, "cemc_selected", "temperature", st_temp, "distribution of selected MC slab temperatures across UQ trials");
+    }
+    {
+        std::ofstream out(outdir / "method_comparison_ci.csv");
+        out << "comparison,metric,n_trials,mean_delta,sd_delta,sem_delta,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion,mean_ci_supports_cemc_better,empirical95_supports_cemc_better\n";
+        write_comparison_row(out, "cemc_tau_minus_random_tau", "tau", st_delta_tau, "positive means CEMC tau is higher");
+        write_comparison_row(out, "random_mse_minus_cemc_mse", "mse", st_delta_mse, "positive means CEMC MSE is lower");
+        write_comparison_row(out, "cemc_score_minus_random_score", "score_tau_minus_mse", st_delta_score, "positive means selected CEMC tau-MSE score is higher");
+    }
+
+    // Plot-ready long files. These are regenerated from selected_temperature_by_trial.csv.
+    {
+        std::ofstream out(outdir / "plot_trial_metrics_long.csv");
+        out << "ml,trial,method,selected_temperature,tau,mse,score_tau_minus_mse\n";
+        out << std::setprecision(12);
+        for (const auto &r : selected_rows) {
+            out << ml_index << ',' << r.trial << ",cemc_selected," << r.temp << ',' << r.cemc_tau << ',' << r.cemc_mse << ',' << r.cemc_score << "\n";
+            out << ml_index << ',' << r.trial << ",random,," << r.random_tau << ',' << r.random_mse << ',' << r.random_score << "\n";
+        }
+    }
+    {
+        std::ofstream out(outdir / "plot_tau_mse_scatter.csv");
+        out << "ml,trial,method,selected_temperature,tau,mse,score_tau_minus_mse\n";
+        out << std::setprecision(12);
+        for (const auto &r : selected_rows) {
+            out << ml_index << ',' << r.trial << ",cemc_selected," << r.temp << ',' << r.cemc_tau << ',' << r.cemc_mse << ',' << r.cemc_score << "\n";
+            out << ml_index << ',' << r.trial << ",random,," << r.random_tau << ',' << r.random_mse << ',' << r.random_score << "\n";
+        }
+    }
+    {
+        std::ofstream out(outdir / "plot_paired_deltas_long.csv");
+        out << "ml,trial,metric,delta,positive_means,cemc_value,random_value\n";
+        out << std::setprecision(12);
+        for (const auto &r : selected_rows) {
+            out << ml_index << ',' << r.trial << ",tau," << r.delta_tau << ",CEMC higher tau," << r.cemc_tau << ',' << r.random_tau << "\n";
+            out << ml_index << ',' << r.trial << ",mse," << r.delta_mse << ",CEMC lower MSE," << r.cemc_mse << ',' << r.random_mse << "\n";
+            out << ml_index << ',' << r.trial << ",score_tau_minus_mse," << r.delta_score << ",CEMC higher tau-MSE score," << r.cemc_score << ',' << r.random_score << "\n";
+        }
+    }
+
+    auto write_plot_summary = [&](std::ofstream &out, const std::string &quantity, const std::string &metric, const SimpleStats &s, const std::string &criterion) {
+        out << std::setprecision(12)
+            << ml_index << ',' << quantity << ',' << metric << ',' << s.n << ',' << s.mean << ',' << s.stddev << ',' << s.sem << ','
+            << s.ci_low << ',' << s.ci_high << ',' << s.q025 << ',' << s.q50 << ',' << s.q975 << ',' << '"' << criterion << '"' << "\n";
+    };
+    {
+        std::ofstream out(outdir / "plot_metric_summary.csv");
+        out << "ml,quantity,metric,n_trials,mean,sd,sem,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion\n";
+        write_plot_summary(out, "cemc_selected", "tau", st_cemc_tau, "higher tau is better");
+        write_plot_summary(out, "random", "tau", st_random_tau, "higher tau is better; random has no temperature");
+        write_plot_summary(out, "cemc_selected", "mse", st_cemc_mse, "lower MSE is better");
+        write_plot_summary(out, "random", "mse", st_random_mse, "lower MSE is better; random has no temperature");
+        write_plot_summary(out, "cemc_minus_random", "tau", st_delta_tau, "positive means CEMC tau is higher");
+        write_plot_summary(out, "random_minus_cemc", "mse", st_delta_mse, "positive means CEMC MSE is lower");
+        write_plot_summary(out, "cemc_minus_random", "score_tau_minus_mse", st_delta_score, "positive means selected CEMC tau-MSE score is higher");
+        write_plot_summary(out, "cemc_selected", "temperature", st_temp, "selected MC slab temperature distribution");
+    }
+    {
+        std::ofstream out(outdir / "plot_method_comparison_ci.csv");
+        out << "ml,comparison,metric,n_trials,mean_delta,sd_delta,sem_delta,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion,mean_ci_supports_cemc_better,empirical95_supports_cemc_better\n";
+        auto wr = [&](const std::string &comparison, const std::string &metric, const SimpleStats &s, const std::string &criterion) {
+            bool mean_support = std::isfinite(s.ci_low) && s.ci_low > 0.0;
+            bool empirical_support = std::isfinite(s.q025) && s.q025 > 0.0;
+            out << std::setprecision(12)
+                << ml_index << ',' << comparison << ',' << metric << ',' << s.n << ',' << s.mean << ',' << s.stddev << ',' << s.sem << ','
+                << s.ci_low << ',' << s.ci_high << ',' << s.q025 << ',' << s.q50 << ',' << s.q975 << ',' << '"' << criterion << '"' << ','
+                << (mean_support ? "true" : "false") << ',' << (empirical_support ? "true" : "false") << "\n";
+        };
+        wr("cemc_tau_minus_random_tau", "tau", st_delta_tau, "positive means CEMC tau is higher");
+        wr("random_mse_minus_cemc_mse", "mse", st_delta_mse, "positive means CEMC MSE is lower");
+        wr("cemc_score_minus_random_score", "score_tau_minus_mse", st_delta_score, "positive means selected CEMC tau-MSE score is higher");
+    }
+
+    // Temperature-selection histogram data.
+    std::map<int,int> counts;
+    for (double t : cemc_temp) if (std::isfinite(t)) counts[static_cast<int>(std::llround(t))]++;
+    int n = static_cast<int>(cemc_temp.size());
+    {
+        std::ofstream out(outdir / "temperature_selection_counts.csv");
+        out << "temperature,n_selected_trials,fraction_selected\n";
+        out << std::setprecision(12);
+        for (const auto &kv : counts) out << kv.first << ',' << kv.second << ',' << (n > 0 ? static_cast<double>(kv.second)/n : 0.0) << "\n";
+    }
+    {
+        std::ofstream out(outdir / "plot_temperature_selection_counts.csv");
+        out << "ml,temperature,n_selected_trials,fraction_selected\n";
+        out << std::setprecision(12);
+        for (const auto &kv : counts) out << ml_index << ',' << kv.first << ',' << kv.second << ',' << (n > 0 ? static_cast<double>(kv.second)/n : 0.0) << "\n";
+    }
+
+    // CEMC metric at every saved temperature, for temperature-response line plots.
+    fs::path metrics_path = outdir / "metrics_by_trial_temperature.csv";
+    if (fs::exists(metrics_path)) {
+        struct TempMetricRow { int trial; double temp; double tau; double mse; double score; };
+        std::vector<TempMetricRow> temp_rows;
+        std::ifstream mt(metrics_path);
+        std::string mline;
+        bool first = true;
+        while (std::getline(mt, mline)) {
+            if (trim(mline).empty()) continue;
+            if (first) { first = false; continue; }
+            auto v = split_csv_line(mline);
+            if (v.size() < 9) continue;
+            try {
+                if (v[3] != "cemc") continue;
+                TempMetricRow r;
+                r.trial = std::stoi(v[0]);
+                r.temp = std::stod(v[2]);
+                r.tau = std::stod(v[4]);
+                r.mse = std::stod(v[5]);
+                r.score = std::stod(v[6]);
+                temp_rows.push_back(r);
+            } catch (...) {}
+        }
+        {
+            std::ofstream out(outdir / "plot_cemc_temperature_metrics_long.csv");
+            out << "ml,trial,temperature,metric,value\n";
+            out << std::setprecision(12);
+            for (const auto &r : temp_rows) {
+                out << ml_index << ',' << r.trial << ',' << r.temp << ",tau," << r.tau << "\n";
+                out << ml_index << ',' << r.trial << ',' << r.temp << ",mse," << r.mse << "\n";
+                out << ml_index << ',' << r.trial << ',' << r.temp << ",score_tau_minus_mse," << r.score << "\n";
+            }
+        }
+        std::map<int, std::vector<double>> byT_tau, byT_mse, byT_score;
+        for (const auto &r : temp_rows) {
+            int T = static_cast<int>(std::llround(r.temp));
+            byT_tau[T].push_back(r.tau);
+            byT_mse[T].push_back(r.mse);
+            byT_score[T].push_back(r.score);
+        }
+        std::ofstream out(outdir / "plot_cemc_temperature_summary.csv");
+        out << "ml,temperature,metric,n_trials,mean,sd,sem,ci95_mean_low,ci95_mean_high,q2p5,q50,q97p5,criterion\n";
+        auto wrT = [&](int T, const std::string &metric, const std::vector<double> &vals, const std::string &criterion) {
+            auto s = compute_stats(vals);
+            out << std::setprecision(12)
+                << ml_index << ',' << T << ',' << metric << ',' << s.n << ',' << s.mean << ',' << s.stddev << ',' << s.sem << ','
+                << s.ci_low << ',' << s.ci_high << ',' << s.q025 << ',' << s.q50 << ',' << s.q975 << ',' << '"' << criterion << '"' << "\n";
+        };
+        for (const auto &kv : byT_tau) wrT(kv.first, "tau", kv.second, "higher tau is better");
+        for (const auto &kv : byT_mse) wrT(kv.first, "mse", kv.second, "lower MSE is better");
+        for (const auto &kv : byT_score) wrT(kv.first, "score_tau_minus_mse", kv.second, "higher tau-MSE score is better");
+    }
+
+    // Also mirror plot-ready files into results/plot_data/ with stable, graph-oriented names.
+    // The source plot_*.csv files are kept at the root for backward compatibility.
+    {
+        fs::path plot_dir = outdir / "plot_data";
+        fs::create_directories(plot_dir);
+        auto cp = [&](const std::string &src_name, const std::string &dst_name) {
+            fs::path src = outdir / src_name;
+            if (fs::exists(src)) fs::copy_file(src, plot_dir / dst_name, fs::copy_options::overwrite_existing);
+        };
+        cp("plot_trial_metrics_long.csv", "trial_metric_distributions.csv");
+        cp("plot_trial_metrics_long.csv", "method_metric_long_by_trial.csv");
+        cp("plot_tau_mse_scatter.csv", "tau_mse_scatter.csv");
+        cp("plot_tau_mse_scatter.csv", "tau_mse_scatter_by_trial.csv");
+        cp("plot_paired_deltas_long.csv", "paired_deltas.csv");
+        cp("plot_paired_deltas_long.csv", "paired_delta_long_by_trial.csv");
+        cp("plot_metric_summary.csv", "ci_interval_summary.csv");
+        cp("plot_metric_summary.csv", "method_metric_interval_summary.csv");
+        cp("plot_method_comparison_ci.csv", "paired_delta_interval_summary.csv");
+        cp("plot_method_comparison_ci.csv", "method_comparison_ci.csv");
+        cp("plot_temperature_selection_counts.csv", "temperature_selection_counts.csv");
+        cp("plot_cemc_temperature_metrics_long.csv", "temperature_metric_long.csv");
+        cp("plot_cemc_temperature_metrics_long.csv", "cemc_temperature_metric_by_trial.csv");
+        cp("plot_cemc_temperature_summary.csv", "temperature_metric_summary.csv");
+        cp("plot_cemc_temperature_summary.csv", "cemc_temperature_summary.csv");
+
+        // Wide paired-delta table for simple histogram plotting.
+        std::ofstream wide(plot_dir / "paired_delta_by_trial.csv");
+        wide << "ml,trial,cemc_selected_temperature,delta_tau_cemc_minus_random,delta_mse_random_minus_cemc,delta_score_cemc_minus_random,cemc_tau,random_tau,cemc_mse,random_mse,cemc_score,random_score\n";
+        wide << std::setprecision(12);
+        for (const auto &r : selected_rows) {
+            wide << ml_index << ',' << r.trial << ',' << r.temp << ',' << r.delta_tau << ',' << r.delta_mse << ',' << r.delta_score << ','
+                 << r.cemc_tau << ',' << r.random_tau << ',' << r.cemc_mse << ',' << r.random_mse << ',' << r.cemc_score << ',' << r.random_score << "\n";
+        }
+        wide.close();
+
+        // Short-name aliases in results/plot_ready/.
+        fs::path plot_ready = outdir / "plot_ready";
+        fs::create_directories(plot_ready);
+        auto cp_ready = [&](const std::string &src_name, const std::string &dst_name) {
+            fs::path src = plot_dir / src_name;
+            if (fs::exists(src)) fs::copy_file(src, plot_ready / dst_name, fs::copy_options::overwrite_existing);
+        };
+        cp_ready("trial_metric_distributions.csv", "paired_metrics_long.csv");
+        cp_ready("paired_delta_long_by_trial.csv", "paired_delta_long.csv");
+        cp_ready("paired_delta_by_trial.csv", "paired_delta_by_trial.csv");
+        cp_ready("tau_mse_scatter.csv", "tau_mse_scatter.csv");
+        cp_ready("temperature_metric_long.csv", "temperature_metrics_long.csv");
+        cp_ready("temperature_metric_summary.csv", "temperature_metric_summary.csv");
+        cp_ready("temperature_selection_counts.csv", "temperature_selection_counts.csv");
+        cp_ready("ci_interval_summary.csv", "uncertainty_interval_bars.csv");
+        cp_ready("paired_delta_interval_summary.csv", "delta_interval_bars.csv");
+        std::ofstream manifest(plot_ready / "README_plot_ready.txt");
+        manifest << "paired_metrics_long.csv: MC-selected and random tau/MSE/score by UQ trial.\n";
+        manifest << "paired_delta_long.csv and paired_delta_by_trial.csv: paired deltas; positive values favor CEMC.\n";
+        manifest << "tau_mse_scatter.csv: tau-MSE joint scatter; higher tau and lower MSE are better.\n";
+        manifest << "temperature_metrics_long.csv: CEMC tau/MSE/score across snapshot temperatures.\n";
+        manifest << "temperature_metric_summary.csv: mean/CI/quantile summaries by CEMC temperature.\n";
+        manifest << "temperature_selection_counts.csv: selected CEMC temperature counts.\n";
+        manifest << "uncertainty_interval_bars.csv and delta_interval_bars.csv: 95% CI interval data.\n";
+    }
+}
+
+
+
+static double sample_sd_from_sums(double sum, double sumsq, int count) {
+    if (count <= 1) return 0.0;
+    const double mean = sum / static_cast<double>(count);
+    double var = (sumsq - static_cast<double>(count) * mean * mean) / static_cast<double>(count - 1);
+    if (var < 0.0 && var > -1e-10) var = 0.0;
+    if (var < 0.0) var = 0.0;
+    return std::sqrt(var);
+}
+
+static void write_be_hist_trial_counts(const fs::path &outdir, int trial, const BEHistogram &hist, const SchedulePlan &plan, const ActivityModel &am) {
+    fs::path hdir = outdir / "be_histograms";
+    fs::create_directories(hdir);
+    std::ostringstream name;
+    name << "trial_" << std::setw(6) << std::setfill('0') << trial << "_be_histogram_counts.csv";
+    fs::path tmp = hdir / (name.str() + ".tmp");
+    fs::path path = hdir / name.str();
+    std::ofstream csv(tmp);
+    csv << "trial,method,temperature,element,bin_left,bin_right,count\n";
+    for (int ti=0; ti<hist.ntemps; ++ti) {
+        for (int e=0; e<BE_HIST_ELEMENT_COUNT; ++e) {
+            uint64_t under = hist.cemc_under[hist.coidx(ti, e)];
+            uint64_t over = hist.cemc_over[hist.coidx(ti, e)];
+            if (under) csv << trial << ",cemc," << plan.target_temperatures[ti] << ',' << am.elements[e] << ",-inf," << BE_HIST_MIN << ',' << under << "\n";
+            for (int b=0; b<BE_HIST_BINS; ++b) {
+                uint64_t c = hist.cemc[hist.cidx(ti, e, b)];
+                if (!c) continue;
+                double left = BE_HIST_MIN + BE_HIST_WIDTH * b;
+                csv << trial << ",cemc," << plan.target_temperatures[ti] << ',' << am.elements[e] << ',' << left << ',' << (left + BE_HIST_WIDTH) << ',' << c << "\n";
+            }
+            if (over) csv << trial << ",cemc," << plan.target_temperatures[ti] << ',' << am.elements[e] << ',' << BE_HIST_MAX << ",inf," << over << "\n";
+        }
+    }
+    for (int e=0; e<BE_HIST_ELEMENT_COUNT; ++e) {
+        if (hist.random_under[e]) csv << trial << ",random,nan," << am.elements[e] << ",-inf," << BE_HIST_MIN << ',' << hist.random_under[e] << "\n";
+        for (int b=0; b<BE_HIST_BINS; ++b) {
+            uint64_t c = hist.random[hist.ridx(e, b)];
+            if (!c) continue;
+            double left = BE_HIST_MIN + BE_HIST_WIDTH * b;
+            csv << trial << ",random,nan," << am.elements[e] << ',' << left << ',' << (left + BE_HIST_WIDTH) << ',' << c << "\n";
+        }
+        if (hist.random_over[e]) csv << trial << ",random,nan," << am.elements[e] << ',' << BE_HIST_MAX << ",inf," << hist.random_over[e] << "\n";
+    }
+    csv.close();
+    fs::rename(tmp, path);
+}
+
+static void merge_be_hist_trial(
+    const fs::path &outdir, const fs::path &trial_dir, int trial, int world_size,
+    const SchedulePlan &plan, const ActivityModel &am
+) {
+    fs::path hdir = outdir / "be_histograms";
+    fs::create_directories(hdir);
+    BEHistogram total(static_cast<int>(plan.target_temperatures.size()));
+    read_be_hist_sparse_into(hdir / "be_histogram_checkpoint.csv", total);
+    for (int rank=0; rank<world_size; ++rank) {
+        std::ostringstream rp;
+        rp << "rank_" << std::setw(5) << std::setfill('0') << rank << "_be_hist.csv";
+        fs::path p = trial_dir / rp.str();
+        if (!fs::exists(p)) continue;
+        BEHistogram part(static_cast<int>(plan.target_temperatures.size()));
+        read_be_hist_sparse_into(p, part);
+        total.add_from(part);
+    }
+    write_be_hist_trial_counts(outdir, trial, total, plan, am);
+    write_be_hist_outputs(outdir, total, plan, am);
+    {
+        std::ofstream done(hdir / "completed_trials.txt", std::ios::app);
+        done << trial << "\n";
+    }
+}
+
+static void merge_packed_trial(
+    const fs::path &outdir, const fs::path &trial_dir, int trial, int world_size,
+    int ncomp, int nruns, int ntemps, int n_metal
+) {
+    const size_t slab_bytes = (static_cast<size_t>(n_metal) * 3 + 7) / 8;
+    const size_t payload_bytes = static_cast<size_t>(ntemps + 1) * slab_bytes;
+    const size_t record_bytes = sizeof(uint32_t) + payload_bytes;
+    const size_t n_tasks = static_cast<size_t>(ncomp) * nruns;
+    fs::path packed_dir = outdir / "packed_atoms";
+    fs::create_directories(packed_dir);
+    fs::path final_path = packed_dir / ("trial_" + zero_pad_int(trial, 6) + ".3bit");
+    fs::path tmp_path = final_path;
+    tmp_path += ".tmp";
+
+    {
+        std::ofstream init(tmp_path, std::ios::binary | std::ios::trunc);
+        if (!init) throw std::runtime_error("Cannot create packed trial file: " + tmp_path.string());
+        if (n_tasks && payload_bytes) {
+            init.seekp(static_cast<std::streamoff>(n_tasks * payload_bytes - 1));
+            init.put('\0');
+        }
+    }
+
+    std::fstream output(tmp_path, std::ios::binary | std::ios::in | std::ios::out);
+    if (!output) throw std::runtime_error("Cannot reopen packed trial file: " + tmp_path.string());
+    std::vector<uint8_t> payload(payload_bytes);
+    std::vector<uint8_t> seen(n_tasks, 0);
+    size_t records = 0;
+    for (int rank=0; rank<world_size; ++rank) {
+        std::ostringstream rp;
+        rp << "rank_" << std::setw(5) << std::setfill('0') << rank << "_packed_atoms.bin";
+        fs::path path = trial_dir / rp.str();
+        if (!fs::exists(path)) continue;
+        const auto bytes = fs::file_size(path);
+        if (bytes % record_bytes != 0)
+            throw std::runtime_error("Truncated packed rank file: " + path.string());
+        std::ifstream input(path, std::ios::binary);
+        while (input.peek() != std::ifstream::traits_type::eof()) {
+            uint32_t task = 0;
+            input.read(reinterpret_cast<char *>(&task), sizeof(task));
+            input.read(reinterpret_cast<char *>(payload.data()), static_cast<std::streamsize>(payload.size()));
+            if (!input) throw std::runtime_error("Failed reading packed rank file: " + path.string());
+            if (task >= n_tasks) throw std::runtime_error("Packed task index out of range");
+            if (seen[task]) throw std::runtime_error("Duplicate packed task index: " + std::to_string(task));
+            output.seekp(static_cast<std::streamoff>(static_cast<size_t>(task) * payload_bytes));
+            output.write(reinterpret_cast<const char *>(payload.data()), static_cast<std::streamsize>(payload.size()));
+            if (!output) throw std::runtime_error("Failed writing merged packed trial file");
+            seen[task] = 1;
+            ++records;
+        }
+    }
+    output.close();
+    if (records != n_tasks)
+        throw std::runtime_error("Packed trial is incomplete: expected " + std::to_string(n_tasks) +
+                                 " tasks, found " + std::to_string(records));
+    fs::rename(tmp_path, final_path);
+
+    fs::path metadata = packed_dir / "metadata.json";
+    if (!fs::exists(metadata)) {
+        std::ofstream meta(metadata);
+        meta << "{\n"
+             << "  \"format\": \"CEMC packed atoms v1\",\n"
+             << "  \"bits_per_atom\": 3,\n"
+             << "  \"bit_order\": \"little-endian within each byte\",\n"
+             << "  \"code_to_atomic_number\": [44, 45, 46, 77, 78],\n"
+             << "  \"code_to_symbol\": [\"Ru\", \"Rh\", \"Pd\", \"Ir\", \"Pt\"],\n"
+             << "  \"atom_order\": \"ce.metal_sites order; identical to template ASE atom order\",\n"
+             << "  \"record_order\": [\"composition\", \"run\", \"state\", \"atom\"],\n"
+             << "  \"state_order\": [\"random\", \"cemc_temperature_index_0_to_" << (ntemps - 1) << "\"],\n"
+             << "  \"n_compositions\": " << ncomp << ",\n"
+             << "  \"n_runs\": " << nruns << ",\n"
+             << "  \"n_temperatures\": " << ntemps << ",\n"
+             << "  \"n_atoms\": " << n_metal << ",\n"
+             << "  \"bytes_per_slab\": " << slab_bytes << ",\n"
+             << "  \"bytes_per_composition_run\": " << payload_bytes << "\n"
+             << "}\n";
+    }
+}
+
+static void merge_trial(
+    const fs::path &outdir, const fs::path &trial_dir, int trial, int world_size,
+    const SchedulePlan &plan, const std::vector<CompositionRow> &rows,
+    const Config &cfg, int n_metal, const ActivityModel &am, const CEData &ce,
+    bool merge_be_hist
+) {
+    fs::path marker = outdir / "merge_in_progress_trial.txt";
+    { std::ofstream m(marker); m << trial << "\n"; }
+
+    const int ntemps = static_cast<int>(plan.target_temperatures.size());
+    const int ncomp = static_cast<int>(rows.size());
+    auto cidx = [&](int ti, int ci) { return ti * ncomp + ci; };
+    std::vector<double> cemc_sums(static_cast<size_t>(ntemps)*ncomp, 0.0);
+    std::vector<double> cemc_sumsq(static_cast<size_t>(ntemps)*ncomp, 0.0);
+    std::vector<int> cemc_counts(static_cast<size_t>(ntemps)*ncomp, 0);
+    std::vector<double> random_sums(ncomp, 0.0);
+    std::vector<double> random_sumsq(ncomp, 0.0);
+    std::vector<int> random_counts(ncomp, 0);
+    const auto wc_pairs = make_wc_pairs(ce);
+    auto wcidx = [&](int ti, int ci, int pi) { return (static_cast<size_t>(ti) * ncomp + ci) * WC_PAIR_COUNT + pi; };
+    auto rwcidx = [&](int ci, int pi) { return static_cast<size_t>(ci) * WC_PAIR_COUNT + pi; };
+    std::vector<double> cemc_wc_sums(static_cast<size_t>(ntemps)*ncomp*WC_PAIR_COUNT, 0.0);
+    std::vector<double> cemc_wc_sumsq(static_cast<size_t>(ntemps)*ncomp*WC_PAIR_COUNT, 0.0);
+    std::vector<int> cemc_wc_counts(static_cast<size_t>(ntemps)*ncomp*WC_PAIR_COUNT, 0);
+    std::vector<double> random_wc_sums(static_cast<size_t>(ncomp)*WC_PAIR_COUNT, 0.0);
+    std::vector<double> random_wc_sumsq(static_cast<size_t>(ncomp)*WC_PAIR_COUNT, 0.0);
+    std::vector<int> random_wc_counts(static_cast<size_t>(ncomp)*WC_PAIR_COUNT, 0);
+
+    for (int rank=0; rank<world_size; ++rank) {
+        std::ostringstream rp;
+        rp << "rank_" << std::setw(5) << std::setfill('0') << rank << "_results.csv";
+        fs::path p = trial_dir / rp.str();
+        if (!fs::exists(p)) continue;
+        std::ifstream in(p);
+        std::string line;
+        while (std::getline(in, line)) {
+            if (trim(line).empty()) continue;
+            auto r = parse_result_line(line);
+            if (r.comp < 0 || r.comp >= ncomp) continue;
+            if (r.method == "cemc") {
+                if (r.temp_idx < 0 || r.temp_idx >= ntemps) continue;
+                cemc_sums[cidx(r.temp_idx, r.comp)] += r.activity;
+                cemc_sumsq[cidx(r.temp_idx, r.comp)] += r.activity * r.activity;
+                cemc_counts[cidx(r.temp_idx, r.comp)] += 1;
+                for (int pi=0; pi<WC_PAIR_COUNT; ++pi) {
+                    double w = r.wc[pi];
+                    if (std::isfinite(w)) {
+                        cemc_wc_sums[wcidx(r.temp_idx, r.comp, pi)] += w;
+                        cemc_wc_sumsq[wcidx(r.temp_idx, r.comp, pi)] += w * w;
+                        cemc_wc_counts[wcidx(r.temp_idx, r.comp, pi)] += 1;
+                    }
+                }
+            } else if (r.method == "random") {
+                random_sums[r.comp] += r.activity;
+                random_sumsq[r.comp] += r.activity * r.activity;
+                random_counts[r.comp] += 1;
+                for (int pi=0; pi<WC_PAIR_COUNT; ++pi) {
+                    double w = r.wc[pi];
+                    if (std::isfinite(w)) {
+                        random_wc_sums[rwcidx(r.comp, pi)] += w;
+                        random_wc_sumsq[rwcidx(r.comp, pi)] += w * w;
+                        random_wc_counts[rwcidx(r.comp, pi)] += 1;
+                    }
+                }
+            }
+        }
+    }
+
+    std::vector<double> exp_raw(rows.size());
+    for (size_t i=0;i<rows.size();i++) exp_raw[i] = rows[i].experimental;
+    auto exp_scaled = scale_to_minus1_0(exp_raw, !cfg.experimental_better_is_lower);
+
+    const double nan = std::numeric_limits<double>::quiet_NaN();
+    std::vector<double> cemc_mean(static_cast<size_t>(ntemps)*ncomp, nan);
+    std::vector<double> cemc_sd(static_cast<size_t>(ntemps)*ncomp, nan);
+    std::vector<double> cemc_scaled(static_cast<size_t>(ntemps)*ncomp, nan);
+    std::vector<double> random_mean(ncomp, nan);
+    std::vector<double> random_sd(ncomp, nan);
+    std::vector<double> random_scaled_vec(ncomp, nan);
+
+    std::unique_ptr<std::ofstream> paselected;
+    if (cfg.write_predicted_activities) {
+        paselected.reset(new std::ofstream(outdir / "predicted_activity_selected_by_trial.csv", std::ios::app));
+        (*paselected) << std::setprecision(12);
+    }
+    std::unique_ptr<std::ofstream> paall;
+    if (cfg.write_all_snapshot_activities) {
+        paall.reset(new std::ofstream(outdir / "predicted_activity_all_snapshots_by_trial_temperature.csv", std::ios::app));
+        (*paall) << std::setprecision(12);
+    }
+
+    std::ofstream metrics(outdir / "metrics_by_trial_temperature.csv", std::ios::app);
+    metrics << std::setprecision(12);
+    std::vector<Metric> cemc_metrics(ntemps);
+    for (int ti=0; ti<ntemps; ++ti) {
+        std::vector<double> pred(rows.size(), 0.0);
+        std::vector<double> pred_sd(rows.size(), 0.0);
+        int record_count = 0;
+        for (int ci=0; ci<ncomp; ++ci) {
+            int c = cemc_counts[cidx(ti, ci)];
+            if (c > 0) {
+                pred[ci] = cemc_sums[cidx(ti, ci)] / c;
+                pred_sd[ci] = sample_sd_from_sums(cemc_sums[cidx(ti, ci)], cemc_sumsq[cidx(ti, ci)], c);
+            }
+            record_count += c;
+        }
+        auto pred_scaled = scale_to_minus1_0(pred, cfg.predicted_better_is_higher);
+        auto [pred_minit, pred_maxit] = std::minmax_element(pred.begin(), pred.end());
+        double pred_scale_den = pred.empty() ? 0.0 : (*pred_maxit - *pred_minit);
+        double tau = kendall_tau_b(exp_scaled, pred_scaled);
+        double mmse = mse(exp_scaled, pred_scaled);
+        cemc_metrics[ti] = {tau, mmse};
+        metrics << trial << ',' << ti << ',' << plan.target_temperatures[ti] << ",cemc,"
+                << tau << ',' << mmse << ',' << metric_score(cemc_metrics[ti]) << ',' << ncomp << ',' << record_count << "\n";
+        for (int ci=0; ci<ncomp; ++ci) {
+            cemc_mean[cidx(ti, ci)] = pred[ci];
+            cemc_sd[cidx(ti, ci)] = pred_sd[ci];
+            cemc_scaled[cidx(ti, ci)] = pred_scaled[ci];
+            if (paall) {
+                (*paall) << trial << ',' << plan.target_temperatures[ti] << ','
+                         << ci << ',' << rows[ci].row_idx << ',' << rows[ci].col_idx << ','
+                         << pred[ci] << ',' << pred_sd[ci] << ',' << cemc_counts[cidx(ti, ci)] << ','
+                         << rows[ci].experimental << ',' << pred_scaled[ci] << ','
+                         << ((std::abs(pred_scale_den) < 1e-30) ? 0.0 : pred_sd[ci] / std::abs(pred_scale_den)) << ','
+                         << exp_scaled[ci] << "\n";
+            }
+        }
+    }
+    metrics.close();
+
+    std::vector<double> random_pred(rows.size(), 0.0);
+    int random_record_count = 0;
+    for (int ci=0; ci<ncomp; ++ci) {
+        int c = random_counts[ci];
+        if (c > 0) {
+            random_pred[ci] = random_sums[ci] / c;
+            random_sd[ci] = sample_sd_from_sums(random_sums[ci], random_sumsq[ci], c);
+        }
+        random_mean[ci] = random_pred[ci];
+        random_record_count += c;
+    }
+    auto random_scaled = scale_to_minus1_0(random_pred, cfg.predicted_better_is_higher);
+    for (int ci=0; ci<ncomp; ++ci) {
+        random_scaled_vec[ci] = random_scaled[ci];
+
+    }
+    Metric random_metric{kendall_tau_b(exp_scaled, random_scaled), mse(exp_scaled, random_scaled)};
+    {
+        std::ofstream rm(outdir / "random_metrics_by_trial.csv", std::ios::app);
+        rm << std::setprecision(12)
+           << trial << ",random," << random_metric.tau << ',' << random_metric.mse << ','
+           << metric_score(random_metric) << ',' << ncomp << ',' << random_record_count << "\n";
+    }
+
+    auto best_score_idx = [](const std::vector<Metric> &m) {
+        int best = 0;
+        for (int i=1;i<(int)m.size();i++) {
+            double si = metric_score(m[i]);
+            double sb = metric_score(m[best]);
+            if (si > sb || (std::abs(si - sb) < 1e-15 && (m[i].tau > m[best].tau || (std::abs(m[i].tau - m[best].tau) < 1e-15 && m[i].mse < m[best].mse)))) best = i;
+        }
+        return best;
+    };
+    int cbest = best_score_idx(cemc_metrics);
+    Metric selected = cemc_metrics[cbest];
+    double selected_score = metric_score(selected);
+    double random_score = metric_score(random_metric);
+    double delta_tau = selected.tau - random_metric.tau;
+    double delta_mse = random_metric.mse - selected.mse;
+    double delta_score = selected_score - random_score;
+    {
+        std::ofstream sel(outdir / "selected_temperature_by_trial.csv", std::ios::app);
+        sel << std::setprecision(12)
+            << trial << ','
+            << plan.target_temperatures[cbest] << ',' << selected_score << ',' << selected.tau << ',' << selected.mse << ','
+            << random_score << ',' << random_metric.tau << ',' << random_metric.mse << ','
+            << delta_tau << ',' << delta_mse << ',' << delta_score << "\n";
+    }
+    {
+        std::ofstream paired(outdir / "paired_comparison_by_trial.csv", std::ios::app);
+        paired << std::setprecision(12)
+            << trial << ',' << plan.target_temperatures[cbest] << ','
+            << selected.tau << ',' << selected.mse << ',' << selected_score << ','
+            << random_metric.tau << ',' << random_metric.mse << ',' << random_score << ','
+            << delta_tau << ',' << delta_mse << ',' << delta_score << "\n";
+    }
+
+    if (cfg.write_predicted_activities) {
+        for (int ci=0; ci<ncomp; ++ci) {
+            (*paselected) << trial << ',' << ci << ',' << rows[ci].row_idx << ',' << rows[ci].col_idx << ','
+                          << cbest << ',' << plan.target_temperatures[cbest] << ','
+                          << cemc_mean[cidx(cbest, ci)] << ',' << cemc_sd[cidx(cbest, ci)] << ',' << cemc_counts[cidx(cbest, ci)] << ','
+                          << random_mean[ci] << ',' << random_sd[ci] << ',' << random_counts[ci] << ','
+                          << rows[ci].experimental << ',' << cemc_scaled[cidx(cbest, ci)] << ','
+                          << random_scaled_vec[ci] << ',' << exp_scaled[ci] << "\n";
+        }
+    }
+
+    if (cfg.write_trial_zarr_summaries) {
+        const double nan = std::numeric_limits<double>::quiet_NaN();
+        std::vector<float> cemc_wc_mean(static_cast<size_t>(ntemps)*ncomp*WC_PAIR_COUNT, f32(nan));
+        std::vector<float> cemc_wc_sd(static_cast<size_t>(ntemps)*ncomp*WC_PAIR_COUNT, f32(nan));
+        for (int ti=0; ti<ntemps; ++ti) {
+            for (int ci=0; ci<ncomp; ++ci) {
+                for (int pi=0; pi<WC_PAIR_COUNT; ++pi) {
+                    size_t idx = wcidx(ti, ci, pi);
+                    int c = cemc_wc_counts[idx];
+                    if (c > 0) {
+                        cemc_wc_mean[idx] = f32(cemc_wc_sums[idx] / c);
+                        cemc_wc_sd[idx] = f32(sample_sd_from_sums(cemc_wc_sums[idx], cemc_wc_sumsq[idx], c));
+                    }
+                }
+            }
+        }
+        std::vector<float> cemc_activity_mean(static_cast<size_t>(ntemps)*ncomp, f32(nan));
+        std::vector<float> cemc_activity_sd(static_cast<size_t>(ntemps)*ncomp, f32(nan));
+        for (int ti=0; ti<ntemps; ++ti) for (int ci=0; ci<ncomp; ++ci) {
+            cemc_activity_mean[static_cast<size_t>(ti)*ncomp + ci] = f32(cemc_mean[cidx(ti, ci)]);
+            cemc_activity_sd[static_cast<size_t>(ti)*ncomp + ci] = f32(cemc_sd[cidx(ti, ci)]);
+        }
+        std::vector<float> cemc_tau(ntemps), cemc_mse(ntemps), cemc_score(ntemps);
+        for (int ti=0; ti<ntemps; ++ti) {
+            cemc_tau[ti] = f32(cemc_metrics[ti].tau);
+            cemc_mse[ti] = f32(cemc_metrics[ti].mse);
+            cemc_score[ti] = f32(metric_score(cemc_metrics[ti]));
+        }
+
+        fs::path trial_root = outdir / "trial_zarr" / ("trial_" + zero_pad_int(trial, 6));
+        fs::path cemc_group = trial_root / "mc.zarr";
+        write_zarr_group_attrs(cemc_group, trial, wc_pairs, &plan.target_temperatures);
+        write_zarr_array_f32(cemc_group, "wc_mean", {static_cast<size_t>(ntemps), static_cast<size_t>(ncomp), static_cast<size_t>(WC_PAIR_COUNT)}, cemc_wc_mean);
+        write_zarr_array_f32(cemc_group, "wc_sd", {static_cast<size_t>(ntemps), static_cast<size_t>(ncomp), static_cast<size_t>(WC_PAIR_COUNT)}, cemc_wc_sd);
+        write_zarr_array_f32(cemc_group, "activity_mean", {static_cast<size_t>(ntemps), static_cast<size_t>(ncomp)}, cemc_activity_mean);
+        write_zarr_array_f32(cemc_group, "activity_sd", {static_cast<size_t>(ntemps), static_cast<size_t>(ncomp)}, cemc_activity_sd);
+        write_zarr_array_f32(cemc_group, "tau", {static_cast<size_t>(ntemps)}, cemc_tau);
+        write_zarr_array_f32(cemc_group, "mse", {static_cast<size_t>(ntemps)}, cemc_mse);
+        write_zarr_array_f32(cemc_group, "score", {static_cast<size_t>(ntemps)}, cemc_score);
+
+        std::vector<float> random_wc_mean(static_cast<size_t>(ncomp)*WC_PAIR_COUNT, f32(nan));
+        std::vector<float> random_wc_sd(static_cast<size_t>(ncomp)*WC_PAIR_COUNT, f32(nan));
+        for (int ci=0; ci<ncomp; ++ci) {
+            for (int pi=0; pi<WC_PAIR_COUNT; ++pi) {
+                size_t idx = rwcidx(ci, pi);
+                int c = random_wc_counts[idx];
+                if (c > 0) {
+                    random_wc_mean[idx] = f32(random_wc_sums[idx] / c);
+                    random_wc_sd[idx] = f32(sample_sd_from_sums(random_wc_sums[idx], random_wc_sumsq[idx], c));
+                }
+            }
+        }
+        std::vector<float> random_activity_mean(ncomp, f32(nan));
+        std::vector<float> random_activity_sd(ncomp, f32(nan));
+        for (int ci=0; ci<ncomp; ++ci) {
+            random_activity_mean[ci] = f32(random_mean[ci]);
+            random_activity_sd[ci] = f32(random_sd[ci]);
+        }
+        std::vector<float> random_tau = {f32(random_metric.tau)};
+        std::vector<float> random_mse = {f32(random_metric.mse)};
+        std::vector<float> random_score_vec = {f32(metric_score(random_metric))};
+        fs::path random_group = trial_root / "random.zarr";
+        write_zarr_group_attrs(random_group, trial, wc_pairs, nullptr);
+        write_zarr_array_f32(random_group, "wc_mean", {static_cast<size_t>(ncomp), static_cast<size_t>(WC_PAIR_COUNT)}, random_wc_mean);
+        write_zarr_array_f32(random_group, "wc_sd", {static_cast<size_t>(ncomp), static_cast<size_t>(WC_PAIR_COUNT)}, random_wc_sd);
+        write_zarr_array_f32(random_group, "activity_mean", {static_cast<size_t>(ncomp)}, random_activity_mean);
+        write_zarr_array_f32(random_group, "activity_sd", {static_cast<size_t>(ncomp)}, random_activity_sd);
+        write_zarr_array_f32(random_group, "tau", {1}, random_tau);
+        write_zarr_array_f32(random_group, "mse", {1}, random_mse);
+        write_zarr_array_f32(random_group, "score", {1}, random_score_vec);
+    }
+
+    // BE-store version: composition samples are used internally but not written.
+    if (cfg.write_random_seeds) append_random_seed_shards(outdir, trial_dir, world_size);
+    if (cfg.write_packed_atoms)
+        merge_packed_trial(outdir, trial_dir, trial, world_size, ncomp, cfg.n_runs, ntemps, n_metal);
+
+    if (cfg.write_structures) {
+        std::set<fs::path> all_possible_paths;
+        for (int ti=0; ti<ntemps; ++ti) for (int ci=0; ci<ncomp; ++ci)
+            all_possible_paths.insert(structure_file_path(outdir, plan.target_temperatures[ti], ci));
+        {
+            std::ofstream marker2(outdir / "merge_in_progress_trial.txt");
+            marker2 << trial << "\n";
+            for (const auto &p : all_possible_paths) marker2 << p.string() << "\n";
+        }
+        struct FileCacheEntry { fs::path path; std::unique_ptr<std::ofstream> out; uint64_t last_use = 0; };
+        std::vector<FileCacheEntry> cache;
+        const size_t max_open_files = 64;
+        uint64_t use_counter = 0;
+        auto get_out = [&](const fs::path &path) -> std::ofstream& {
+            ++use_counter;
+            for (auto &e : cache) if (e.path == path) { e.last_use = use_counter; return *e.out; }
+            if (cache.size() >= max_open_files) {
+                auto victim = std::min_element(cache.begin(), cache.end(), [](const auto &a, const auto &b){ return a.last_use < b.last_use; });
+                victim->out->close();
+                cache.erase(victim);
+            }
+            fs::create_directories(path.parent_path());
+            FileCacheEntry e;
+            e.path = path;
+            e.out.reset(new std::ofstream(path, std::ios::app));
+            e.last_use = use_counter;
+            cache.push_back(std::move(e));
+            return *cache.back().out;
+        };
+        for (int rank=0; rank<world_size; ++rank) {
+            std::ostringstream rp;
+            rp << "rank_" << std::setw(5) << std::setfill('0') << rank << "_structures.jsonl";
+            fs::path p = trial_dir / rp.str();
+            if (!fs::exists(p)) continue;
+            std::ifstream in(p);
+            std::string line;
+            while (std::getline(in, line)) {
+                auto tab1 = line.find('\t');
+                if (tab1 == std::string::npos) continue;
+                auto tab2 = line.find('\t', tab1 + 1);
+                if (tab2 == std::string::npos) continue;
+                int ti = std::stoi(line.substr(0, tab1));
+                int ci = std::stoi(line.substr(tab1 + 1, tab2 - tab1 - 1));
+                if (ti < 0 || ti >= ntemps || ci < 0 || ci >= ncomp) continue;
+                auto &out = get_out(structure_file_path(outdir, plan.target_temperatures[ti], ci));
+                out << line.substr(tab2 + 1) << "\n";
+            }
+        }
+        for (auto &e : cache) if (e.out) e.out->close();
+    }
+
+    {
+        if (merge_be_hist) merge_be_hist_trial(outdir, trial_dir, trial, world_size, plan, am);
+        std::ofstream done(outdir / "completed_trials.txt", std::ios::app);
+        done << trial << "\n";
+    }
+    fs::remove(marker);
+    fs::remove_all(trial_dir);
+}
+
+static void merge_structure_only_trial(
+    const fs::path &outdir, const fs::path &trial_dir, int trial, int world_size,
+    int ncomp, int nruns, int ntemps, int n_metal
+) {
+    fs::path marker = outdir / "merge_in_progress_trial.txt";
+    { std::ofstream m(marker); m << trial << "\n"; }
+    merge_packed_trial(outdir, trial_dir, trial, world_size, ncomp, nruns, ntemps, n_metal);
+    { std::ofstream done(outdir / "completed_trials.txt", std::ios::app); done << trial << "\n"; }
+    fs::remove(marker);
+    fs::remove_all(trial_dir);
+}
+
+
+static double seconds_since(std::chrono::steady_clock::time_point t0, std::chrono::steady_clock::time_point t1) {
+    return std::chrono::duration<double>(t1 - t0).count();
+}
+
+static void append_trial_timing(const fs::path &outdir, int trial, double compute_s, double merge_s, double summary_s,
+                                int64_t n_tasks, int world_size, bool structures_written, bool summary_written) {
+    std::ofstream out(outdir / "trial_timing.csv", std::ios::app);
+    out << std::setprecision(6) << std::fixed
+        << trial << ',' << compute_s << ',' << merge_s << ',' << summary_s << ',' << (compute_s + merge_s + summary_s) << ','
+        << n_tasks << ',' << world_size << ',' << (structures_written ? "true" : "false") << ',' << (summary_written ? "true" : "false") << "\n";
+}
+
+int main(int argc, char **argv) {
+#ifdef USE_MPI
+    MPI_Init(&argc, &argv);
+    int rank=0, world_size=1;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+#else
+    int rank=0, world_size=1;
+#endif
+    try {
+        std::string config_path;
+        bool reconstruct_random = false;
+        bool reconstruct_cemc = false;
+        int recon_trial = -1, recon_comp = -1, recon_run = -1;
+        int recon_temp_index = -1;
+        double recon_temperature = std::numeric_limits<double>::quiet_NaN();
+        bool have_manual_seed = false, have_manual_counts = false;
+        uint64_t manual_seed = 0;
+        std::array<int,5> manual_counts{};
+        std::string recon_output = "random_slab_atomic_numbers.json";
+        for (int i=1; i<argc; ++i) {
+            std::string a = argv[i];
+            if (a == "--config" && i+1 < argc) config_path = argv[++i];
+            else if (a == "--reconstruct-random") reconstruct_random = true;
+            else if (a == "--reconstruct-cemc") reconstruct_cemc = true;
+            else if (a == "--trial" && i+1 < argc) recon_trial = std::stoi(argv[++i]);
+            else if (a == "--composition" && i+1 < argc) recon_comp = std::stoi(argv[++i]);
+            else if (a == "--run" && i+1 < argc) recon_run = std::stoi(argv[++i]);
+            else if (a == "--temp-index" && i+1 < argc) recon_temp_index = std::stoi(argv[++i]);
+            else if (a == "--temperature" && i+1 < argc) recon_temperature = std::stod(argv[++i]);
+            else if (a == "--seed" && i+1 < argc) { manual_seed = static_cast<uint64_t>(std::stoull(argv[++i])); have_manual_seed = true; }
+            else if (a == "--counts" && i+1 < argc) { manual_counts = parse_counts_arg(argv[++i]); have_manual_counts = true; }
+            else if (a == "--output" && i+1 < argc) recon_output = argv[++i];
+            else if (a == "-h" || a == "--help") {
+                if (rank == 0) {
+                    std::cout << "usage: uq_cemc_mpi --config uq_config.ini\n"
+                              << "       uq_cemc_mpi --config uq_config.ini --reconstruct-random --trial T --composition C --run R --output slab.json\n"
+                              << "       uq_cemc_mpi --config uq_config.ini --reconstruct-random --seed S --counts Ir,Pd,Pt,Rh,Ru --output slab.json\n"
+                              << "       uq_cemc_mpi --config uq_config.ini --reconstruct-cemc --trial T --composition C --run R --temperature 1500 --output snapshot.json\n"
+                              << "       uq_cemc_mpi --config uq_config.ini --reconstruct-cemc --trial T --composition C --run R --temp-index I --output snapshot.json\n";
+                }
+#ifdef USE_MPI
+                MPI_Finalize();
+#endif
+                return 0;
+            } else {
+                throw std::runtime_error("Unknown argument: " + a);
+            }
+        }
+        if (config_path.empty()) throw std::runtime_error("Missing --config uq_config.ini");
+        Config cfg = read_config(config_path);
+        CEData ce = read_ce_export(cfg.ce_export);
+        auto plan = read_schedule_export(cfg.schedule_export);
+        ActivityModel am = read_activity_model(cfg.activity_model, ce);
+        auto rows = read_compositions_and_activity(cfg.composition_csv, cfg.experimental_activity_csv, cfg.max_compositions);
+        if (rows.empty()) throw std::runtime_error("No composition/activity rows loaded");
+        fs::path outdir(cfg.output_dir);
+        if (rank == 0) {
+            fs::create_directories(outdir);
+            repair_partial_merge(outdir, plan);
+            ensure_headers(outdir, cfg.structure_only);
+            std::cerr << "Loaded " << rows.size() << " compositions; " << plan.target_temperatures.size() << " CEMC snapshot target temperatures; "
+                      << cfg.n_trials << " trials; " << cfg.n_runs << " runs; MPI ranks=" << world_size << "\n";
+        }
+#ifdef USE_MPI
+        MPI_Barrier(MPI_COMM_WORLD);
+#endif
+        std::set<int> completed = read_completed_trials(outdir);
+        std::set<int> be_completed = read_be_completed_trials(outdir);
+        const std::array<std::string,5> elems = {"Ir","Pd","Pt","Rh","Ru"};
+        std::array<int,5> element_to_code{};
+        for (int k=0;k<5;k++) {
+            auto it = ce.species_to_code.find(elems[k]);
+            if (it == ce.species_to_code.end()) throw std::runtime_error("CE species missing: " + elems[k]);
+            element_to_code[k] = it->second;
+        }
+
+        if (reconstruct_random) {
+            if (rank == 0) {
+                uint64_t seed = manual_seed;
+                std::array<int,5> counts = manual_counts;
+                if (!(have_manual_seed && have_manual_counts)) {
+                    if (recon_trial < 0 || recon_comp < 0 || recon_run < 0)
+                        throw std::runtime_error("For --reconstruct-random, provide either --seed and --counts, or --trial/--composition/--run");
+                    auto rec = find_random_seed_record(fs::path(cfg.output_dir), recon_trial, recon_comp, recon_run);
+                    seed = rec.random_slab_seed;
+                    counts = rec.counts;
+                    std::cerr << "Reconstructing random slab from seed row: trial=" << rec.trial
+                              << " composition=" << rec.comp << " run=" << rec.run
+                              << " seed=" << seed << "\n";
+                }
+                reconstruct_random_slab_file(ce, element_to_code, seed, counts, fs::path(recon_output));
+                std::cerr << "Wrote " << recon_output << "\n";
+            }
+#ifdef USE_MPI
+            MPI_Finalize();
+#endif
+            return 0;
+        }
+
+        if (reconstruct_cemc) {
+            if (rank == 0) {
+                if (recon_trial < 0 || recon_comp < 0 || recon_run < 0)
+                    throw std::runtime_error("For --reconstruct-cemc, provide --trial T --composition C --run R plus --temperature or --temp-index");
+                if (recon_comp < 0 || recon_comp >= static_cast<int>(rows.size()))
+                    throw std::runtime_error("--composition is outside the loaded composition range");
+                int temp_index = recon_temp_index;
+                if (temp_index < 0) {
+                    if (!std::isfinite(recon_temperature))
+                        throw std::runtime_error("For --reconstruct-cemc, provide --temperature or --temp-index");
+                    double best_diff = std::numeric_limits<double>::infinity();
+                    for (int i=0; i<static_cast<int>(plan.target_temperatures.size()); ++i) {
+                        double d = std::abs(plan.target_temperatures[i] - recon_temperature);
+                        if (d < best_diff) { best_diff = d; temp_index = i; }
+                    }
+                }
+                if (temp_index < 0 || temp_index >= static_cast<int>(plan.target_temperatures.size()))
+                    throw std::runtime_error("Temperature index is outside the target-temperature list");
+                const auto &row = rows[recon_comp];
+                auto sampled = sample_composition(row, cfg, ce.n_metal_sites, recon_trial, recon_comp);
+                uint64_t initial_seed = random_slab_seed(cfg, recon_trial, recon_comp, recon_run);
+                uint64_t mc_seed = cemc_seed(cfg, recon_trial, recon_comp, recon_run);
+                std::mt19937_64 init_rng(initial_seed);
+                auto initial_occ = make_initial_occupations(ce, sampled, element_to_code, init_rng);
+                std::mt19937_64 mc_rng(mc_seed);
+                MCOutcome mc = run_cemc_snapshots(ce, initial_occ, plan, mc_rng);
+                const Snapshot &snap = mc.snapshots[temp_index];
+                double activity = predict_activity(ce, am, snap.occ, sampled.be_shift);
+                fs::path outp(recon_output);
+                if (!outp.parent_path().empty()) fs::create_directories(outp.parent_path());
+                std::ofstream out(outp);
+                out << "{\n";
+                out << "  \"trial\": " << recon_trial << ",\n";
+                out << "  \"composition_index\": " << recon_comp << ",\n";
+                out << "  \"row_idx\": " << row.row_idx << ",\n";
+                out << "  \"col_idx\": " << row.col_idx << ",\n";
+                out << "  \"run\": " << recon_run << ",\n";
+                out << "  \"temp_index\": " << temp_index << ",\n";
+                out << "  \"target_temperature\": " << std::setprecision(12) << plan.target_temperatures[temp_index] << ",\n";
+                out << "  \"actual_temperature\": " << std::setprecision(12) << snap.actual_temperature << ",\n";
+                out << "  \"temperature_error\": " << std::setprecision(12) << snap.temperature_error << ",\n";
+                out << "  \"mc_step\": " << snap.global_step << ",\n";
+                out << "  \"energy\": " << std::setprecision(12) << snap.energy << ",\n";
+                out << "  \"attempted\": " << snap.attempted << ",\n";
+                out << "  \"accepted\": " << snap.accepted << ",\n";
+                out << "  \"random_slab_seed\": " << initial_seed << ",\n";
+                out << "  \"cemc_seed\": " << mc_seed << ",\n";
+                out << "  \"be_shift_by_element\": {";
+                for (int k=0; k<5; ++k) {
+                    if (k) out << ", ";
+                    out << "\"" << am.elements[k] << "\": " << std::setprecision(12) << sampled.be_shift[k];
+                }
+                out << "},\n";
+                out << "  \"activity\": " << std::setprecision(12) << activity << ",\n";
+                out << "  \"Z\": [";
+                auto z = physical_atomic_numbers(ce, snap.occ);
+                for (size_t i=0; i<z.size(); ++i) { if (i) out << ','; out << z[i]; }
+                out << "]\n}\n";
+                std::cerr << "Reconstructed CEMC snapshot trial=" << recon_trial
+                          << " composition=" << recon_comp << " run=" << recon_run
+                          << " target_temperature=" << plan.target_temperatures[temp_index]
+                          << " to " << recon_output << "\n";
+            }
+#ifdef USE_MPI
+            MPI_Finalize();
+#endif
+            return 0;
+        }
+
+        for (int trial=cfg.trial_start; trial<cfg.n_trials; trial += cfg.trial_stride) {
+            bool activity_done = completed.count(trial) > 0;
+            bool be_done = be_completed.count(trial) > 0;
+            if (cfg.structure_only && activity_done) {
+                if (rank == 0) std::cerr << "Skipping completed structure-only trial " << trial << "\n";
+                continue;
+            }
+            if (!cfg.structure_only && activity_done && be_done) {
+                if (rank == 0) std::cerr << "Skipping completed activity/BE trial " << trial << "\n";
+                continue;
+            }
+            bool be_only = !cfg.structure_only && activity_done && !be_done;
+            fs::path trial_dir = outdir / "_trial_work" / ("trial_" + std::to_string(trial));
+            auto trial_wall_start = std::chrono::steady_clock::now();
+            if (rank == 0) {
+                fs::remove_all(trial_dir);
+                fs::create_directories(trial_dir);
+                if (be_only) std::cerr << "Starting BE-only reconstruction for completed trial " << trial << "\n";
+                else std::cerr << "Starting trial " << trial << "\n";
+            }
+#ifdef USE_MPI
+            MPI_Barrier(MPI_COMM_WORLD);
+#endif
+            auto compute_start = std::chrono::steady_clock::now();
+            fs::create_directories(trial_dir);
+            std::ostringstream rp;
+            rp << "rank_" << std::setw(5) << std::setfill('0') << rank;
+            std::ofstream results;
+            if (!be_only && !cfg.structure_only) results.open(trial_dir / (rp.str() + "_results.csv"));
+            std::ofstream seed_records;
+            if (!be_only && cfg.write_random_seeds) seed_records.open(trial_dir / (rp.str() + "_seeds.csv"));
+            std::ofstream structs;
+            if (!be_only && cfg.write_structures) structs.open(trial_dir / (rp.str() + "_structures.jsonl"));
+            std::ofstream packed_atoms;
+            if (!be_only && cfg.write_packed_atoms)
+                packed_atoms.open(trial_dir / (rp.str() + "_packed_atoms.bin"), std::ios::binary);
+            if (results.is_open()) results << std::setprecision(12);
+            if (seed_records.is_open()) seed_records << std::setprecision(12);
+            const int ncomp = static_cast<int>(rows.size());
+            const int ntemps = static_cast<int>(plan.target_temperatures.size());
+            const auto wc_pairs = make_wc_pairs(ce);
+            BEHistogram rank_be_hist(ntemps);
+            auto append_wc_values = [](std::ofstream &out, const std::array<double, WC_PAIR_COUNT> &wc) {
+                for (double x : wc) {
+                    out << ',';
+                    if (std::isfinite(x)) out << x;
+                    else out << "nan";
+                }
+            };
+            // One MPI task = one independent CEMC trajectory for one
+            // (trial, composition, run). The original schedule.yaml is run once;
+            // 2000/1900/.../300 K configurations are snapshots from that trajectory.
+            int64_t n_tasks = static_cast<int64_t>(ncomp) * cfg.n_runs;
+            for (int64_t task = rank; task < n_tasks; task += world_size) {
+                int run_idx = static_cast<int>(task % cfg.n_runs);
+                int comp_idx = static_cast<int>(task / cfg.n_runs);
+                const auto &row = rows[comp_idx];
+                auto sampled = sample_composition(row, cfg, ce.n_metal_sites, trial, comp_idx);
+                uint64_t comp_seed = composition_seed(cfg, trial, comp_idx);
+                uint64_t initial_seed = random_slab_seed(cfg, trial, comp_idx, run_idx);
+                uint64_t mc_seed = cemc_seed(cfg, trial, comp_idx, run_idx);
+                std::mt19937_64 init_rng(initial_seed);
+                auto initial_occ = make_initial_occupations(ce, sampled, element_to_code, init_rng);
+                if (seed_records.is_open()) {
+                    seed_records << trial << ',' << comp_idx << ',' << row.row_idx << ',' << row.col_idx << ',' << run_idx << ','
+                                 << comp_seed << ',' << initial_seed << ',' << mc_seed << ',' << cfg.random_seed
+                                 << ",initial_random_slab,mt19937_64_deterministic_fisher_yates_v1," << ce.n_metal_sites;
+                    for (int x : sampled.counts) seed_records << ',' << x;
+                    for (double x : sampled.fraction) seed_records << ',' << x;
+                    for (double x : sampled.be_shift) seed_records << ',' << x;
+                    seed_records << "\n";
+                }
+                double random_activity = 0.0;
+                if (!cfg.structure_only)
+                    random_activity = evaluate_slab(ce, am, initial_occ, sampled.be_shift, &rank_be_hist, false, -1).activity;
+                if (packed_atoms.is_open()) {
+                    uint32_t packed_task = static_cast<uint32_t>(task);
+                    packed_atoms.write(reinterpret_cast<const char *>(&packed_task), sizeof(packed_task));
+                    write_packed_slab(packed_atoms, ce, initial_occ);
+                }
+                // Random slabs have no CEMC temperature. Record exactly one random baseline
+                // activity per (trial, composition, run). The seed/counts in random_slab_seeds.csv
+                // are sufficient to reconstruct the random slab later.
+                if (!be_only && !cfg.structure_only) {
+                    auto random_wc = compute_surface_wc(ce, am, initial_occ, wc_pairs);
+                    results << trial << ',' << comp_idx << ',' << run_idx << ",-1,-1,random," << random_activity << ",0,0,0,0,0";
+                    append_wc_values(results, random_wc);
+                    results << "\n";
+                }
+                std::mt19937_64 mc_rng(mc_seed);
+                MCOutcome mc = run_cemc_snapshots(ce, initial_occ, plan, mc_rng);
+                for (int temp_idx=0; temp_idx<ntemps; ++temp_idx) {
+                    const Snapshot &snap = mc.snapshots[temp_idx];
+                    if (packed_atoms.is_open()) write_packed_slab(packed_atoms, ce, snap.occ);
+                    double cemc_activity = 0.0;
+                    if (!cfg.structure_only)
+                        cemc_activity = evaluate_slab(ce, am, snap.occ, sampled.be_shift, &rank_be_hist, true, temp_idx).activity;
+                    if (!be_only && !cfg.structure_only) {
+                        auto cemc_wc = compute_surface_wc(ce, am, snap.occ, wc_pairs);
+                        results << trial << ',' << comp_idx << ',' << run_idx << ',' << temp_idx << ','
+                                << plan.target_temperatures[temp_idx] << ",cemc," << cemc_activity << ','
+                                << snap.energy << ',' << snap.attempted << ',' << snap.accepted << ','
+                                << snap.actual_temperature << ',' << snap.global_step;
+                        append_wc_values(results, cemc_wc);
+                        results << "\n";
+                        if (cfg.write_structures) {
+                            write_structure_json(structs, trial, comp_idx, row, run_idx, temp_idx, plan.target_temperatures[temp_idx],
+                                                 "cemc", cemc_activity, &snap, ce, snap.occ);
+                        }
+                    }
+                }
+            }
+            if (!cfg.structure_only) write_be_hist_sparse(trial_dir / (rp.str() + "_be_hist.csv"), rank_be_hist);
+            if (results.is_open()) results.close();
+            if (seed_records.is_open()) seed_records.close();
+            if (structs.is_open()) structs.close();
+            if (packed_atoms.is_open()) packed_atoms.close();
+#ifdef USE_MPI
+            MPI_Barrier(MPI_COMM_WORLD);
+#endif
+            auto compute_end = std::chrono::steady_clock::now();
+            if (rank == 0) {
+                auto merge_start = std::chrono::steady_clock::now();
+                if (be_only) merge_be_hist_trial(outdir, trial_dir, trial, world_size, plan, am);
+                else if (cfg.structure_only) merge_structure_only_trial(outdir, trial_dir, trial, world_size, ncomp, cfg.n_runs, ntemps, ce.n_metal_sites);
+                else merge_trial(outdir, trial_dir, trial, world_size, plan, rows, cfg, ce.n_metal_sites, am, ce, !be_done);
+                auto merge_end = std::chrono::steady_clock::now();
+                bool do_summary = !cfg.structure_only && (cfg.summary_every_trials > 0) && (((trial + 1) % cfg.summary_every_trials == 0) || (trial + cfg.trial_stride >= cfg.n_trials));
+                double summary_s = 0.0;
+                if (!be_only && do_summary) {
+                    auto summary_start = std::chrono::steady_clock::now();
+                    write_uncertainty_summary(outdir, cfg.ml_index);
+                    auto summary_end = std::chrono::steady_clock::now();
+                    summary_s = seconds_since(summary_start, summary_end);
+                }
+                double compute_s = seconds_since(compute_start, compute_end);
+                double merge_s = seconds_since(merge_start, merge_end);
+                int64_t trial_tasks = static_cast<int64_t>(rows.size()) * cfg.n_runs;
+                if (!be_only) append_trial_timing(outdir, trial, compute_s, merge_s, summary_s, trial_tasks, world_size, cfg.write_structures, do_summary);
+                std::cerr << (be_only ? "Finished BE-only trial " : "Finished trial ") << trial
+                          << " compute_s=" << compute_s
+                          << " merge_s=" << merge_s
+                          << " summary_s=" << summary_s
+                          << " total_s=" << (compute_s + merge_s + summary_s) << "\n";
+            }
+#ifdef USE_MPI
+            MPI_Barrier(MPI_COMM_WORLD);
+#endif
+        }
+        if (rank == 0 && !cfg.structure_only) {
+            auto summary_start = std::chrono::steady_clock::now();
+            write_uncertainty_summary(outdir, cfg.ml_index);
+            auto summary_end = std::chrono::steady_clock::now();
+            std::cerr << "Final uncertainty/plot summary written in " << seconds_since(summary_start, summary_end) << " s\n";
+            std::cerr << "All requested trials are complete. Output: " << outdir << "\n";
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "Rank " << rank << " error: " << e.what() << "\n";
+#ifdef USE_MPI
+        MPI_Abort(MPI_COMM_WORLD, 1);
+        MPI_Finalize();
+#endif
+        return 1;
+    }
+#ifdef USE_MPI
+    MPI_Finalize();
+#endif
+    return 0;
+}

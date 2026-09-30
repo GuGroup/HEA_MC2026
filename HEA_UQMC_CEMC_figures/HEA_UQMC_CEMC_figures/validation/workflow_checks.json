@@ -1,0 +1,58 @@
+[
+  {
+    "workflow": "FeCoNiPdPt_fcc100",
+    "case": "hollow",
+    "n_temperature_snapshots": 18,
+    "raw_activity_bitwise_equal": true
+  },
+  {
+    "workflow": "FeCoNiPdPt_fcc100",
+    "case": "bridge",
+    "n_temperature_snapshots": 18,
+    "raw_activity_bitwise_equal": true
+  },
+  {
+    "workflow": "FeCoNiPdPt_fcc100",
+    "slab_generation_bitwise_equal": true,
+    "snapshots": 18
+  },
+  {
+    "workflow": "FeCoNiPdPt_fcc110",
+    "case": "bridge",
+    "n_temperature_snapshots": 18,
+    "raw_activity_bitwise_equal": true
+  },
+  {
+    "workflow": "FeCoNiPdPt_fcc110",
+    "slab_generation_bitwise_equal": true,
+    "snapshots": 18
+  },
+  {
+    "workflow": "FeCoNiPdPt_fcc111",
+    "case": "fcc",
+    "n_temperature_snapshots": 18,
+    "raw_activity_bitwise_equal": true
+  },
+  {
+    "workflow": "FeCoNiPdPt_fcc111",
+    "case": "top",
+    "n_temperature_snapshots": 18,
+    "raw_activity_bitwise_equal": true
+  },
+  {
+    "workflow": "FeCoNiPdPt_fcc111",
+    "slab_generation_bitwise_equal": true,
+    "snapshots": 18
+  },
+  {
+    "workflow": "PtPdRhRuIr_fcc111",
+    "case": "ML1",
+    "n_temperature_snapshots": 18,
+    "raw_activity_bitwise_equal": true
+  },
+  {
+    "workflow": "PtPdRhRuIr_fcc111",
+    "slab_generation_bitwise_equal": true,
+    "snapshots": 18
+  }
+]

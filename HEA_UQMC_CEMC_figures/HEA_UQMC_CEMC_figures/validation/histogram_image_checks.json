@@ -1,0 +1,74 @@
+[
+  {
+    "figure": "Fig_1",
+    "dataset": "Pt_Study1",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 0.9880551196172249
+  },
+  {
+    "figure": "Fig_1",
+    "dataset": "Pt_ML4",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_1",
+    "dataset": "Fe_fcc100_hollow",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S6",
+    "dataset": "Pt_ML1",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S6",
+    "dataset": "Pt_ML2",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S6",
+    "dataset": "Pt_ML3",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S6",
+    "dataset": "Pt_ML5",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S6",
+    "dataset": "Pt_ML6",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S7",
+    "dataset": "Fe_fcc100_bridge",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S7",
+    "dataset": "Fe_fcc110_bridge",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S7",
+    "dataset": "Fe_fcc111_fcc",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  },
+  {
+    "figure": "Fig_S7",
+    "dataset": "Fe_fcc111_top",
+    "same_dimensions": true,
+    "pixel_equal_fraction": 1.0
+  }
+]

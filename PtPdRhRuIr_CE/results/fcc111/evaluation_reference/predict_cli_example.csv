@@ -1,0 +1,3 @@
+identifier,path,prediction,total_energy,normalization_denominator,n_metal,n_lattice,kind
+Bulk_0,/tmp/PtPdRhRuIr_CE_75iafegx/PtPdRhRuIr_CE/fcc111/data/structures/Bulk_0.cif,0.02068984657133477,0.6620750902827126,32.0,32,32,bulk
+Slab_0,/tmp/PtPdRhRuIr_CE_75iafegx/PtPdRhRuIr_CE/fcc111/data/structures/Slab_0.cif,0.2592152808884611,13.997625167976897,54.0,54,108,slab111

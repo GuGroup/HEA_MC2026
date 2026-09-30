@@ -1,0 +1,15 @@
+{
+  "preexisting_member_count": 665,
+  "allowed_updates": [
+    "README.md",
+    "reproduce_all_figures.py",
+    "requirements.txt",
+    "workflows/FeCoNiPdPt_fcc100/README.md",
+    "workflows/FeCoNiPdPt_fcc110/README.md",
+    "workflows/FeCoNiPdPt_fcc111/README.md",
+    "workflows/PtPdRhRuIr_fcc111/README.md"
+  ],
+  "unexpected_changes": [],
+  "additional_historical_seed_cases_match": true,
+  "original_script_syntax_issues": []
+}

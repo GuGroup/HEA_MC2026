@@ -1,0 +1,58 @@
+{
+  "facets": {
+    "111": {
+      "facet": "111",
+      "same_sample_order": true,
+      "same_holdout_split": true,
+      "selected_alpha": 2.1544346900318776,
+      "reference_alpha": 2.1544346900318776,
+      "coefficient_max_abs_difference": 1.2452890281455797e-11,
+      "target_max_abs_difference": 9.80118763926896e-17,
+      "prediction_max_abs_difference": 1.8328560891234247e-11,
+      "validation_prediction_max_abs_difference": 9.71445146547012e-17,
+      "all_metric_fields_max_abs_difference": 1.7927881401647028e-12,
+      "saved_model_fresh_prediction_max_abs_difference": 1.3877787807814457e-16,
+      "predict_cli_checked_families": [
+        "bulk",
+        "slab111"
+      ]
+    },
+    "100": {
+      "facet": "100",
+      "same_sample_order": true,
+      "same_holdout_split": true,
+      "selected_alpha": 46.41588833612773,
+      "reference_alpha": 46.41588833612773,
+      "coefficient_max_abs_difference": 5.854593719545331e-11,
+      "target_max_abs_difference": 9.8879238130678e-17,
+      "prediction_max_abs_difference": 4.130801256607697e-11,
+      "validation_prediction_max_abs_difference": 1.4419806668164448e-10,
+      "all_metric_fields_max_abs_difference": 2.6650126550009645e-10,
+      "saved_model_fresh_prediction_max_abs_difference": 1.942890293094024e-16,
+      "predict_cli_checked_families": [
+        "bulk",
+        "slab100"
+      ]
+    },
+    "110": {
+      "facet": "110",
+      "same_sample_order": true,
+      "same_holdout_split": true,
+      "selected_alpha": 21.54434690031878,
+      "reference_alpha": 21.54434690031878,
+      "coefficient_max_abs_difference": 1.9094152509113727e-09,
+      "target_max_abs_difference": 9.8879238130678e-17,
+      "prediction_max_abs_difference": 7.103599375390957e-10,
+      "validation_prediction_max_abs_difference": 1.1102230246251565e-16,
+      "all_metric_fields_max_abs_difference": 7.042214034136407e-12,
+      "saved_model_fresh_prediction_max_abs_difference": 2.7755575615628914e-16,
+      "predict_cli_checked_families": [
+        "bulk",
+        "slab110"
+      ]
+    }
+  },
+  "source_matches_original_wheel": true,
+  "all_structure_hashes_verified": true,
+  "note": "Numeric comparisons allow floating-point roundoff; original reference outputs are preserved byte-for-byte."
+}

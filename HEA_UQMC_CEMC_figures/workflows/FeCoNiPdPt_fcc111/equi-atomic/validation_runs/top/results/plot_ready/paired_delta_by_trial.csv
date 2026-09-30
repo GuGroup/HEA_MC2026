@@ -1,0 +1,2 @@
+ml,trial,cemc_selected_temperature,delta_tau_cemc_minus_random,delta_mse_random_minus_cemc,delta_score_cemc_minus_random,cemc_tau,random_tau,cemc_mse,random_mse,cemc_score,random_score
+1,0,2000,nan,0,nan,nan,nan,0,0,nan,nan

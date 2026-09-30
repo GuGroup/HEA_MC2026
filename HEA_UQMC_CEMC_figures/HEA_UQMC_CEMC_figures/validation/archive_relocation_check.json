@@ -1,0 +1,6 @@
+{
+  "archive_integrity": "all member SHA256 hashes checked",
+  "reproduced_after_extraction": "Fig_2 all three panels",
+  "working_directory": "outside the package",
+  "passed": true
+}

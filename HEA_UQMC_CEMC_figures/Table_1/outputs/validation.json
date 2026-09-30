@@ -1,0 +1,205 @@
+{
+  "numpy_version": "2.4.6",
+  "quantile_method": "linear",
+  "comparison": "strict delta > 0; equal trial weights; pair by trial ID",
+  "compared_numeric_cells": 124,
+  "matching_cells": 122,
+  "mismatches": [
+    {
+      "dataset": "Study 1",
+      "field": "tau_q975",
+      "manuscript": "0.39",
+      "recomputed": "0.38",
+      "unrounded": 0.3837824367439394
+    },
+    {
+      "dataset": "Study 2, ML4",
+      "field": "crps_q025",
+      "manuscript": "-0.04",
+      "recomputed": "-0.03",
+      "unrounded": -0.03494168848045415
+    }
+  ],
+  "datasets": [
+    {
+      "dataset": "Study 1",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        4638,
+        5001,
+        5111
+      ],
+      "all_positive_count": 3212,
+      "ties_per_metric": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 2, ML1",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        5838,
+        6266,
+        6429
+      ],
+      "all_positive_count": 3994,
+      "ties_per_metric": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 2, ML2",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        7771,
+        5462,
+        3555
+      ],
+      "all_positive_count": 2623,
+      "ties_per_metric": [
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 2, ML3",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        6674,
+        5412,
+        2559
+      ],
+      "all_positive_count": 1832,
+      "ties_per_metric": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 2, ML4",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        5546,
+        4938,
+        4955
+      ],
+      "all_positive_count": 2240,
+      "ties_per_metric": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 2, ML5",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        5647,
+        5882,
+        4565
+      ],
+      "all_positive_count": 1657,
+      "ties_per_metric": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 2, ML6",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        7073,
+        6381,
+        3834
+      ],
+      "all_positive_count": 2915,
+      "ties_per_metric": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 3, fcc(100) hollow",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        5687,
+        6905,
+        6794
+      ],
+      "all_positive_count": 3584,
+      "ties_per_metric": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 3, fcc(100) bridge",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        6025,
+        5315,
+        5337
+      ],
+      "all_positive_count": 2818,
+      "ties_per_metric": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 3, fcc(110) bridge",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        6059,
+        5848,
+        5423
+      ],
+      "all_positive_count": 2999,
+      "ties_per_metric": [
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 3, fcc(111) hollow",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        4377,
+        4486,
+        5271
+      ],
+      "all_positive_count": 2288,
+      "ties_per_metric": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "dataset": "Study 3, fcc(111) top",
+      "unique_paired_trials": 10000,
+      "strictly_positive_counts": [
+        6539,
+        6034,
+        6838
+      ],
+      "all_positive_count": 4406,
+      "ties_per_metric": [
+        2,
+        0,
+        0
+      ]
+    }
+  ]
+}

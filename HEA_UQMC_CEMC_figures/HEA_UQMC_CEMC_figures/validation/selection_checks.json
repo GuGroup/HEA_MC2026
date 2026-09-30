@@ -1,0 +1,101 @@
+[
+  {
+    "dataset": "Pt_ML1",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Pt_ML2",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Pt_ML3",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Pt_ML4",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Pt_ML5",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Pt_ML6",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Fe_fcc100_hollow",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Fe_fcc100_bridge",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Fe_fcc110_bridge",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Fe_fcc111_fcc",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  },
+  {
+    "dataset": "Fe_fcc111_top",
+    "all_temperature_rows": 180000,
+    "n_trials": 10000,
+    "temperature_selection_matches": true,
+    "most_probable_trial_matches": true,
+    "best_trial_matches": true,
+    "histogram_probabilities_match": true
+  }
+]
