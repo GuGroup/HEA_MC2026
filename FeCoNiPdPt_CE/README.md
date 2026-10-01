@@ -2,7 +2,6 @@
 
 ## 1. Contents and data
 
-Original source: `/home/jinsookim/HEA_MC/FeCoNiPtPd_HER/CEMC`.
 This package contains the inputs used by the original training configurations and saved models for three facets. Only structures listed in each `id_prop.csv` are included. CSV row order, target values, and CIF contents are preserved.
 The target is the original CSV energy per metal atom, in **eV/metal atom**. These are cluster expansion (CE) models, separate from the H adsorption energy regression models.
 
