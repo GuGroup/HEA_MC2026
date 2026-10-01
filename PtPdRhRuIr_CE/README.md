@@ -1,6 +1,5 @@
 # PtPdRhRuIr fcc(111) Cluster Expansion Training and Evaluation Package
 
-Original source: `/home/jinsookim/HEA_MC/PtPdRhRuIr/CEMC`.
 This package contains the CIF structures and `id_prop.csv` energy targets used by the original configuration and saved model, together with the code, model, and evaluation results. Only the 1,757 structures listed in the CSV are included. Original file contents and CSV row order are preserved.
 
 ## Data and evaluation procedure
