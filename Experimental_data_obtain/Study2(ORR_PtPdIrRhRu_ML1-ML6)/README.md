@@ -12,6 +12,6 @@ All experimental data in this directory were digitized from the figures in the p
 
 `PtPdIrRhRu_ORR_ML1-6.png` shows the oxygen reduction reaction (ORR) activity of all six microlibraries. At each composition coordinate, `extract_activity_from_png.py` matches the dot color to the corresponding microlibrary’s colorbar to recover the signed activity, $A$.
 
-The distributed `ML*_activity_data.csv` files contain the activity magnitude scaled linearly within each microlibrary. For $m = |A|$, the saved `Activity` value is $-(m-m_{\min})/(m_{\max}-m_{\min})$, where both extrema are taken over that microlibrary’s 342 positions. The smallest magnitude maps to **0** and the largest to **−1**. To reproduce the archived CSV precision, the script rounds the extracted values and an intermediate common-scale normalization to eight decimal places before the final per-ML scaling. Run `python extract_activity_from_png.py` from this directory to extract the colorbar values, apply the scaling, and write all six activity CSVs.
+The distributed `ML*_activity_data.csv` files contain the activity magnitude scaled linearly within each microlibrary. For $m = |A|$, the saved `Activity` value is $-(m-m_{\min})/(m_{\max}-m_{\min})$, where both extrema are taken over that microlibrary’s 342 positions. The smallest magnitude maps to **0** and the largest to **−1**.
 
 To pair activity with composition, match `Row_Idx` and `Col_Idx` within the same microlibrary.
