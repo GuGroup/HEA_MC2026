@@ -1,0 +1,2858 @@
+[
+  {
+    "index": 1,
+    "name": "Fe0.05Co0.15Ni0.40Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.15,
+      "Ni": 0.4,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -3.161046739
+  },
+  {
+    "index": 2,
+    "name": "Fe0.05Co0.15Ni0.40Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.15,
+      "Ni": 0.4,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -2.709728239
+  },
+  {
+    "index": 3,
+    "name": "Fe0.05Co0.15Ni0.40Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.15,
+      "Ni": 0.4,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -2.571041949
+  },
+  {
+    "index": 4,
+    "name": "Fe0.05Co0.15Ni0.40Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.15,
+      "Ni": 0.4,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -3.629619817
+  },
+  {
+    "index": 5,
+    "name": "Fe0.05Co0.15Ni0.40Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.15,
+      "Ni": 0.4,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -4.754098361
+  },
+  {
+    "index": 6,
+    "name": "Fe0.05Co0.20Ni0.35Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.2,
+      "Ni": 0.35,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -2.563068921
+  },
+  {
+    "index": 7,
+    "name": "Fe0.05Co0.20Ni0.35Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.2,
+      "Ni": 0.35,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -3.586015538
+  },
+  {
+    "index": 8,
+    "name": "Fe0.05Co0.20Ni0.35Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.2,
+      "Ni": 0.35,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -4.853485064
+  },
+  {
+    "index": 9,
+    "name": "Fe0.05Co0.25Ni0.30Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.25,
+      "Ni": 0.3,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -4.573991031
+  },
+  {
+    "index": 10,
+    "name": "Fe0.05Co0.25Ni0.30Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.25,
+      "Ni": 0.3,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -4.091404215
+  },
+  {
+    "index": 11,
+    "name": "Fe0.05Co0.25Ni0.30Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.25,
+      "Ni": 0.3,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -1.982158787
+  },
+  {
+    "index": 12,
+    "name": "Fe0.05Co0.25Ni0.30Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.25,
+      "Ni": 0.3,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -4.634812287
+  },
+  {
+    "index": 13,
+    "name": "Fe0.05Co0.25Ni0.30Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.25,
+      "Ni": 0.3,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -3.173863636
+  },
+  {
+    "index": 14,
+    "name": "Fe0.05Co0.25Ni0.30Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.25,
+      "Ni": 0.3,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -4.925875086
+  },
+  {
+    "index": 15,
+    "name": "Fe0.05Co0.25Ni0.30Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.25,
+      "Ni": 0.3,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -8.310567937
+  },
+  {
+    "index": 16,
+    "name": "Fe0.05Co0.30Ni0.25Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.3,
+      "Ni": 0.25,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -1.332698844
+  },
+  {
+    "index": 17,
+    "name": "Fe0.05Co0.30Ni0.25Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.3,
+      "Ni": 0.25,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -3.555391976
+  },
+  {
+    "index": 18,
+    "name": "Fe0.05Co0.30Ni0.25Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.3,
+      "Ni": 0.25,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -4.025791855
+  },
+  {
+    "index": 19,
+    "name": "Fe0.05Co0.30Ni0.25Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.3,
+      "Ni": 0.25,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -5.807379013
+  },
+  {
+    "index": 20,
+    "name": "Fe0.05Co0.30Ni0.25Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.3,
+      "Ni": 0.25,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -6.783008037
+  },
+  {
+    "index": 21,
+    "name": "Fe0.05Co0.30Ni0.25Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.3,
+      "Ni": 0.25,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -7.786988194
+  },
+  {
+    "index": 22,
+    "name": "Fe0.05Co0.30Ni0.25Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.3,
+      "Ni": 0.25,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -11.6343852
+  },
+  {
+    "index": 23,
+    "name": "Fe0.05Co0.35Ni0.20Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.35,
+      "Ni": 0.2,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -3.040540541
+  },
+  {
+    "index": 24,
+    "name": "Fe0.05Co0.35Ni0.20Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.35,
+      "Ni": 0.2,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -8.319088319
+  },
+  {
+    "index": 25,
+    "name": "Fe0.05Co0.35Ni0.20Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.35,
+      "Ni": 0.2,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -12.25403436
+  },
+  {
+    "index": 26,
+    "name": "Fe0.05Co0.40Ni0.15Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.4,
+      "Ni": 0.15,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -2.737079921
+  },
+  {
+    "index": 27,
+    "name": "Fe0.05Co0.40Ni0.15Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.4,
+      "Ni": 0.15,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -7.835509864
+  },
+  {
+    "index": 28,
+    "name": "Fe0.05Co0.40Ni0.15Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.4,
+      "Ni": 0.15,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -10.20749665
+  },
+  {
+    "index": 29,
+    "name": "Fe0.05Co0.40Ni0.15Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.4,
+      "Ni": 0.15,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -9.455040872
+  },
+  {
+    "index": 30,
+    "name": "Fe0.05Co0.40Ni0.15Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.05,
+      "Co": 0.4,
+      "Ni": 0.15,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -17.73750279
+  },
+  {
+    "index": 31,
+    "name": "Fe0.10Co0.10Ni0.40Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.1,
+      "Ni": 0.4,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -6.850961538
+  },
+  {
+    "index": 32,
+    "name": "Fe0.10Co0.10Ni0.40Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.1,
+      "Ni": 0.4,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -8.601478113
+  },
+  {
+    "index": 33,
+    "name": "Fe0.10Co0.10Ni0.40Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.1,
+      "Ni": 0.4,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -11.34242366
+  },
+  {
+    "index": 34,
+    "name": "Fe0.10Co0.10Ni0.40Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.1,
+      "Ni": 0.4,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -14.51015266
+  },
+  {
+    "index": 35,
+    "name": "Fe0.10Co0.10Ni0.40Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.1,
+      "Ni": 0.4,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -21.1232493
+  },
+  {
+    "index": 36,
+    "name": "Fe0.10Co0.10Ni0.40Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.1,
+      "Ni": 0.4,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -25.76041179
+  },
+  {
+    "index": 37,
+    "name": "Fe0.10Co0.10Ni0.40Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.1,
+      "Ni": 0.4,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -40.17094017
+  },
+  {
+    "index": 38,
+    "name": "Fe0.10Co0.15Ni0.35Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.15,
+      "Ni": 0.35,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -11.33662081
+  },
+  {
+    "index": 39,
+    "name": "Fe0.10Co0.15Ni0.35Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.15,
+      "Ni": 0.35,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -21.04572396
+  },
+  {
+    "index": 40,
+    "name": "Fe0.10Co0.15Ni0.35Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.15,
+      "Ni": 0.35,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -14.68237894
+  },
+  {
+    "index": 41,
+    "name": "Fe0.10Co0.15Ni0.35Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.15,
+      "Ni": 0.35,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -20.37932003
+  },
+  {
+    "index": 42,
+    "name": "Fe0.10Co0.15Ni0.35Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.15,
+      "Ni": 0.35,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -10.96457027
+  },
+  {
+    "index": 43,
+    "name": "Fe0.10Co0.15Ni0.35Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.15,
+      "Ni": 0.35,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -9.306666667
+  },
+  {
+    "index": 44,
+    "name": "Fe0.10Co0.15Ni0.35Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.15,
+      "Ni": 0.35,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -10.58380414
+  },
+  {
+    "index": 45,
+    "name": "Fe0.10Co0.20Ni0.30Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.2,
+      "Ni": 0.3,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -6.893218547
+  },
+  {
+    "index": 46,
+    "name": "Fe0.10Co0.20Ni0.30Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.2,
+      "Ni": 0.3,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -9.286773184
+  },
+  {
+    "index": 47,
+    "name": "Fe0.10Co0.20Ni0.30Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.2,
+      "Ni": 0.3,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -7.984270816
+  },
+  {
+    "index": 48,
+    "name": "Fe0.10Co0.25Ni0.25Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.25,
+      "Ni": 0.25,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -13.64380997
+  },
+  {
+    "index": 49,
+    "name": "Fe0.10Co0.25Ni0.25Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.25,
+      "Ni": 0.25,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -10.90909091
+  },
+  {
+    "index": 50,
+    "name": "Fe0.10Co0.25Ni0.25Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.25,
+      "Ni": 0.25,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -10.51628276
+  },
+  {
+    "index": 51,
+    "name": "Fe0.10Co0.25Ni0.25Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.25,
+      "Ni": 0.25,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -8.435712509
+  },
+  {
+    "index": 52,
+    "name": "Fe0.10Co0.25Ni0.25Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.25,
+      "Ni": 0.25,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -8.457655637
+  },
+  {
+    "index": 53,
+    "name": "Fe0.10Co0.25Ni0.25Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.25,
+      "Ni": 0.25,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -8.726981585
+  },
+  {
+    "index": 54,
+    "name": "Fe0.10Co0.25Ni0.25Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.25,
+      "Ni": 0.25,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -11.83823529
+  },
+  {
+    "index": 55,
+    "name": "Fe0.10Co0.30Ni0.20Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.3,
+      "Ni": 0.2,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -12.22542164
+  },
+  {
+    "index": 56,
+    "name": "Fe0.10Co0.30Ni0.20Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.3,
+      "Ni": 0.2,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -14.57836281
+  },
+  {
+    "index": 57,
+    "name": "Fe0.10Co0.30Ni0.20Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.3,
+      "Ni": 0.2,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -12.42660276
+  },
+  {
+    "index": 58,
+    "name": "Fe0.10Co0.35Ni0.15Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.35,
+      "Ni": 0.15,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -12.8656827
+  },
+  {
+    "index": 59,
+    "name": "Fe0.10Co0.35Ni0.15Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.35,
+      "Ni": 0.15,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -17.66131026
+  },
+  {
+    "index": 60,
+    "name": "Fe0.10Co0.35Ni0.15Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.35,
+      "Ni": 0.15,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -13.95306859
+  },
+  {
+    "index": 61,
+    "name": "Fe0.10Co0.35Ni0.15Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.35,
+      "Ni": 0.15,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -11.46126761
+  },
+  {
+    "index": 62,
+    "name": "Fe0.10Co0.35Ni0.15Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.35,
+      "Ni": 0.15,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -8.841773261
+  },
+  {
+    "index": 63,
+    "name": "Fe0.10Co0.35Ni0.15Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.35,
+      "Ni": 0.15,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -12.5794155
+  },
+  {
+    "index": 64,
+    "name": "Fe0.10Co0.35Ni0.15Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.35,
+      "Ni": 0.15,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -32.17683806
+  },
+  {
+    "index": 65,
+    "name": "Fe0.10Co0.40Ni0.10Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.4,
+      "Ni": 0.1,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -10.15907448
+  },
+  {
+    "index": 66,
+    "name": "Fe0.10Co0.40Ni0.10Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.4,
+      "Ni": 0.1,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -8.30317092
+  },
+  {
+    "index": 67,
+    "name": "Fe0.10Co0.40Ni0.10Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.4,
+      "Ni": 0.1,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -10.31605563
+  },
+  {
+    "index": 68,
+    "name": "Fe0.10Co0.40Ni0.10Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.4,
+      "Ni": 0.1,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -8.434901782
+  },
+  {
+    "index": 69,
+    "name": "Fe0.10Co0.40Ni0.10Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.4,
+      "Ni": 0.1,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -14.51737452
+  },
+  {
+    "index": 70,
+    "name": "Fe0.10Co0.40Ni0.10Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.4,
+      "Ni": 0.1,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -10.31234775
+  },
+  {
+    "index": 71,
+    "name": "Fe0.10Co0.40Ni0.10Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.1,
+      "Co": 0.4,
+      "Ni": 0.1,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -24.55727481
+  },
+  {
+    "index": 72,
+    "name": "Fe0.15Co0.05Ni0.40Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.05,
+      "Ni": 0.4,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -8.827368421
+  },
+  {
+    "index": 73,
+    "name": "Fe0.15Co0.05Ni0.40Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.05,
+      "Ni": 0.4,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -8.621788488
+  },
+  {
+    "index": 74,
+    "name": "Fe0.15Co0.05Ni0.40Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.05,
+      "Ni": 0.4,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -12.36086494
+  },
+  {
+    "index": 75,
+    "name": "Fe0.15Co0.05Ni0.40Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.05,
+      "Ni": 0.4,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -16.72952087
+  },
+  {
+    "index": 76,
+    "name": "Fe0.15Co0.05Ni0.40Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.05,
+      "Ni": 0.4,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -36.21437137
+  },
+  {
+    "index": 77,
+    "name": "Fe0.15Co0.10Ni0.35Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.1,
+      "Ni": 0.35,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -48.64561404
+  },
+  {
+    "index": 78,
+    "name": "Fe0.15Co0.10Ni0.35Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.1,
+      "Ni": 0.35,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -56.6197726
+  },
+  {
+    "index": 79,
+    "name": "Fe0.15Co0.10Ni0.35Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.1,
+      "Ni": 0.35,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -60.95530237
+  },
+  {
+    "index": 80,
+    "name": "Fe0.15Co0.10Ni0.35Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.1,
+      "Ni": 0.35,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -45.23655217
+  },
+  {
+    "index": 81,
+    "name": "Fe0.15Co0.10Ni0.35Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.1,
+      "Ni": 0.35,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -14.11101217
+  },
+  {
+    "index": 82,
+    "name": "Fe0.15Co0.10Ni0.35Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.1,
+      "Ni": 0.35,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -18.83098438
+  },
+  {
+    "index": 83,
+    "name": "Fe0.15Co0.10Ni0.35Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.1,
+      "Ni": 0.35,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -19.58210172
+  },
+  {
+    "index": 84,
+    "name": "Fe0.15Co0.15Ni0.30Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.15,
+      "Ni": 0.3,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -8.933369893
+  },
+  {
+    "index": 85,
+    "name": "Fe0.15Co0.15Ni0.30Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.15,
+      "Ni": 0.3,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -5.679099226
+  },
+  {
+    "index": 86,
+    "name": "Fe0.15Co0.15Ni0.30Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.15,
+      "Ni": 0.3,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -9.377505803
+  },
+  {
+    "index": 87,
+    "name": "Fe0.15Co0.15Ni0.30Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.15,
+      "Ni": 0.3,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -9.364555189
+  },
+  {
+    "index": 88,
+    "name": "Fe0.15Co0.15Ni0.30Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.15,
+      "Ni": 0.3,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -9.433144381
+  },
+  {
+    "index": 89,
+    "name": "Fe0.15Co0.15Ni0.30Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.15,
+      "Ni": 0.3,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -7.962466488
+  },
+  {
+    "index": 90,
+    "name": "Fe0.15Co0.15Ni0.30Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.15,
+      "Ni": 0.3,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -7.889045604
+  },
+  {
+    "index": 91,
+    "name": "Fe0.15Co0.20Ni0.25Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.2,
+      "Ni": 0.25,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -14.04265403
+  },
+  {
+    "index": 92,
+    "name": "Fe0.15Co0.20Ni0.25Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.2,
+      "Ni": 0.25,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -11.26883665
+  },
+  {
+    "index": 93,
+    "name": "Fe0.15Co0.20Ni0.25Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.2,
+      "Ni": 0.25,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -8.249468462
+  },
+  {
+    "index": 94,
+    "name": "Fe0.15Co0.25Ni0.20Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.25,
+      "Ni": 0.2,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -10.3294022
+  },
+  {
+    "index": 95,
+    "name": "Fe0.15Co0.25Ni0.20Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.25,
+      "Ni": 0.2,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -11.25890736
+  },
+  {
+    "index": 96,
+    "name": "Fe0.15Co0.25Ni0.20Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.25,
+      "Ni": 0.2,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -7.548045063
+  },
+  {
+    "index": 97,
+    "name": "Fe0.15Co0.30Ni0.15Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.3,
+      "Ni": 0.15,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -8.924421821
+  },
+  {
+    "index": 98,
+    "name": "Fe0.15Co0.30Ni0.15Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.3,
+      "Ni": 0.15,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -8.711886876
+  },
+  {
+    "index": 99,
+    "name": "Fe0.15Co0.30Ni0.15Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.3,
+      "Ni": 0.15,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -7.721017285
+  },
+  {
+    "index": 100,
+    "name": "Fe0.15Co0.30Ni0.15Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.3,
+      "Ni": 0.15,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -9.247606019
+  },
+  {
+    "index": 101,
+    "name": "Fe0.15Co0.30Ni0.15Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.3,
+      "Ni": 0.15,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -10.6577917
+  },
+  {
+    "index": 102,
+    "name": "Fe0.15Co0.30Ni0.15Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.3,
+      "Ni": 0.15,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -10.97131682
+  },
+  {
+    "index": 103,
+    "name": "Fe0.15Co0.30Ni0.15Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.3,
+      "Ni": 0.15,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -8.450233801
+  },
+  {
+    "index": 104,
+    "name": "Fe0.15Co0.35Ni0.10Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.35,
+      "Ni": 0.1,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -16.03555556
+  },
+  {
+    "index": 105,
+    "name": "Fe0.15Co0.35Ni0.10Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.35,
+      "Ni": 0.1,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -13.76793967
+  },
+  {
+    "index": 106,
+    "name": "Fe0.15Co0.35Ni0.10Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.35,
+      "Ni": 0.1,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -9.242096146
+  },
+  {
+    "index": 107,
+    "name": "Fe0.15Co0.35Ni0.10Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.35,
+      "Ni": 0.1,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -7.34584702
+  },
+  {
+    "index": 108,
+    "name": "Fe0.15Co0.35Ni0.10Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.35,
+      "Ni": 0.1,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -6.096364433
+  },
+  {
+    "index": 109,
+    "name": "Fe0.15Co0.35Ni0.10Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.35,
+      "Ni": 0.1,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -10.02253267
+  },
+  {
+    "index": 110,
+    "name": "Fe0.15Co0.35Ni0.10Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.35,
+      "Ni": 0.1,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -11.06315455
+  },
+  {
+    "index": 111,
+    "name": "Fe0.15Co0.40Ni0.05Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.4,
+      "Ni": 0.05,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -12.60477157
+  },
+  {
+    "index": 112,
+    "name": "Fe0.15Co0.40Ni0.05Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.4,
+      "Ni": 0.05,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -13.69895965
+  },
+  {
+    "index": 113,
+    "name": "Fe0.15Co0.40Ni0.05Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.4,
+      "Ni": 0.05,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -17.07452725
+  },
+  {
+    "index": 114,
+    "name": "Fe0.15Co0.40Ni0.05Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.4,
+      "Ni": 0.05,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -26.88616681
+  },
+  {
+    "index": 115,
+    "name": "Fe0.15Co0.40Ni0.05Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.15,
+      "Co": 0.4,
+      "Ni": 0.05,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -30.16455101
+  },
+  {
+    "index": 116,
+    "name": "Fe0.20Co0.05Ni0.35Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.05,
+      "Ni": 0.35,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -6.144424598
+  },
+  {
+    "index": 117,
+    "name": "Fe0.20Co0.05Ni0.35Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.05,
+      "Ni": 0.35,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -7.473562776
+  },
+  {
+    "index": 118,
+    "name": "Fe0.20Co0.05Ni0.35Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.05,
+      "Ni": 0.35,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -23.89259293
+  },
+  {
+    "index": 119,
+    "name": "Fe0.20Co0.10Ni0.30Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.1,
+      "Ni": 0.3,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -26.95890411
+  },
+  {
+    "index": 120,
+    "name": "Fe0.20Co0.10Ni0.30Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.1,
+      "Ni": 0.3,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -34.35063663
+  },
+  {
+    "index": 121,
+    "name": "Fe0.20Co0.10Ni0.30Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.1,
+      "Ni": 0.3,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -31.70389279
+  },
+  {
+    "index": 122,
+    "name": "Fe0.20Co0.15Ni0.25Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.15,
+      "Ni": 0.25,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -9.202094886
+  },
+  {
+    "index": 123,
+    "name": "Fe0.20Co0.15Ni0.25Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.15,
+      "Ni": 0.25,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -4.718239109
+  },
+  {
+    "index": 124,
+    "name": "Fe0.20Co0.15Ni0.25Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.15,
+      "Ni": 0.25,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -7.498243148
+  },
+  {
+    "index": 125,
+    "name": "Fe0.20Co0.20Ni0.20Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.2,
+      "Ni": 0.2,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -8.123103598
+  },
+  {
+    "index": 126,
+    "name": "Fe0.20Co0.20Ni0.20Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.2,
+      "Ni": 0.2,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -8.242471954
+  },
+  {
+    "index": 127,
+    "name": "Fe0.20Co0.20Ni0.20Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.2,
+      "Ni": 0.2,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -7.331722472
+  },
+  {
+    "index": 128,
+    "name": "Fe0.20Co0.20Ni0.20Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.2,
+      "Ni": 0.2,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -76.26193724
+  },
+  {
+    "index": 129,
+    "name": "Fe0.20Co0.20Ni0.20Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.2,
+      "Ni": 0.2,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -7.965599051
+  },
+  {
+    "index": 130,
+    "name": "Fe0.20Co0.20Ni0.20Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.2,
+      "Ni": 0.2,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -8.037761295
+  },
+  {
+    "index": 131,
+    "name": "Fe0.20Co0.20Ni0.20Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.2,
+      "Ni": 0.2,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -8.626567398
+  },
+  {
+    "index": 132,
+    "name": "Fe0.20Co0.25Ni0.15Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.25,
+      "Ni": 0.15,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -7.36345776
+  },
+  {
+    "index": 133,
+    "name": "Fe0.20Co0.25Ni0.15Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.25,
+      "Ni": 0.15,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -7.023923445
+  },
+  {
+    "index": 134,
+    "name": "Fe0.20Co0.25Ni0.15Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.25,
+      "Ni": 0.15,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -7.984063745
+  },
+  {
+    "index": 135,
+    "name": "Fe0.20Co0.30Ni0.10Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.3,
+      "Ni": 0.1,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -9.528219971
+  },
+  {
+    "index": 136,
+    "name": "Fe0.20Co0.30Ni0.10Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.3,
+      "Ni": 0.1,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -7.646360088
+  },
+  {
+    "index": 137,
+    "name": "Fe0.20Co0.30Ni0.10Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.3,
+      "Ni": 0.1,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -10.47089359
+  },
+  {
+    "index": 138,
+    "name": "Fe0.20Co0.35Ni0.05Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.35,
+      "Ni": 0.05,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -16.05095541
+  },
+  {
+    "index": 139,
+    "name": "Fe0.20Co0.35Ni0.05Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.35,
+      "Ni": 0.05,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -12.2649889
+  },
+  {
+    "index": 140,
+    "name": "Fe0.20Co0.35Ni0.05Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.2,
+      "Co": 0.35,
+      "Ni": 0.05,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -34.01834862
+  },
+  {
+    "index": 141,
+    "name": "Fe0.25Co0.05Ni0.30Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.05,
+      "Ni": 0.3,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -18.04886813
+  },
+  {
+    "index": 142,
+    "name": "Fe0.25Co0.05Ni0.30Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.05,
+      "Ni": 0.3,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -19.96740016
+  },
+  {
+    "index": 143,
+    "name": "Fe0.25Co0.05Ni0.30Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.05,
+      "Ni": 0.3,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -20.55944056
+  },
+  {
+    "index": 144,
+    "name": "Fe0.25Co0.05Ni0.30Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.05,
+      "Ni": 0.3,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -23.46735669
+  },
+  {
+    "index": 145,
+    "name": "Fe0.25Co0.05Ni0.30Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.05,
+      "Ni": 0.3,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -22.09677419
+  },
+  {
+    "index": 146,
+    "name": "Fe0.25Co0.05Ni0.30Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.05,
+      "Ni": 0.3,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -48.08457429
+  },
+  {
+    "index": 147,
+    "name": "Fe0.25Co0.05Ni0.30Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.05,
+      "Ni": 0.3,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -64.26127527
+  },
+  {
+    "index": 148,
+    "name": "Fe0.25Co0.10Ni0.25Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.1,
+      "Ni": 0.25,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -38.41545894
+  },
+  {
+    "index": 149,
+    "name": "Fe0.25Co0.10Ni0.25Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.1,
+      "Ni": 0.25,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -32.20172911
+  },
+  {
+    "index": 150,
+    "name": "Fe0.25Co0.10Ni0.25Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.1,
+      "Ni": 0.25,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -30.63902107
+  },
+  {
+    "index": 151,
+    "name": "Fe0.25Co0.10Ni0.25Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.1,
+      "Ni": 0.25,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -20.77346668
+  },
+  {
+    "index": 152,
+    "name": "Fe0.25Co0.10Ni0.25Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.1,
+      "Ni": 0.25,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -29.43458718
+  },
+  {
+    "index": 153,
+    "name": "Fe0.25Co0.10Ni0.25Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.1,
+      "Ni": 0.25,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -46.42757854
+  },
+  {
+    "index": 154,
+    "name": "Fe0.25Co0.10Ni0.25Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.1,
+      "Ni": 0.25,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -30.88531187
+  },
+  {
+    "index": 155,
+    "name": "Fe0.25Co0.15Ni0.20Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.15,
+      "Ni": 0.2,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -22.99187844
+  },
+  {
+    "index": 156,
+    "name": "Fe0.25Co0.15Ni0.20Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.15,
+      "Ni": 0.2,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -18.21434715
+  },
+  {
+    "index": 157,
+    "name": "Fe0.25Co0.15Ni0.20Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.15,
+      "Ni": 0.2,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -12.76274945
+  },
+  {
+    "index": 158,
+    "name": "Fe0.25Co0.20Ni0.15Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.2,
+      "Ni": 0.15,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -25.24737631
+  },
+  {
+    "index": 159,
+    "name": "Fe0.25Co0.20Ni0.15Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.2,
+      "Ni": 0.15,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -28.46697389
+  },
+  {
+    "index": 160,
+    "name": "Fe0.25Co0.20Ni0.15Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.2,
+      "Ni": 0.15,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -27.02387562
+  },
+  {
+    "index": 161,
+    "name": "Fe0.25Co0.25Ni0.10Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.25,
+      "Ni": 0.1,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -12.54656489
+  },
+  {
+    "index": 162,
+    "name": "Fe0.25Co0.25Ni0.10Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.25,
+      "Ni": 0.1,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -10.10745112
+  },
+  {
+    "index": 163,
+    "name": "Fe0.25Co0.25Ni0.10Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.25,
+      "Ni": 0.1,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -10.01353638
+  },
+  {
+    "index": 164,
+    "name": "Fe0.25Co0.25Ni0.10Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.25,
+      "Ni": 0.1,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -9.874236436
+  },
+  {
+    "index": 165,
+    "name": "Fe0.25Co0.25Ni0.10Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.25,
+      "Ni": 0.1,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -13.48917417
+  },
+  {
+    "index": 166,
+    "name": "Fe0.25Co0.25Ni0.10Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.25,
+      "Ni": 0.1,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -12.17625208
+  },
+  {
+    "index": 167,
+    "name": "Fe0.25Co0.25Ni0.10Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.25,
+      "Ni": 0.1,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -13.54816514
+  },
+  {
+    "index": 168,
+    "name": "Fe0.25Co0.30Ni0.05Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.3,
+      "Ni": 0.05,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -7.237660722
+  },
+  {
+    "index": 169,
+    "name": "Fe0.25Co0.30Ni0.05Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.3,
+      "Ni": 0.05,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -6.843611762
+  },
+  {
+    "index": 170,
+    "name": "Fe0.25Co0.30Ni0.05Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.3,
+      "Ni": 0.05,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -11.82312925
+  },
+  {
+    "index": 171,
+    "name": "Fe0.25Co0.30Ni0.05Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.3,
+      "Ni": 0.05,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -11.38751239
+  },
+  {
+    "index": 172,
+    "name": "Fe0.25Co0.30Ni0.05Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.3,
+      "Ni": 0.05,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -18.94779278
+  },
+  {
+    "index": 173,
+    "name": "Fe0.25Co0.30Ni0.05Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.3,
+      "Ni": 0.05,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -18.26842253
+  },
+  {
+    "index": 174,
+    "name": "Fe0.25Co0.30Ni0.05Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.25,
+      "Co": 0.3,
+      "Ni": 0.05,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -52.59117083
+  },
+  {
+    "index": 175,
+    "name": "Fe0.30Co0.05Ni0.25Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.05,
+      "Ni": 0.25,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -16.37583893
+  },
+  {
+    "index": 176,
+    "name": "Fe0.30Co0.05Ni0.25Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.05,
+      "Ni": 0.25,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -14.77865373
+  },
+  {
+    "index": 177,
+    "name": "Fe0.30Co0.05Ni0.25Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.05,
+      "Ni": 0.25,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -26.767545
+  },
+  {
+    "index": 178,
+    "name": "Fe0.30Co0.05Ni0.25Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.05,
+      "Ni": 0.25,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -23.48234727
+  },
+  {
+    "index": 179,
+    "name": "Fe0.30Co0.05Ni0.25Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.05,
+      "Ni": 0.25,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -20.85627885
+  },
+  {
+    "index": 180,
+    "name": "Fe0.30Co0.05Ni0.25Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.05,
+      "Ni": 0.25,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -41.95717572
+  },
+  {
+    "index": 181,
+    "name": "Fe0.30Co0.05Ni0.25Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.05,
+      "Ni": 0.25,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -91.70948479
+  },
+  {
+    "index": 182,
+    "name": "Fe0.30Co0.10Ni0.20Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.1,
+      "Ni": 0.2,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -30.84253844
+  },
+  {
+    "index": 183,
+    "name": "Fe0.30Co0.10Ni0.20Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.1,
+      "Ni": 0.2,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -46.00749064
+  },
+  {
+    "index": 184,
+    "name": "Fe0.30Co0.10Ni0.20Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.1,
+      "Ni": 0.2,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -71.82985554
+  },
+  {
+    "index": 185,
+    "name": "Fe0.30Co0.15Ni0.15Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.15,
+      "Ni": 0.15,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -43.14419949
+  },
+  {
+    "index": 186,
+    "name": "Fe0.30Co0.15Ni0.15Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.15,
+      "Ni": 0.15,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -46.9777584
+  },
+  {
+    "index": 187,
+    "name": "Fe0.30Co0.15Ni0.15Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.15,
+      "Ni": 0.15,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -47.82163576
+  },
+  {
+    "index": 188,
+    "name": "Fe0.30Co0.15Ni0.15Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.15,
+      "Ni": 0.15,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -51.20458891
+  },
+  {
+    "index": 189,
+    "name": "Fe0.30Co0.15Ni0.15Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.15,
+      "Ni": 0.15,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -70.96304766
+  },
+  {
+    "index": 190,
+    "name": "Fe0.30Co0.15Ni0.15Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.15,
+      "Ni": 0.15,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -81.18414918
+  },
+  {
+    "index": 191,
+    "name": "Fe0.30Co0.15Ni0.15Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.15,
+      "Ni": 0.15,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -103.3523715
+  },
+  {
+    "index": 192,
+    "name": "Fe0.30Co0.20Ni0.10Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.2,
+      "Ni": 0.1,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -44.69469835
+  },
+  {
+    "index": 193,
+    "name": "Fe0.30Co0.20Ni0.10Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.2,
+      "Ni": 0.1,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -42.69005848
+  },
+  {
+    "index": 194,
+    "name": "Fe0.30Co0.20Ni0.10Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.2,
+      "Ni": 0.1,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -34.93277562
+  },
+  {
+    "index": 195,
+    "name": "Fe0.30Co0.25Ni0.05Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.25,
+      "Ni": 0.05,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -40.0
+  },
+  {
+    "index": 196,
+    "name": "Fe0.30Co0.25Ni0.05Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.25,
+      "Ni": 0.05,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -38.02168576
+  },
+  {
+    "index": 197,
+    "name": "Fe0.30Co0.25Ni0.05Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.25,
+      "Ni": 0.05,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -32.96725784
+  },
+  {
+    "index": 198,
+    "name": "Fe0.30Co0.25Ni0.05Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.25,
+      "Ni": 0.05,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -31.93578848
+  },
+  {
+    "index": 199,
+    "name": "Fe0.30Co0.25Ni0.05Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.25,
+      "Ni": 0.05,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -38.23861074
+  },
+  {
+    "index": 200,
+    "name": "Fe0.30Co0.25Ni0.05Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.25,
+      "Ni": 0.05,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -37.99339389
+  },
+  {
+    "index": 201,
+    "name": "Fe0.30Co0.25Ni0.05Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.3,
+      "Co": 0.25,
+      "Ni": 0.05,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -10.46601365
+  },
+  {
+    "index": 202,
+    "name": "Fe0.35Co0.05Ni0.20Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.05,
+      "Ni": 0.2,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -16.00831601
+  },
+  {
+    "index": 203,
+    "name": "Fe0.35Co0.05Ni0.20Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.05,
+      "Ni": 0.2,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -13.05437407
+  },
+  {
+    "index": 204,
+    "name": "Fe0.35Co0.05Ni0.20Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.05,
+      "Ni": 0.2,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -9.142767097
+  },
+  {
+    "index": 205,
+    "name": "Fe0.35Co0.10Ni0.15Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.1,
+      "Ni": 0.15,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -10.53142703
+  },
+  {
+    "index": 206,
+    "name": "Fe0.35Co0.10Ni0.15Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.1,
+      "Ni": 0.15,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -14.44958372
+  },
+  {
+    "index": 207,
+    "name": "Fe0.35Co0.10Ni0.15Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.1,
+      "Ni": 0.15,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -21.05980318
+  },
+  {
+    "index": 208,
+    "name": "Fe0.35Co0.10Ni0.15Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.1,
+      "Ni": 0.15,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -21.98470038
+  },
+  {
+    "index": 209,
+    "name": "Fe0.35Co0.10Ni0.15Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.1,
+      "Ni": 0.15,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -29.50094162
+  },
+  {
+    "index": 210,
+    "name": "Fe0.35Co0.10Ni0.15Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.1,
+      "Ni": 0.15,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -42.70386266
+  },
+  {
+    "index": 211,
+    "name": "Fe0.35Co0.10Ni0.15Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.1,
+      "Ni": 0.15,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -52.21020093
+  },
+  {
+    "index": 212,
+    "name": "Fe0.35Co0.15Ni0.10Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.15,
+      "Ni": 0.1,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -17.35924933
+  },
+  {
+    "index": 213,
+    "name": "Fe0.35Co0.15Ni0.10Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.15,
+      "Ni": 0.1,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -20.25119099
+  },
+  {
+    "index": 214,
+    "name": "Fe0.35Co0.15Ni0.10Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.15,
+      "Ni": 0.1,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -26.84697667
+  },
+  {
+    "index": 215,
+    "name": "Fe0.35Co0.15Ni0.10Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.15,
+      "Ni": 0.1,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -32.70695364
+  },
+  {
+    "index": 216,
+    "name": "Fe0.35Co0.15Ni0.10Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.15,
+      "Ni": 0.1,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -29.78698638
+  },
+  {
+    "index": 217,
+    "name": "Fe0.35Co0.15Ni0.10Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.15,
+      "Ni": 0.1,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -39.55422488
+  },
+  {
+    "index": 218,
+    "name": "Fe0.35Co0.15Ni0.10Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.15,
+      "Ni": 0.1,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -105.2348993
+  },
+  {
+    "index": 219,
+    "name": "Fe0.35Co0.20Ni0.05Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.2,
+      "Ni": 0.05,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -59.61949792
+  },
+  {
+    "index": 220,
+    "name": "Fe0.35Co0.20Ni0.05Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.2,
+      "Ni": 0.05,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -48.54911292
+  },
+  {
+    "index": 221,
+    "name": "Fe0.35Co0.20Ni0.05Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.35,
+      "Co": 0.2,
+      "Ni": 0.05,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -94.80812641
+  },
+  {
+    "index": 222,
+    "name": "Fe0.40Co0.05Ni0.15Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.05,
+      "Ni": 0.15,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -39.2703319
+  },
+  {
+    "index": 223,
+    "name": "Fe0.40Co0.05Ni0.15Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.05,
+      "Ni": 0.15,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -43.93157752
+  },
+  {
+    "index": 224,
+    "name": "Fe0.40Co0.05Ni0.15Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.05,
+      "Ni": 0.15,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -51.92889361
+  },
+  {
+    "index": 225,
+    "name": "Fe0.40Co0.05Ni0.15Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.05,
+      "Ni": 0.15,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -35.85865171
+  },
+  {
+    "index": 226,
+    "name": "Fe0.40Co0.05Ni0.15Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.05,
+      "Ni": 0.15,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -86.21659634
+  },
+  {
+    "index": 227,
+    "name": "Fe0.40Co0.10Ni0.10Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.1,
+      "Ni": 0.1,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -57.85809906
+  },
+  {
+    "index": 228,
+    "name": "Fe0.40Co0.10Ni0.10Pt0.10Pd0.30",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.1,
+      "Ni": 0.1,
+      "Pt": 0.1,
+      "Pd": 0.3
+    },
+    "j_relative_m0p15V": -63.2083958
+  },
+  {
+    "index": 229,
+    "name": "Fe0.40Co0.10Ni0.10Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.1,
+      "Ni": 0.1,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -63.94430312
+  },
+  {
+    "index": 230,
+    "name": "Fe0.40Co0.10Ni0.10Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.1,
+      "Ni": 0.1,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -51.65558721
+  },
+  {
+    "index": 231,
+    "name": "Fe0.40Co0.10Ni0.10Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.1,
+      "Ni": 0.1,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -38.22237836
+  },
+  {
+    "index": 232,
+    "name": "Fe0.40Co0.10Ni0.10Pt0.30Pd0.10",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.1,
+      "Ni": 0.1,
+      "Pt": 0.3,
+      "Pd": 0.1
+    },
+    "j_relative_m0p15V": -142.6957224
+  },
+  {
+    "index": 233,
+    "name": "Fe0.40Co0.10Ni0.10Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.1,
+      "Ni": 0.1,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -48.74886398
+  },
+  {
+    "index": 234,
+    "name": "Fe0.40Co0.15Ni0.05Pt0.05Pd0.35",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.15,
+      "Ni": 0.05,
+      "Pt": 0.05,
+      "Pd": 0.35
+    },
+    "j_relative_m0p15V": -56.88582168
+  },
+  {
+    "index": 235,
+    "name": "Fe0.40Co0.15Ni0.05Pt0.15Pd0.25",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.15,
+      "Ni": 0.05,
+      "Pt": 0.15,
+      "Pd": 0.25
+    },
+    "j_relative_m0p15V": -117.5588135
+  },
+  {
+    "index": 236,
+    "name": "Fe0.40Co0.15Ni0.05Pt0.20Pd0.20",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.15,
+      "Ni": 0.05,
+      "Pt": 0.2,
+      "Pd": 0.2
+    },
+    "j_relative_m0p15V": -65.96988087
+  },
+  {
+    "index": 237,
+    "name": "Fe0.40Co0.15Ni0.05Pt0.25Pd0.15",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.15,
+      "Ni": 0.05,
+      "Pt": 0.25,
+      "Pd": 0.15
+    },
+    "j_relative_m0p15V": -71.8363626
+  },
+  {
+    "index": 238,
+    "name": "Fe0.40Co0.15Ni0.05Pt0.35Pd0.05",
+    "fractions": {
+      "Fe": 0.4,
+      "Co": 0.15,
+      "Ni": 0.05,
+      "Pt": 0.35,
+      "Pd": 0.05
+    },
+    "j_relative_m0p15V": -141.95231
+  }
+]
