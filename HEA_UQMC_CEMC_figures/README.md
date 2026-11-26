@@ -1,6 +1,6 @@
 # HEA UQMC and CEMC Figure Reproduction Package
 
-This package reproduces Table 1, Figs. 1-6 and Figs. S6-S15 from the supplied Manuscript and Supporting Information. It includes numerical plotting data, portable plotting code, the original C++ simulation backends and model inputs, commands for generating and reusing CEMC slabs, and validation records. All README files are in English.
+This package reproduces Table 1, Figs. 1-6 and Figs. S6-S15 from the supplied Manuscript and Supporting Information. It includes numerical plotting data, portable plotting code, the original C++ simulation backends and model inputs, commands for generating and reusing CEMC slabs, and validation records.
 
 ## Reproduce Table 1
 
